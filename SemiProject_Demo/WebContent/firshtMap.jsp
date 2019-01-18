@@ -243,10 +243,10 @@
 						    	    searchplace.push($(this).text());
 						    	});
 						    	
-						    	/* if (!searchplace.replace(/^\s+|\s+$/g, '')) {
+						    	if (searchplace == null) {
 							        alert('일정을 선택해주세요!');
 							        return false;
-							    } */
+							    }
 						    	
 						    	$('#map').hide();
 								$('#list').hide();

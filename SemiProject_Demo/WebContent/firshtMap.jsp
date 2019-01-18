@@ -129,11 +129,15 @@
 			$('#showdistance').on('click', function() {
 			    //Find the child check box. 
 			    var $input = $(this).find('input'); 
-
+			    if ($("#my_tbody tr td:nth-child(6)").text() == null || !$("#my_tbody tr td:nth-child(6)").text().replace(/^\s+|\s+$/g, '')) {
+			        alert('일정을 선택해주세요!');
+			        return false;
+			    }
 			    $(this).toggleClass('btn-danger btn-success');
-			    if ($(this).hasClass('btn-danger')) { 
-			     $input.removeAttr('checked');
-			     searchPlaces();
+			    if ($(this).hasClass('btn-danger')) {
+			    	
+			   		$input.removeAttr('checked');
+			     	searchPlaces();
 			    } else { 
 			     $input.attr('checked', '');
 			     showCalendar();
@@ -242,11 +246,6 @@
 						    	$("#my_tbody tr td:nth-child(6)").each(function(i){
 						    	    searchplace.push($(this).text());
 						    	});
-						    	
-						    	if (searchplace == null) {
-							        alert('일정을 선택해주세요!');
-							        return false;
-							    }
 						    	
 						    	$('#map').hide();
 								$('#list').hide();

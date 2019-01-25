@@ -369,19 +369,20 @@ public class DanimServlet extends HttpServlet {
 			int res = cmtdao.insertCmt(dto);
 			
 			if(res > 0) {
-				dispatch(request, response, "danim.do?command=boarddetail&boardno="+boardno);	// 주소임시임시임시임ㅇ시이ㅣ밍시이밍ㅁ!!!!!!!!!!!!!
+				dispatch(request, response, "danim.do?command=boarddetail&boardno="+boardno);
 			} else {
 				System.out.println("false");
 			}
 			
 		} else if(command.equals("deleteCmt")) {
+			int boardno = Integer.parseInt(request.getParameter("boardno"));
 			int cmtno = Integer.parseInt(request.getParameter("cmtno"));
 			System.out.println(cmtno+" 코멘트 삭제");
 			
 			int res = cmtdao.deleteCmt(cmtno);
 			
 			if(res > 0) {
-				dispatch(request, response, "boarddetail.jsp");	// 주소임시임시임시임ㅇ시이ㅣ밍시이밍ㅁ!!!!!!!!!!!!!
+				dispatch(request, response, "danim.do?command=boarddetail&boardno="+boardno);
 			} else {
 				System.out.println("false");
 			}

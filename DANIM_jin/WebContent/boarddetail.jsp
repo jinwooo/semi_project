@@ -91,9 +91,9 @@
 				<span class="cmtname"><%=cmtdto.getCmtno() %></span>
 				<span class="cmtid"><%=cmtdto.getId() %></span>
 <%
-				if(dto.getId().equals(id)){
+				if(cmtdto.getId().equals(id)){
 %>
-					<a class="cmtdelete" href="danim.do?command=deleteCmt&cmtno=<%=cmtdto.getCmtno() %>">삭제</a>
+					<a class="cmtdelete" href="danim.do?command=deleteCmt&cmtno=<%=cmtdto.getCmtno() %>&boardno=<%=boardno %>">삭제</a>
 <%
 				}
 %>

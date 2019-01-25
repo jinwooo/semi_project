@@ -41,9 +41,9 @@
 	
 	<!-- 게시글 보기 -->
 	<select  id="selectOne" parameterType="int" resultType="BoardDto">
-		SELECT BOARDNO,ID,TITLE,CONTENT,LIKENUM,VIEWCOUNT
+		SELECT BOARDNO,ID,TITLE,(SELECT COUNT(*) FROM USERLIKE WHERE LIKEYN = 'Y' AND BOARDNO = #{boardno}) AS LIKENUM,REGDATE,VIEWCOUNT,FILENAME,CONTENT
 		FROM BOARD
-		WHERE BOARDNO=#{boardno}
+		WHERE BOARDNO = #{boardno}
 	</select>
 	
 	<!-- 게시글 추가 -->

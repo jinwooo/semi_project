@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.like.mapper">
+
+	<resultMap type="LikeDto" id="cmtMap">
+		<result property="cmtno" column="CMTNO"/>
+		<result property="boardno" column="BOARDNO"/>
+		<result property="cmt" column="CMT"/>
+		<result property="id" column="ID" />
+	</resultMap>
+
+  <select id="selectCmt" parameterType="int" resultMap="cmtMap">
+    SELECT * FROM BOARDCMT WHERE BOARDNO = #{boardno } ORDER BY CMTNO
+  </select>
+  
+  <select id="CmtCount" parameterType="int" resultType="int">
+  	SELECT COUNT(*) FROM BOARDCMT WHERE BOARDNO = #{boardno }
+  </select>
+  
+  <insert id="insertCmt" parameterType="BoardCmtDto">
+  	INSERT INTO BOARDCMT VALUES(CMTSEQ.NEXTVAL,#{boardno },#{cmt },#{id})
+  </insert>
+  
+  <delete id="deleteCmt" parameterType="int">
+  	DELETE FROM BOARDCMT WHERE CMTNO = #{cmtno }
+  </delete>
+  
+</mapper>

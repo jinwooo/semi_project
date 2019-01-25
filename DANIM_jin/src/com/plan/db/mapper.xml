@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.plan.mapper">
+	
+	<resultMap type="planDto" id="planDto">
+		<result property="pno" column="PNO"/>
+		<result property="ptitle" column="PTITLE"/>
+		<result property="psdate" column="PSDATE"/>
+		<result property="pldate" column="PLDATE"/>
+		<result property="pdata" column="PDATA"/>
+		<result property="id" column="ID"/>	
+	</resultMap>
+	
+	<select id="selectOne" parameterType="String" resultType="planDto">
+		SELECT PNO, PTITLE, PSDATE, PLDATE, PDATA, ID 
+		FROM PLAN 
+		WHERE PNO = #{pno } 
+	</select>
+	
+	<update id="saveText" parameterType="planDto">
+		UPDATE PLAN SET PDATA = #{pdata} 
+		WHERE PNO = #{pno}
+	</update>
+	
+	<select id="selectList" resultType="planDto" parameterType="String">
+		SELECT PNO, PTITLE, PSDATE, PLDATE, PDATA, ID
+		FROM PLAN 
+		WHERE ID = #{id }
+	</select>
+	
+	
+</mapper>

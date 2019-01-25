@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.danim.mapper">
+
+	<resultMap type="DanimDto" id="danimMap">
+		<result property="id" column="ID" />
+		<result property="name" column="NAME"/>
+		<result property="pw" column="PW"/>
+		<result property="addr" column="ADDR"/>
+		<result property="phone" column="PHONE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="grade" column="GRADE" />
+		<result property="yn" column="YN"/>
+		<result property="pencount" column="PENCOUNT"/>
+		<result property="confirm" column="CONFIRM"/>
+		<result property="sns" column="SNS"/>
+		<result property="image" column="IMAGE"/>
+	</resultMap>
+
+	<select id="selectOne" parameterType="String" resultMap="danimMap">
+		SELECT ID,NAME,PW,ADDR,PHONE,EMAIL,PENCOUNT
+		FROM USERBOARD;
+	</select>
+	
+	<select id="login" parameterType="String" resultMap="danimMap">
+		SELECT ID,NAME,PW,ADDR,PHONE,EMAIL,GRADE,YN,PENCOUNT,CONFIRM,SNS,IMAGE FROM USERBOARD WHERE ID= #{id}
+	</select>
+	
+	<insert id="join" parameterType="DanimDto">
+		INSERT INTO USERBOARD VALUES(#{id},#{name},#{pw},#{addr},#{phone},#{email},'general','Y',0,'N','origin','')
+	</insert>
+	
+	<insert id="snsJoin" parameterType="DanimDto">
+		INSERT INTO USERBOARD VALUES(#{id},#{name},#{pw},#{addr},#{phone},#{email},'general','Y',0,'N','sns','')
+	</insert>
+	
+	<update id="confirm" parameterType="String">
+		UPDATE USERBOARD SET CONFIRM='Y' WHERE ID=#{id}
+	</update>
+	
+	<select id="findInfo" parameterType="DanimDto" resultMap="danimMap">
+		SELECT ID,NAME,PW,ADDR,PHONE,EMAIL,GRADE,YN,PENCOUNT,CONFIRM,SNS,IMAGE FROM USERBOARD WHERE EMAIL= #{email}
+	</select>
+
+	<update id="updatePw" parameterType="java.util.Map">
+      UPDATE USERBOARD SET PW=#{pw} WHERE ID=#{id}
+  </update>
+  
+     <select id="idCheck" parameterType="String" resultMap="danimMap">
+      SELECT ID FROM USERBOARD WHERE ID=#{id}
+   </select>
+   
+	<update id="changeInfo" parameterType="java.util.Map">
+      UPDATE USERBOARD SET NAME=#{name},ADDR=#{addr},PHONE=#{phone},EMAIL=#{email},PW=#{pw} WHERE ID=#{id}
+  	</update>
+
+
+
+</mapper>

@@ -4,12 +4,17 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.Calendar" %>
+
 <!DOCTYPE html>
 <html class="full-height">
 <head>
 <meta charset="UTF-8">
 <title>detailmap</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="css/bootstrap-timepicker.min.css" />
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
@@ -103,6 +108,7 @@
 
 	.customButton {position:absolute;right:10px;bottom:0;margin:10px 10px 10px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;border-radius: 10px;}
 	
+	.daypanel {position: relative;padding: 5px;border: 1px solid #ccc;border-radius: 5px;}
 	.block {background: #f2f2f2;position: relative;padding: 15px;border: 1px solid #ccc;border-radius: 5px;}
 	.modifier {float: right;margin-left: 8px;font-size: 14px;}
 	.action {color: green;}
@@ -122,16 +128,32 @@
 	.column .blocks {overflow: hidden;}
 	.column .blocks .block {overflow: hidden;} 
 	
+	
+	.bootstrap-timepicker-widget table td input {width: 40px;margin: 0;text-align: center;}
+	.input-group-addon:last-child {border-left: 0;}
+	.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:first-child>.btn-group:not(:first-child)>.btn, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle {
+	    border-top-left-radius: 0;border-bottom-left-radius: 0;}
+	.input-group-addon {padding: 10px 25px 10px 10px;font-size: 14px;font-weight: 400;line-height: 1;color: #555;text-align: center;vertical-align:middle;background-color: #eee;border: 1px solid #ccc;border-radius: 4px;}
+	.input-group-addon, .input-group-btn {width: 1%;white-space: nowrap;vertical-align: middle;}
+	.input-group .form-control, .input-group-addon, .input-group-btn {display: table-cell;}
+	.input-group {position: relative;border-collapse: separate;text-align: center;}
+	.input-group-addon, .input-group-btn {width: 1%;white-space: nowrap;vertical-align: middle;}
+	
+	
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="js/bootstrap-timepicker.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
+	var ele;
+	var cnt = 0;
+	
+	$(document).ready(function(){			
 			reCalculate();
 			
 			$(".blocks").sortable({
@@ -159,26 +181,48 @@
 			$(".blocks").on('click', '.block', function() {
 				//$(this).css('background', 'none');
 		        $(this).find('.remove-block').hide();
-		        $(this).css("background-color","#ffe6e6");
-		        $(this).siblings(".block").css("background-color","#f2f2f2");
+		        //$(this).css("background-color","#ffe6e6");
+		        //$(this).siblings(".block").css("background-color","#f2f2f2");
 		        
 		        /* if(ele.is(".block:contains(toggle)")){
 	                $("img").toggle();
 	            } */
 			});
 			
-			/* $("body").on('click', '#placesList .item', function() {				
-				$(this).css("background-color","#ffe6e6");
-				$(this).siblings("#placesList .item").css("background-color","white");
-			}); */
+			$(".panel").on('click', '.daypanel', function() {
+		        $(this).css("background-color","#ffe6e6");
+		        $(this).siblings(".daypanel").css("background-color","#fff");
+		        ele = $(this);
+			});
 			
-			$('.block-add').click(function() {
-			  $(this).closest('.column').find('.blocks')
-			  	.append('<div class="block">'+
-			  			'<span class="patching-numbering"></span>'+
-			  			'<div class="block-actions float-right">'+
-						'<div class="remove modifier remove-block">'+
-							'<i class="fas fa-times"></i></div>'+						
+			$("body").on('click', '#placesList .item', function() {				
+				$(this).css("background-color","#ffe6e6");
+				$(this).siblings("#placesList .item").css("background-color","#fff");
+				$('#nowselectplace').val($(this).find("h5").text());
+			});
+			
+			//$('.block-add').click(function()
+					//closest('.daypanel').			
+			
+			$("body").on( "click", "#addblock", function() {				
+				if (ele == null) {
+			        alert('날짜를 선택해주세요!');
+			        return false;
+				} else if (!$("#nowselectplace").val().replace(/^\s+|\s+$/g, '')) {
+			        alert('장소를 선택해주세요!');
+			        return false;
+				} 
+				
+				ele.find('.blocks')
+			  	.append('<div class="block clearfix ui-sortable-handle">'+
+			  				'<span class="patching-numbering"></span>'+
+			  				'<div class="block-actions float-right">'+
+								'<div class="remove modifier remove-block">'+
+								'<i class="fas fa-times"></i></div></div>'+
+							$('#nowselectplace').val()+
+								'<br/><div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">'+
+		   						'<input id="timepicker'+(++cnt)+'" type="text" class="form-control input-small">'+
+		 						'<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>'+
 						'</div>')					  	
 					.find(".remove-block").click(function() {
 				        var valueCheck = false;
@@ -196,42 +240,87 @@
 				            reCalculate();
 				        };				
 					});
+				$('#timepicker'+cnt).timepicker('setTime', '12:00 AM');	
 			  	reCalculate();
-			});	
-
-	});
+			});
+	});	
 	
 	// .block 번호를 순서대로 할당하는 함수
 	function reCalculate() {
 		$('.block').each(function() {
-		    $(this).find('.patching-numbering').text('DAY '+parseInt($(this).index()+1));
+		    $(this).find('.patching-numbering').text(parseInt($(this).index()+1)+' ');
 		});
 	}
 </script>
 
 </head>
+<% 
+	String[] place = request.getParameterValues("place");
+	String[] date = request.getParameterValues("date");
+	
+	/* String place = request.getParameter("place");
+	String date = request.getParameter("date"); */
+	
+	
+%>
 <body class="full-height">	
 	<div class="container-fluid full-height">
 		<div class="row full-height">
 			<div class="col-sm-6 col-md-2 full-height">
 				<div class="col-xs-6 column">
-					<div class="column-toolbar">
+					<div class="column-toolbar" style="display:none;">
 						<div class="block-add float-right">
 							<i class="fas fa-plus-circle"></i>
 						</div>
 					</div>
-					<div class="blocks panel panel-default panel-body ui-sortable">
-						<div class="block clearfix ui-sortable-handle">
-							<span class="patching-numbering"></span>
-							<div class="block-actions float-right">
-								<div class="remove modifier remove-block">
-									<i class="fas fa-times"></i>
-								</div>
-								<div class="edit modifier edit-block">
-									<i class="fas fa-pencil-alt"></i>
-								</div>
-							</div>
-						</div>
+					<input type="hidden" id="nowselectplace"/>
+					
+						<!-- <div class="edit modifier edit-block">
+										<i class="fas fa-pencil-alt"></i>
+							</div> -->
+					<div class="panel panel-default panel-body orderday">
+<%
+							int cnt = 1;
+							for (int i = 0; i < place.length; i++){
+								Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(date[i].split("~")[1]);
+								Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(date[i].split("~")[0]);								
+								int compare = endDate.compareTo( startDate );
+								
+								Calendar cal = Calendar.getInstance();
+						        cal.setTime(startDate);
+						        
+								if (compare == 0){
+%>
+									<div class="daypanel">								
+										<span>DAY <%=cnt %>, <%=date[i].split("~")[0]%></span><br/>
+										<span><%=place[i] %></span>
+										<br/>										
+										<div class="blocks panel panel-default panel-body">																														
+										</div>
+									</div>
+
+<%									
+									cnt++;
+								} else if ( compare > 0 ) {
+									while(new Date(cal.getTimeInMillis()).compareTo( endDate ) <= 0){
+										SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+										String compareDate = transFormat.format(new Date(cal.getTimeInMillis()));
+%>
+										<div class="daypanel">								
+											<span>DAY <%=cnt %>, <%=compareDate %></span><br/>
+											<span><%=place[i] %></span>
+											<br/>											
+											<div class="blocks panel panel-default panel-body">																																			
+											</div>
+										</div>
+<%															
+										cnt++;
+										cal.add(Calendar.DATE, 1);
+									}							
+									
+								}
+							}
+%>
 					</div>
 				</div>
 			</div>
@@ -256,7 +345,7 @@
 					<div id="pagination"></div>
 				</div>
 				<div class="customButton">
-					<input class="btn btn-primary btn-sm" type="button" value="추가">
+					<input id="addblock" class="btn btn-primary btn-sm" type="button" value="추가">
 				</div>
 			</div>
 			<div class="map_wrap col-md-8 full-height padding-none">
@@ -265,7 +354,7 @@
 				<div id="clustermap" class="overlay"></div>
 				<div class="customButton">
 					<input class="btn btn-primary btn-sm" type="button" value="저장">
-					<input class="btn btn-primary btn-sm" type="button" value="다음으로" onclick="location.href='planner.jsp'">
+					<input class="btn btn-primary btn-sm" type="button" value="다음으로">
 				</div>
 			</div>
 			<script type="text/javascript"
@@ -421,7 +510,8 @@
 				            // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
 				            (function(marker, place) {
 				                daum.maps.event.addListener(marker, 'click', function() {
-									displayPlaceInfo(place);				                    
+									displayPlaceInfo(place);
+									$("#nowselectplace").val(place.place_name);
 				                    $('#placesList .item').find(':contains('+place.place_name+')').parent().parent().css("background-color","#ffe6e6");
 								    $('#placesList .item').find(':contains('+place.place_name+')').parent().parent().siblings().css("background-color","#FFFFFF");
 				                });
@@ -486,7 +576,6 @@
 				    contentNode.innerHTML = content;
 				    placeOverlay.setPosition(new daum.maps.LatLng(place.y, place.x));
 				    placeOverlay.setMap(map);
-				    
 				    
 				}
 				
@@ -680,6 +769,7 @@
 			            (function(marker, place) {
 			                daum.maps.event.addListener(marker, 'click', function() {
 			                    displayPlaceInfo(place);
+			                    $("#nowselectplace").val(place.place_name);
 			                    $('#placesList .item').find(':contains('+place.place_name+')').parent().parent().css("background-color","#ffe6e6");
 							    $('#placesList .item').find(':contains('+place.place_name+')').parent().parent().siblings().css("background-color","#FFFFFF");			        			
 			                });
@@ -857,11 +947,14 @@
 			        	 // 마커에 클릭이벤트를 등록합니다
 		        	    daum.maps.event.addListener(marker, 'click', function() {
 		        	    	displayPlaceInfoFe(marker,record);
+		        	    	$("#nowselectplace").val(record.축제명);
+		        	    	$('#placesList .item').css("background-color","#FFFFFF");
 		                });
 		        		
 			            return marker;
 			        });
-	
+			        
+			        $('#placesList .item').css("background-color","#FFFFFF");
 			        // 클러스터러에 마커들을 추가합니다
 			        clusterer.addMarkers(markers);
 			    });
@@ -905,6 +998,8 @@
 
 				 	// 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
 			        clustermap.setLevel(level, {anchor: cluster.getCenter()});
+				 	
+			        $('#placesList .item').css("background-color","#FFFFFF");
 			    });
 			    
 			 	// 클러스터 마커 항목을 Element로 반환하는 함수입니다
@@ -951,9 +1046,9 @@
 				function displayPlaceInfoFe (marker,record) {
 					var content = 	'<div class="wrap">' + 
 	                '    <div class="infomation">' + 
-	                '        <div class="title">' + 
+	                '        <div class="title"><h5>' + 
 	              				 record.축제명 + 
-	                '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	                '            </h5><div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 	                '        </div>' + 
 	                '        <div class="body">' + 
 	                '            <div class="desc">'+

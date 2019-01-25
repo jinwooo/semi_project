@@ -29,6 +29,7 @@
  	#schedule {width: 80%; max-width: 900px;}
  	
  	#my_tbody tr td {vertical-align:middle;}
+ 	#my_tbody tr td input{border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;}
  	.customButton {position:absolute;right:10px;bottom:0;margin:10px 10px 10px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;border-radius: 10px;}
  	
  	.dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
@@ -162,12 +163,15 @@
 			    cell1.innerHTML = '<button type="button" id="del_btn" class="btn btn-link btn-sm black"><span style="color:black;" class="glyphicon glyphicon-remove"></span></button>';
 			    cell2.setAttribute('style','display:none;');
 			    cell2.innerHTML = cnt;
-			    cell3.innerHTML = '';
-			    cell4.innerHTML = '<span id="date">'+myStartDate+' ~ '+myEndDate+'</span>';
+			    cell3.innerHTML = '';			    
+			    //cell4.innerHTML = '<input type="text" readonly id="date" name="date">'+myStartDate+' ~ '+myEndDate+'</input>';
+			    cell4.innerHTML = '<input type="text" readonly id="date" name="date" value="'+myStartDate+'~'+myEndDate+'"></input>';
+			    cell5.setAttribute('style','display:none;');
 			    cell5.innerHTML = '<div class="input-group bootstrap-timepicker timepicker">'+
 	           						'<input id="timepicker'+cnt+'" type="text" class="form-control input-small">'+
 	         						'<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span></div>';			        
-			    cell6.innerHTML = '<td><span id="place">'+$("#tmpPlace").val()+'</span></td>';
+			    //cell6.innerHTML = '<td><input type="text" readonly id="place" name="place">'+$("#tmpPlace").val()+'</input></td>';
+			    cell6.innerHTML = '<td><input type="text" readonly id="place" name="place" value="'+$("#tmpPlace").val()+'"></input></td>';
 			    
 			    $('#timepicker'+cnt).timepicker('setTime', '12:00 AM');			    
 			    
@@ -501,33 +505,35 @@
 				
 				<div id='schedule'>
 					<div class="table-responsive">
-						<input type="hidden" id="tmpPlace"/>
-						<table class="table table-striped">							
-							<col width="10">
-							<col width="20">
-							<col width="170">
-							<col width="135">
-							<col width="300">				
-							<thead>
-								<tr>
-									<th><!-- <input type="checkbox" name="all" value="#" onclick="allChk(this.checked)"> --></th>
-									<th>NO.</th>
-									<th>날짜</th>
-									<th>시간</th>	
-									<th>장소</th>
-								</tr>
-							</thead>
-							<tbody id="my_tbody">								
-								<tr>
-									<td colspan="5" align="right">
-										<input class="btn btn-primary btn-sm" type="hidden" value="삭제" onclick="row_del()">
-										<input class="btn btn-primary btn-sm" type="hidden" id="addrow" value="일정추가">
-										<input class="btn btn-primary btn-sm" type="button" id="showdistance" data-toggle="button" aria-pressed="false" autocomplete="off" value="경로보기">
-										<input class="btn btn-primary btn-sm" type="button" value="다음으로" onclick="location.href='detailMap.jsp'">										
-									</td>
-								</tr>								
-							</tbody>
-						</table>
+						<form action="detailMap.jsp" method="post">
+							<input type="hidden" id="tmpPlace"/>
+							<table class="table table-striped">							
+								<col width="10">
+								<col width="20">
+								<col width="170">
+								<!-- <col width="135"> -->
+								<col width="300">				
+								<thead>
+									<tr>
+										<th><!-- <input type="checkbox" name="all" value="#" onclick="allChk(this.checked)"> --></th>
+										<th>NO.</th>
+										<th>날짜</th>
+										<!-- <th>시간</th> -->	
+										<th>장소</th>
+									</tr>
+								</thead>
+								<tbody id="my_tbody">								
+									<tr>
+										<td colspan="5" align="right">
+											<input class="btn btn-primary btn-sm" type="hidden" value="삭제" onclick="row_del()">
+											<input class="btn btn-primary btn-sm" type="hidden" id="addrow" value="일정추가">
+											<input class="btn btn-primary btn-sm" type="button" id="showdistance" data-toggle="button" aria-pressed="false" autocomplete="off" value="경로보기">
+											<input class="btn btn-primary btn-sm" type="submit" value="다음으로">										
+										</td>
+									</tr>								
+								</tbody>
+							</table>
+						</form>
 					</div>
 				</div>
 			</div>

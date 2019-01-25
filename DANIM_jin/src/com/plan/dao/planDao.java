@@ -17,6 +17,8 @@ public class planDao extends SqlMapConfig {
 		session = getSqlSessionFactory().openSession(true);
 		res = session.update(namespace+"saveText",dto);
 		
+		session.close();
+		
 		return res;
 	}
 	
@@ -39,7 +41,64 @@ public class planDao extends SqlMapConfig {
 		
 		session = getSqlSessionFactory().openSession(true);
 		list = session.selectList(namespace+"selectList",id);
-		System.out.println("selectList 작동 됨");
+		
+		session.close();
+		
 		return list;
+	}
+	
+	public int checkPno(String id, String pno) {
+		SqlSession session = null;
+		int res = 1;
+		
+		planDto dto = new planDto();
+		dto.setId(id);
+		dto.setPno(pno);
+		
+		System.out.println("이게 저장됨 : "+dto.getId() +","+ dto.getPno());
+		
+		session = getSqlSessionFactory().openSession(true);
+		dto = session.selectOne(namespace+"checkPno",dto);
+		
+		System.out.println(dto.getPdata()+"****");
+		
+		if(dto.getPdata()==null) {
+			res = 0;
+		}
+
+		System.out.println(res);
+
+		
+		session.close();
+		
+		return res;
+	}
+	
+	public int insert(planDto dto) {
+		SqlSession session = null;
+		int res = 0;
+		
+		session = getSqlSessionFactory().openSession(true);
+				
+		res = session.insert(namespace+"insert",dto);
+	
+		session.close();
+		
+		System.out.println("insert에서 : " + res);
+		
+		return res;
+	}
+	
+	public int setPno() {
+		SqlSession session = null;
+		int res = 0;
+		
+		session = getSqlSessionFactory().openSession(true);
+		
+		res = session.selectOne(namespace+"setpno");
+		
+		System.out.println(res);
+		
+		return res;
 	}
 }

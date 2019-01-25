@@ -220,47 +220,35 @@
    String dpcont = "해운대물놀이";
 %>
 
-
-<%
-	String id = (String)session.getAttribute("sessionId"); //dto로 받아와야함
-	/* String pno = request.getParameter("pno");  */
-	System.out.println(id);
-	String pno = "1";
-	//dto.pno를 갖고 있어야함 현재 사용하는것이 무엇인지 알아야하
-	planDao dao = new planDao();
-	List<planDto> listDto = dao.selectList(id);
-	Map<String,planDto> map =null;
-	if(listDto.equals(null)||listDto==null||listDto.size() == 0){
-%>
-<script type="text/javascript">
-	$("#selDiary").append("<option value=" + 0 + ">" + "여행정보가 없습니다" + "</option>" );
-</script>
-<%		
-	}else{
-		map = new HashMap<String,planDto>();
-		for(planDto dto : listDto){
-			map.put(dto.getPno(), dto);
-		}
-	}
-%>
-
 <script src="js/html2canvas.min.js"></script>
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
 
+	<%
+	String user = (String)request.getAttribute("sessionId"); //dto로 받아와야함
+	String id = "aaa";
+	planDao dao = new planDao();
+	List<planDto> listDto = dao.selectList(id);
+	%>	
 
+	var pno = "";
+
+	
    $(function() {
 	   
 		$("#selDiary").empty();
-/*		$("#selDiary").append("<option value=" + 0 + ">" + "여행불러오기" + "</option>" ); */
-		<%
+		<%		
 		if(listDto.equals(null)||listDto==null||listDto.size() == 0){
 		%>
 		$("#selDiary").append("<option value=" + 0 + ">" + "여행정보가 없습니다" + "</option>" );		
 		<%
 		}else{
+			Map<String,planDto> map = new HashMap<String,planDto>();
+			for(planDto dto : listDto){
+				map.put(dto.getPno(), dto);
+			}
 			for(Map.Entry<String,planDto> cnt : map.entrySet()){
 		%>
 		  		$("#selDiary").append("<option value=" + "<%=cnt.getKey() %>" + ">" + "<%=cnt.getValue().getPtitle() %>" + "</option>" );
@@ -377,48 +365,55 @@
          $(this).parent().find(".contentDel").remove()
       })
       })
+    
+    
+        <%
+		planDto pdto = new planDto();
+      	pdto.setPtitle("sample_Ptitle");
+      	pdto.setPsdate("sample_psdate");
+      	pdto.setPldate("sample_pldata");
+      %>      
       
-      $("#planSave").click(function(){
-	 		/* var tempSorttable = $("#sortable").html();
-			tempSorttable = delSpace(tempSorttable); */
-			//공백이 있으면 텍스트로 가져갈때 문제가 됨! 공백을 없애주는 녀석
-		/* 	location.href = 'textController?command=saveText&pno='+ "2" + '&text='+tempSorttable; */
+  	$("#planSave").click(function(){
+		var ptitle = "";
+		ptitle = prompt("제목을 입력하세요","");
+		alert(ptitle);
 		$.ajax({
- 			url : "textController",
+ 			url : "danimServlet",
  			type : "POST",
  			data : {
  				command : "saveText",
- 				pno : "<%=pno %>",
- 				text : delSpace($("#openFile").html())
+ 				id : "<%=id %>",
+ 				pno : pno,
+ 				text : delSpace($("#openFile").html()),
+ 				ptitle : ptitle,
+ 				psdate : "<%=pdto.getPsdate() %>",
+ 				pldate : "<%=pdto.getPldate() %>"
  			}
  		});	     
  		
       });
       
-      $(function(){
-        	$("#planSelect").click(function(){
-        		var titleno = $("#selDiary option:selected").val();
-  		/* 	1. dao로 한개를 찾아온다.
-  			2. 해당 애를 불러온다.
-  			3. 기존에 있던 div를 지워준다.
-  			4. 지워진 자리에 붙여넣어 준다. */
-  			$.ajax({
-  				url:"textController",
-  				type : "POST",
-  				data: {command : "getText", pno: titleno},
-  				success : function(data){
-  					$("#openFile").empty();
-  					alert(data.substr(data.length-7,6)); 
-  					$("#openFile").load("form/"+data.substr(data.length-7,6), "html");
-					
-  				}
-  			}) .fail (function() {
-                  alert('failure');
-  			});
+       /* 저장된 파일을 불러오는 함수 */
+       $(function(){
+         	$("#planSelect").click(function(){
+         		var titleno = $("#selDiary option:selected").val();
+         		pno = titleno;
+   			$.ajax({
+   				url:"danimServlet",
+   				type : "POST",
+   				data: {command : "getText", pno: titleno},
+   				success : function(data){
+   					$("#openFile").empty();
+   					$("#openFile").load("sav/"+data);
+   				}
+   			}) .fail (function() {
+                   alert('failure');
+   			});
 
-        	});
-        	
-        }); 
+         	});
+         	
+         });  
       
    });
       

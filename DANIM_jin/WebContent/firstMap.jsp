@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>selectmap</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-<link rel="stylesheet" href="css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<!-- <link rel="stylesheet" href="css/bootstrap-timepicker.min.css" /> -->
 <link rel='stylesheet' href='css/fullcalendar.min.css' />
 <link rel='stylesheet' href='css/fullcalendar.print.min.css' media='print' />
 
@@ -29,8 +29,9 @@
  	#schedule {width: 80%; max-width: 900px;}
  	
  	#my_tbody tr td {vertical-align:middle;}
- 	#my_tbody tr td input{border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;}
+ 	#my_tbody tr td #date, #my_tbody tr td #place {width: 200px;border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;}
  	.customButton {position:absolute;right:10px;bottom:0;margin:10px 10px 10px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;border-radius: 10px;}
+ 	#my_tbody tr td #date:nth-of-type(odd), #my_tbody tr td #place:nth-of-type(odd){background-color: rgba(0,0,0,.001);}
  	
  	.dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
 	.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
@@ -41,19 +42,141 @@
 	.distancelabel .left {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_l.png") no-repeat;display: inline-block;height: 24px;overflow: hidden;vertical-align: top;width: 7px;}
 	.distancelabel .center {background: url(http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_bg.png) repeat-x;display: inline-block;height: 24px;font-size: 12px;line-height: 24px;}
 	.distancelabel .right {background: url("http://t1.daumcdn.net/localimg/localimages/07/2011/map/storeview/tip_r.png") -1px 0  no-repeat;display: inline-block;height: 24px;overflow: hidden;width: 6px;}
-	 	 	
+	
+	
+	all: unset; 
+	@font-face { font-family: 'BMHANNAAir'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff'); font-weight: normal; font-style: normal; }
+	header{	left :0;top:0;width:100%;height: 100px;z-index: 4;}
+	#title{
+		position:absolute;
+		top : 10px;
+		left:100px; 
+		font-weight : bold;
+		font-size: 36px;
+		font-style : italic;
+		color : rgb(200,160,220);
+		cursor: pointer;
+		}
+		hr{
+			position:absolute;
+			top:80px;
+			border:none;
+			background-color : #C0C0C0;
+			height :2px;
+			margin-top: 1rem;
+	    margin-bottom: 1rem;
+	        box-sizing: content-box;
+	    	width:100%;
+	    overflow: visible;
+	
+		}
+		.hr-sect{
+	
+		display :flex;
+		flex-basis : 100%;
+		align-items : center;
+		color : rgb(200,160,220);
+		font-style : italic;
+		font-weight : bold;
+		font-size : 30px;
+		margin: 8px 0px;
+	}
+	.hr-sect::after{
+		content:"";
+		flex-grow:1;
+		background: #C0C0C0;
+		height : 2px;
+		font-size: 0px;
+		line-height: 2px;
+		margin: 0px 50px;
+	}
+	#myPage{
+	 	position : absolute;
+		top : 22px;
+		right : 100px;
+	
+	}
+	#logout{
+	 	position:absolute;
+		top : 22px;
+		right:180px; 
+	}
+	#welcome{
+		position:absolute;
+		top : 27px;
+		right:270px; 
+	}
+	input[type=button]{
+		font-family: 'BMHANNAAir'; 
+	}
+	.btn-success_custom {
+	    width: 65.9286px;
+	    height: 34px;
+	    font-size: 15px;
+	    color: rgb(255,255,255);
+	    line-height: 2.5em;
+	    border-radius: 4px;
+	    background-color: rgb(190,190,190);
+	    text-align: center;
+	    font-weight: bold;
+	    border: none;
+	    -webkit-appearance: button;
+	        overflow: visible;
+	}
+	a{
+		color : rgb(200,160,220);
+		cursor: pointer;
+		text-decoration: none;
+	}
+		
 </style>
 
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>	
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2360278da0d0c6bd52ae10b4eaddaea5&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script type="text/javascript" src="js/bPolygon.js"></script>	
 	<script type="text/javascript" src='lib/moment.min.js'></script>
 	<script type="text/javascript" src='js/fullcalendar.min.js'></script>
 	<script type="text/javascript" src="js/bootstrap-timepicker.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2360278da0d0c6bd52ae10b4eaddaea5&libraries=services,clusterer,drawing"></script>
+	
 	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
 
+	<%
+	String id = "";
+	
+	
+	id = (String)session.getAttribute("sessionId");            // request에서 id 파라미터를 가져온다
+	
+	
+	
+	if(id==null||id.equals("")){                            // id가 Null 이거나 없을 경우
+	%>
+	
+		<script type="text/javascript">
+			$(function(){
+				alert("로그인이 필요한 페이지입니다.");
+				location.href="danim.do?command=main";
+			});
+		</script>
+	
+	<%	
+	}else{
+		System.out.println(id);
+	%>
+	
+	<script type="text/javascript">
+		$(function(){
+			
+			$("#afterLogin").show();
+		});
+	</script>
+	
+	<%	
+	}
+
+%>
 	<script type="text/javascript">
 		var cnt = 0;
 		var myStartDate = '';
@@ -108,14 +231,14 @@
 						    if (!confirm("일정을 이동하시겠습니까?")) {
 						      revertFunc();
 						    }
-						    $('#my_tbody > tr > td:nth-child(5n+2):contains("'+event.id+'")').next().next().text(event.start.format()+' ~ '+event.end.subtract(1, 'days').format());
+						    $('#my_tbody > tr > td:nth-child(5n+2):contains("'+event.id+'")').next().next().children('input').val(event.start.format()+'~'+event.end.subtract(1, 'days').format());
 						},
 						eventResize: function(event, delta, revertFunc) {
 						    //alert(event.title + " end is now " + event.end.format());
 						    if (!confirm("일정을 변경하시겠습니까?")) {
 						      revertFunc();
 						    }
-						    $('#my_tbody > tr > td:nth-child(5n+2):contains("'+event.id+'")').next().next().text(event.start.format()+' ~ '+event.end.subtract(1, 'days').format());
+						    $('#my_tbody > tr > td:nth-child(5n+2):contains("'+event.id+'")').next().next().children('input').val(event.start.format()+'~'+event.end.subtract(1, 'days').format());
 						}						
 					});		
 
@@ -133,7 +256,7 @@
 
 			    $(this).toggleClass('btn-danger btn-success');
 			    if ($(this).hasClass('btn-danger')) {
-			    	if ($("#my_tbody tr td:nth-child(6)").text() == null || !$("#my_tbody tr td:nth-child(6)").text().replace(/^\s+|\s+$/g, '')) {
+			    	if ($("#my_tbody tr td:nth-child(6)").children('input').val() == null || !$("#my_tbody tr td:nth-child(6)").children('input').val().replace(/^\s+|\s+$/g, '')) {
 				        alert('일정을 선택해주세요!');
 				        return false;
 				    }
@@ -160,7 +283,7 @@
 			    var cell6 = row.insertCell(5);
 			    //cell1.innerHTML = '<input type="checkbox" name="chk" value="'+cnt+'" />';
 			    //cell1.innerHTML = "<td><input type='button' value='삭제' id='del_btn' class='btn btn-default btn-sm' /></td>"
-			    cell1.innerHTML = '<button type="button" id="del_btn" class="btn btn-link btn-sm black"><span style="color:black;" class="glyphicon glyphicon-remove"></span></button>';
+			    cell1.innerHTML = '<button type="button" id="del_btn" class="btn btn-link btn-sm black"><span style="color:black;" class="fa fa-times"></span></button>';
 			    cell2.setAttribute('style','display:none;');
 			    cell2.innerHTML = cnt;
 			    cell3.innerHTML = '';			    
@@ -212,7 +335,26 @@
 
 </head>
 <body class="full-height">
+	<header>
+		<div id="outer">
+		
+		<div data-text-content="true" id="title">
+		<a style="all: unset; color: rgb(200, 160, 220); cursor: pointer " href="danim.do?command=main">#DANIM</a>
+		</div>
+		<div id="afterLogin">
+		<span id="welcome"><%=id %>님 환영합니다 </span>
+		<div data-obj-type="element">	
+			<input type="button" id="myPage" value="내 정보" class="btn-success_custom">
+		</div>
+		<div data-obj-type="element">	
+			<input type="button" id="logout" value="로그아웃" class="btn-success_custom" onclick="location.href='danim.do?command=logout'">
+		</div>
+		</div>
+		</div>		
+		<hr>	
+	</header> 
 	<div class="container-fluid full-height">
+		<!-- <div class="row" style="height:100px; clear:both;"></div> -->
 		<div class="row full-height">
 			<div class="col-lg-6 full-height">
 				<div id="mapwrap" style="width: 100%; height: 80%;">
@@ -247,8 +389,8 @@
 						    	placePosition = [];
 						    	searchplace = [];
 						    	
-						    	$("#my_tbody tr td:nth-child(6)").each(function(i){
-						    	    searchplace.push($(this).text());
+						    	$("#my_tbody tr td:nth-child(6)").children('input').each(function(i){
+						    	    searchplace.push($(this).val());
 						    	});
 						    	
 						    	$('#map').hide();
@@ -453,12 +595,12 @@
 						</script>				
 					</div>
 				<div id="list" style="text-align:center;">
-					<input class="btn" type="button" code="0" value="전국" />
-					<input class="btn" type="button" code="11" value="서울" />
-					<input class="btn" type="button" code="26" value="부산" />
-					<input class="btn" type="button" code="28" value="인천" />
-					<input class="btn" type="button" code="41" value="경기" />
-					<input class="btn" type="button" code="50" value="제주" />
+					<input class="btn btn-secondary btn-sm" type="button" code="0" value="전국" />
+					<input class="btn btn-secondary btn-sm" type="button" code="11" value="서울" />
+					<input class="btn btn-secondary btn-sm" type="button" code="26" value="부산" />
+					<input class="btn btn-secondary btn-sm" type="button" code="28" value="인천" />
+					<input class="btn btn-secondary btn-sm" type="button" code="41" value="경기" />
+					<input class="btn btn-secondary btn-sm" type="button" code="50" value="제주" />
 				</div>
 				<script>
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

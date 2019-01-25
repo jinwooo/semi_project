@@ -126,10 +126,9 @@
 	.itemBoxHighlight {background: #ffe6e6; height: 50px; position: relative;padding: 15px;border: 1px solid #ccc;border-radius: 5px;}	
 	.column{max-height:938px; overflow-x:hidden; overflow-y:auto;}
 	.column .blocks {overflow: hidden;}
-	.column .blocks .block {overflow: hidden;} 
+	.column .blocks .block {overflow: hidden;} 	
 	
-	
-	.bootstrap-timepicker-widget table td input {width: 40px;margin: 0;text-align: center;}
+	/* .bootstrap-timepicker input {width: 120px;margin: 0;text-align: center;} */
 	.input-group-addon:last-child {border-left: 0;}
 	.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:first-child>.btn-group:not(:first-child)>.btn, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle {
 	    border-top-left-radius: 0;border-bottom-left-radius: 0;}
@@ -218,10 +217,10 @@
 			  				'<span class="patching-numbering"></span>'+
 			  				'<div class="block-actions float-right">'+
 								'<div class="remove modifier remove-block">'+
-								'<i class="fas fa-times"></i></div></div>'+
+								'<i class="fas fa-times"></i></div></div><span class="selectedplace">'+
 							$('#nowselectplace').val()+
-								'<br/><div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">'+
-		   						'<input id="timepicker'+(++cnt)+'" type="text" class="form-control input-small">'+
+								'</span><br/><div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">'+
+		   						'<input id="timepicker'+(++cnt)+'" type="text" class="form-control input-small timepickernow">'+
 		 						'<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>'+
 						'</div>')					  	
 					.find(".remove-block").click(function() {
@@ -243,6 +242,44 @@
 				$('#timepicker'+cnt).timepicker('setTime', '12:00 AM');	
 			  	reCalculate();
 			});
+			
+			$("body").on( "click", "#savedate", function() {
+				$(".daypanel").each(function() {
+					var daycnt = $(this).find('.daycnt').text().substr(4);
+					var sldate = $(this).find('.sldate').text();
+					var planplace = $(this).find('.planplace').text();								
+					
+					$(this).children().children('.block').each(function() {
+						var selectedplace = $(this).find('.selectedplace').text();
+						var timepickernow = $(this).find('.timepickernow').val();
+						var timefix;
+						if (timepickernow.length == 8){
+							if (timepickernow.substr(6) == 'PM'){
+								timefix = (parseInt(timepickernow.substr(0,2))+12)+timepickernow.substr(3,2);
+							} else if ( timepickernow.substr(6) == 'AM' && timepickernow.substr(0,2) == 12 ) {
+								timefix = '00'+timepickernow.substr(3,2);
+							} else {
+								timefix = timepickernow.substr(0,2)+timepickernow.substr(3,2);
+							}
+						} else {
+							timepickernow = 0+timepickernow;
+							if (timepickernow.substr(6) == 'PM'){
+								timefix = (parseInt(timepickernow.substr(0,2))+12)+timepickernow.substr(3,2);
+							} else {
+								timefix = timepickernow.substr(0,2)+timepickernow.substr(3,2);
+							}							
+						}
+						$('#hiddentable > tbody:last').append('<tr><td><input name="daycnt" value="'+daycnt+'"/></td>'+
+																'<td><input name="timepickernow" value="'+timefix+'"/></td>'+
+																'<td><input name="selectedplace" value="'+selectedplace+'"/></td>'+
+																'<td><input name="sldate" value="'+sldate+'"/></td>'+
+																'<td><input name="planplace" value="'+planplace+'"/></td>'+
+																'</tr>');
+					});
+				});
+				$( "#submitval" ).click();
+				  
+			});
 	});	
 	
 	// .block 번호를 순서대로 할당하는 함수
@@ -260,13 +297,41 @@
 	
 	/* String place = request.getParameter("place");
 	String date = request.getParameter("date"); */
+%>
+<%
+	String id = "";
 	
 	
+	id = (String)session.getAttribute("sessionId");            // request에서 id 파라미터를 가져온다
+	
+	
+	
+	if(id==null||id.equals("")){                            // id가 Null 이거나 없을 경우
+%>
+	
+		<script type="text/javascript">
+			$(function(){
+				alert("로그인이 필요한 페이지입니다.");
+				//location.href="danim.do?command=main";
+			});
+		</script>
+	
+<%	
+	}else{
+		System.out.println(id);
+	}
 %>
 <body class="full-height">	
 	<div class="container-fluid full-height">
 		<div class="row full-height">
 			<div class="col-sm-6 col-md-2 full-height">
+				<form action="map.do" method="post" style="display:none;">
+					<input type="hidden" name="command" value="insertdetailplan">					
+					<table id="hiddentable">
+						<tbody></tbody>
+					</table>
+					<input type="submit" id="submitval"/>
+				</form>
 				<div class="col-xs-6 column">
 					<div class="column-toolbar" style="display:none;">
 						<div class="block-add float-right">
@@ -292,8 +357,8 @@
 								if (compare == 0){
 %>
 									<div class="daypanel">								
-										<span>DAY <%=cnt %>, <%=date[i].split("~")[0]%></span><br/>
-										<span><%=place[i] %></span>
+										<span class="daycnt">DAY <%=cnt %></span> , <span class="sldate"><%=date[i].split("~")[0]%></span><br/>
+										<span class="planplace"><%=place[i] %></span>
 										<br/>										
 										<div class="blocks panel panel-default panel-body">																														
 										</div>
@@ -307,8 +372,8 @@
 										String compareDate = transFormat.format(new Date(cal.getTimeInMillis()));
 %>
 										<div class="daypanel">								
-											<span>DAY <%=cnt %>, <%=compareDate %></span><br/>
-											<span><%=place[i] %></span>
+											<span class="daycnt">DAY <%=cnt %></span>,<span class="sldate"><%=compareDate %></span><br/>
+											<span class="planplace"><%=place[i] %></span>
 											<br/>											
 											<div class="blocks panel panel-default panel-body">																																			
 											</div>
@@ -316,8 +381,7 @@
 <%															
 										cnt++;
 										cal.add(Calendar.DATE, 1);
-									}							
-									
+									}			
 								}
 							}
 %>
@@ -353,8 +417,8 @@
 					style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 				<div id="clustermap" class="overlay"></div>
 				<div class="customButton">
-					<input class="btn btn-primary btn-sm" type="button" value="저장">
-					<input class="btn btn-primary btn-sm" type="button" value="다음으로">
+					<input class="btn btn-primary btn-sm" type="button" id="savedate" value="저장">
+					<input class="btn btn-primary btn-sm" type="button" id="nextpage" value="다음으로">
 				</div>
 			</div>
 			<script type="text/javascript"

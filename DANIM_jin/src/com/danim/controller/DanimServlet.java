@@ -220,13 +220,75 @@ public class DanimServlet extends HttpServlet {
 			}
 			
 		}else if(command.equals("saveText")) {
+			/* 저장버튼을 누르면 처음 들어오는애 */
 			String pno = request.getParameter("pno");
-			System.out.println(pno);
 			String text = request.getParameter("text");
+			String id = request.getParameter("id");
+			
+			/*pno = "1";*/
+				
 			Pdto.setPno(pno);
-			Pdto.setPdata(text);
+			Pdto.setPtitle(request.getParameter("ptitle"));
+			Pdto.setPsdate(request.getParameter("psdate"));
+			Pdto.setPldate(request.getParameter("pldate"));
+			Pdto.setPdata("none-data");
+			Pdto.setId(id);
+			
+			
+			System.out.println(Pdto.getPno()+":"+Pdto.getPtitle()+":"+Pdto.getPsdate()+":"+Pdto.getPldate()+":"+Pdto.getPdata()+":"+Pdto.getId());
+	
+			int tempDto = 0;
+			
+			System.out.println(pno.getClass().getName());
+			
+			
+			/* 저장이 안되어 있을 경우 db저장시키기 */
+			if(pno == null || pno.equals(null) || pno.equals("")) {
+				/* 아무것도 안나옴  - 저장합시다*/
+				System.out.println("아무것도 없을때 사용하는 if문으로 들어옴1");
+				
+				Pdto.setPno(Integer.toString(Pdao.setPno()));
+				
+				int res = Pdao.insert(Pdto);
+				
+				System.out.println("::insert가 됨 값은 : " +res);
+				
+				if(res > 0) {
+					System.out.println("성공적으로 저장");
+					Pdto.setPdata(text);
+				}else {
+					System.out.println("안됨");
+				}
+			}else {
+				System.out.println("else로 들어옴");
+				tempDto = Pdao.checkPno(id, pno);
+				System.out.println("tempDto는 : "+tempDto);
+				if(tempDto != 1) {
+					/* 아무것도 안나옴  - 저장합시다*/
+					System.out.println("아무것도 없을때 사용하는 if문으로 들어옴");
+					
+					Pdto.setPno(Integer.toString(Pdao.setPno()));
+					
+					int res = Pdao.insert(Pdto);
+					
+					System.out.println("::insert가 됨 값은 : " +res);
+					
+					if(res > 0) {
+						System.out.println("성공적으로 저장");
+						Pdto.setPdata(text);
+					}else {
+						System.out.println("안됨");
+					}
+				}else {
+					Pdto.setPno(pno);
+					Pdto.setPdata(text);
+				}
+			}		
+			
 			request.setAttribute("dto", Pdto);
-			dispatch(request, response, "tempOption.jsp");			
+			System.out.println("여기까진 옴");
+			dispatch(request, response, "tempOption.jsp");
+			
 		}else if(command.equals("savePath")) {
 			Pdto = (planDto)request.getAttribute("dto");
 			System.out.println(Pdto.getPno());
@@ -235,9 +297,9 @@ public class DanimServlet extends HttpServlet {
 			Pdto = Pdao.selectOne(Pdto.getPno());
 			
 			if(res >0) {
-				System.out.println("success!");
-				request.setAttribute("ID", Pdto.getPno());
-				//id가 아니라 dto를 보내야함 
+				System.out.println("success!" + Pdto.getPno());
+				request.setAttribute("pno", Pdto.getPno());
+				//id가 아니라 pno를 보내야함 
 				dispatch(request, response, "planner.jsp");
 			}else {
 				System.out.println("false");

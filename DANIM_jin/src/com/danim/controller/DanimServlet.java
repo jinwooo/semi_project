@@ -3,6 +3,7 @@ package com.danim.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -466,6 +467,17 @@ public class DanimServlet extends HttpServlet {
 
 			request.setAttribute("list", list);
 			dispatch(request,response,"payHistory.jsp");
+		}else if(command.equals("muldel")) {
+			String[] array = request.getParameterValues("chk");
+			System.out.println(Arrays.toString(array));
+			String id = request.getParameter("id");
+			
+			int res = dao.multiDelete(array);
+			if(res > 0) {
+				jsResponse(response, "danim.do?command=myhistory&id="+id, "삭제 성공");
+			} else {
+				System.out.println("false");
+			}
 		}
 		
 	}

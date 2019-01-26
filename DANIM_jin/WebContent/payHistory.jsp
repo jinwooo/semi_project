@@ -61,13 +61,10 @@
   } 
   </style>
 <title>Insert title here</title>
+
 </head>
 <%
-
-
-
 		String id = (String)session.getAttribute("sessionId");         
-
 %>
 <body>
 <div style="height: 100px;">
@@ -91,17 +88,18 @@
 </div>
   <!-- /사이드바 -->
 <div align="center">
-<form action="danim.do" method="post">
+
 	<h1>내 결제 내역</h1>
 	<input type="hidden" name="command" value="" >
 	<table border="1">
-		<col width="50"/>
-		<col width="200px"/>
+
+
 		<col width="200px"/>
 		<col width="300px"/>
 		<col width="100px"/>
 		<col width="50px"/>
 		<tr>
+		
 			<th>결제 번호</th>
 			<th>구매 수량</th>
 			<th>결제 날짜</th>
@@ -117,6 +115,7 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
+						<td><input type="checkbox" name="chk" value="${dto.paynum }"/>
 						<td>${dto.paynum }</td>
 						<td>${dto.buycount }</td>
 						<td>${dto.buydate }</td>
@@ -128,8 +127,7 @@
 		
 		<tr></tr>	
 	</table>
-
-</form>
+	
 
 <div class="pager">
 	
@@ -156,8 +154,7 @@
 
 </div>
 <div>
-	<input type="button"  id="home" value="home" class="btn-primary center-block" onclick="location.href='danim.do?command=main'" >
-</div>
+	</div>
 </div>
 
 </body>

@@ -5,6 +5,7 @@ import static common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -121,6 +122,23 @@ public class BoardDao extends SqlMapConfig {
 		session.close();
 		
 		return list;
+	}
+	
+	public int multiDelete(String[] array) {
+		SqlSession session= null;
+		int res = 0;
+		session=getSqlSessionFactory().openSession(true);
+		
+		List<String[]> list = new ArrayList<String[]>();
+		list.add(array);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		
+		res=session.update(namespace+"muldel",list);
+		session.close();
+		
+		return res;
 	}
 	
 }

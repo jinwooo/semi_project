@@ -61,6 +61,24 @@
   } 
   </style>
 <title>Insert title here</title>
+<script type="text/javascript">
+function allchk(bool){
+	$("input[name=chk]").attr("checked", bool);
+}
+
+$(function(){
+	$("#muldelform").submit(function(){
+		// $("#muldelform input: checked")
+		if($("input[name=chk]:checked").length==0){
+			alert("하나 이상 체크해주세요!")
+			return false;
+		}else{
+			alert("삭제 성공!")
+		}
+
+	});
+}); 
+</script>
 </head>
 <%
 
@@ -91,10 +109,11 @@
 </div>
   <!-- /사이드바 -->
 <div align="center">
-<form action="danim.do" method="post">
+	<form action="danim.do?command=muldel" method="post" id="muldelform">
 	<h1>내가 올린 글</h1>
 	<input type="hidden" name="command" value="" >
 	<table border="1">
+		<col width="50"/>
 		<col width="50"/>
 		<col width="200px"/>
 		<col width="200px"/>
@@ -102,6 +121,7 @@
 		<col width="100px"/>
 		<col width="50px"/>
 		<tr>
+			<th><input type="checkbox" name="all" onclick="allchk(this.checked)" /></th>
 			<th>번  호</th>
 			<th>글제목</th>
 			<th>파일이름</th>
@@ -117,6 +137,7 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
+						<td><input type="checkbox" name="chk" value="${dto.boardno }"/>
 						<td>${dto.boardno }</td>
 						<td><a href="danim.do?command=boarddetail&boardno=${dto.boardno }">${dto.title }</a></td>
 						<td>${dto.filename }</td>
@@ -129,8 +150,9 @@
 		
 		<tr></tr>	
 	</table>
-
+		<input type="submit"  id="write" value="삭제" class="btn-primary center-block"  >
 </form>
+
 
 <div class="pager">
 	
@@ -157,9 +179,8 @@
 
 </div>
 <div>
-	<input type="button"  id="write" value="삭제" class="btn-primary center-block" onclick="location.href='danim.do?command=insert'" >
-</div>
-</div>
 
+</div>
+</div>
 </body>
 </html>

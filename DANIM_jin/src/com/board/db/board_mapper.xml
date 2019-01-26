@@ -72,6 +72,13 @@
 		WHERE ID=#{id}
 		ORDER BY BOARDNO DESC
 	</select>
+  	<delete id="muldel" parameterType="java.util.Map">
+		DELETE FROM BOARD
+		WHERE BOARDNO=
+		<foreach collection="list" item="item" separator=",">
+			#{item}
+		</foreach>
+	</delete>  
 </mapper>
 
 

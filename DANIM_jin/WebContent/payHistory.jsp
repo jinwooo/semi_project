@@ -84,7 +84,7 @@
       <li><a href="myPage.jsp">개인정보 변경</a></li>
       <li><a href="#">내 플래너</a></li>
       <li><a href="danim.do?command=myHistory&id=<%=id%>">내가 올린 글</a></li>
-      <li><a href="danim.do?command=payHistory&id=<%=id%>">결제 내역</a></li>
+      <li><a href="#">결제 내역</a></li>
 
     </ul>
   </div>
@@ -92,7 +92,7 @@
   <!-- /사이드바 -->
 <div align="center">
 <form action="danim.do" method="post">
-	<h1>내가 올린 글</h1>
+	<h1>내 결제 내역</h1>
 	<input type="hidden" name="command" value="" >
 	<table border="1">
 		<col width="50"/>
@@ -102,11 +102,11 @@
 		<col width="100px"/>
 		<col width="50px"/>
 		<tr>
-			<th>번  호</th>
-			<th>글제목</th>
-			<th>파일이름</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th>결제 번호</th>
+			<th>구매 수량</th>
+			<th>결제 날짜</th>
+			<th>결제 금액</th>
+			
 		</tr>
 		<c:choose>
 			<c:when test="${empty list }">
@@ -117,11 +117,10 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td>${dto.boardno }</td>
-						<td><a href="danim.do?command=boarddetail&boardno=${dto.boardno }">${dto.title }</a></td>
-						<td>${dto.filename }</td>
-						<td>${dto.regdate }</td>
-						<td>${dto.viewcount }</td>
+						<td>${dto.paynum }</td>
+						<td>${dto.buycount }</td>
+						<td>${dto.buydate }</td>
+						<td>${dto.paymoney }</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
@@ -157,7 +156,7 @@
 
 </div>
 <div>
-	<input type="button"  id="write" value="삭제" class="btn-primary center-block" onclick="location.href='danim.do?command=insert'" >
+	<input type="button"  id="home" value="home" class="btn-primary center-block" onclick="location.href='danim.do?command=main'" >
 </div>
 </div>
 

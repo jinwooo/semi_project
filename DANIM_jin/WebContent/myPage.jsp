@@ -156,6 +156,7 @@ input[type=button]{
       <li><a href="myPage.jsp">개인정보 변경</a></li>
       <li><a href="#">내 플래너</a></li>
       <li><a href="danim.do?command=myHistory&id=<%=id%>">내가 올린 글</a></li>
+      <li><a href="danim.do?command=payHistory&id=<%=id%>">결제 내역</a></li>
 
     </ul>
   </div>

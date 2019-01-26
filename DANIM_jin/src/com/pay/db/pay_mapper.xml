@@ -14,6 +14,12 @@
 		INSERT INTO USEPAY VALUES(#{paynum},#{id},#{buycount},#{buydate},#{paymoney})
 	</insert>
 
+	<select  id="payList" parameterType="String" resultType="payDto">
+		SELECT PAYNUM,ID,BUYCOUNT,BUYDATE,PAYMONEY
+		FROM USEPAY
+		WHERE ID=#{id}
+		ORDER BY BUYDATE ASC
+	</select>
 
 
 </mapper>

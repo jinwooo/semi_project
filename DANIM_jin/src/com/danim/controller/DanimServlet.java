@@ -22,6 +22,8 @@ import com.cmt.dto.BoardCmtDto;
 import com.danim.dao.DanimDao;
 import com.danim.dto.DanimDto;
 import com.paging.Paging;
+import com.pay.dao.payDao;
+import com.pay.dto.payDto;
 import com.plan.dao.planDao;
 import com.plan.dto.planDto;
 
@@ -59,6 +61,8 @@ public class DanimServlet extends HttpServlet {
 		random random = new random();
 		planDto Pdto = new planDto();
 		planDao Pdao = new planDao(); 
+		payDto payDto = new payDto();
+		payDao payDao = new payDao();
 		
 		String command=request.getParameter("command");
 		System.out.println("["+command+"]");
@@ -455,6 +459,13 @@ public class DanimServlet extends HttpServlet {
 
 			request.setAttribute("list", list);
 			dispatch(request,response,"myHistory.jsp");
+		}else if(command.equals("payHistory")) {
+			String id = request.getParameter("id");
+			
+			List<BoardDto> list=payDao.payList(id);
+
+			request.setAttribute("list", list);
+			dispatch(request,response,"payHistory.jsp");
 		}
 		
 	}

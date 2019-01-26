@@ -448,6 +448,13 @@ public class DanimServlet extends HttpServlet {
 			} else {
 				System.out.println("false");
 			}
+		}else if(command.equals("myHistory")) {
+			String id = request.getParameter("id");
+			
+			List<BoardDto> list=dao.idList(id);
+
+			request.setAttribute("list", list);
+			dispatch(request,response,"myHistory.jsp");
 		}
 		
 	}

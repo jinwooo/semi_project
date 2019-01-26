@@ -64,6 +64,14 @@
 		DELETE FROM BOARD
 		WHERE BOARDNO=#{boardno}
 	</delete>
+	
+	<!-- 아이디별 게시글 -->
+	<select  id="idList" parameterType="String" resultType="BoardDto">
+		SELECT BOARDNO,ID,TITLE,LIKENUM,REGDATE,VIEWCOUNT,FILENAME,CONTENT
+		FROM BOARD
+		WHERE ID=#{id}
+		ORDER BY BOARDNO DESC
+	</select>
 </mapper>
 
 

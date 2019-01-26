@@ -111,6 +111,18 @@ public class BoardDao extends SqlMapConfig {
 		
 	}
 	
+	public List<BoardDto> idList(String id){
+		
+		SqlSession session= null;
+		List<BoardDto> list=null;
+		
+		session=getSqlSessionFactory().openSession(true);
+		list=session.selectList(namespace+"idList",id);
+		session.close();
+		
+		return list;
+	}
+	
 }
 
 

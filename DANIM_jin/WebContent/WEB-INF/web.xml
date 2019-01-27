@@ -12,4 +12,14 @@
     <servlet-name>danim</servlet-name>
     <url-pattern>/danim.do</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>map</servlet-name>
+    <servlet-class>com.map.controller.mapController</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>map</servlet-name>
+    <url-pattern>/map.do</url-pattern>
+  </servlet-mapping>
 </web-app>

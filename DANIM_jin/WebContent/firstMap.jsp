@@ -47,87 +47,21 @@
 	all: unset; 
 	@font-face { font-family: 'BMHANNAAir'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff'); font-weight: normal; font-style: normal; }
 	header{	left :0;top:0;width:100%;height: 100px;z-index: 4;}
-	#title{
-		position:absolute;
-		top : 10px;
-		left:100px; 
-		font-weight : bold;
-		font-size: 36px;
-		font-style : italic;
-		color : rgb(200,160,220);
-		cursor: pointer;
-		}
-		hr{
-			position:absolute;
-			top:80px;
-			border:none;
-			background-color : #C0C0C0;
-			height :2px;
-			margin-top: 1rem;
-	    margin-bottom: 1rem;
-	        box-sizing: content-box;
-	    	width:100%;
-	    overflow: visible;
-	
-		}
-		.hr-sect{
-	
-		display :flex;
-		flex-basis : 100%;
-		align-items : center;
-		color : rgb(200,160,220);
-		font-style : italic;
-		font-weight : bold;
-		font-size : 30px;
-		margin: 8px 0px;
-	}
-	.hr-sect::after{
-		content:"";
-		flex-grow:1;
-		background: #C0C0C0;
-		height : 2px;
-		font-size: 0px;
-		line-height: 2px;
-		margin: 0px 50px;
-	}
-	#myPage{
-	 	position : absolute;
-		top : 22px;
-		right : 100px;
-	
-	}
-	#logout{
-	 	position:absolute;
-		top : 22px;
-		right:180px; 
-	}
-	#welcome{
-		position:absolute;
-		top : 27px;
-		right:270px; 
-	}
-	input[type=button]{
-		font-family: 'BMHANNAAir'; 
-	}
-	.btn-success_custom {
-	    width: 65.9286px;
-	    height: 34px;
-	    font-size: 15px;
-	    color: rgb(255,255,255);
-	    line-height: 2.5em;
-	    border-radius: 4px;
-	    background-color: rgb(190,190,190);
-	    text-align: center;
-	    font-weight: bold;
-	    border: none;
-	    -webkit-appearance: button;
-	        overflow: visible;
-	}
-	a{
-		color : rgb(200,160,220);
-		cursor: pointer;
-		text-decoration: none;
-	}
+	#title,.hr-sect {color:#c8a0dc; font-style:italic; font-weight:700}
+	#logout,#myPage {top:22px; position:absolute}
+	#logout,#myPage,#title,#welcome,hr {position:absolute}
+	#title,.hr-sect {font-weight:700}
+	#title,a {cursor:pointer}
+	#title {top:10px; left:100px; font-size:36px}
+	hr {top:80px; border:none; background-color:silver; height:2px; margin-top:1rem; margin-bottom:1rem; box-sizing:content-box; width:100%; overflow:visible}
+	.hr-sect {display:flex; flex-basis:100%; align-items:center; font-size:30px; margin:8px 0}
+	.hr-sect::after {content:""; flex-grow:1; background:silver; height:2px; font-size:0; line-height:2px; margin:0 50px}
+	#myPage {right:100px}
+	#logout {right:180px}
+	#welcome {top:27px; right:270px}
+	input[type=button] {font-family:BMHANNAAir}
+	.btn-success_custom {width:65.93px; height:34px; font-size:15px; color:#fff; line-height:2.5em; border-radius:4px; background-color:#bebebe; text-align:center; font-weight:700; border:none; -webkit-appearance:button; overflow:visible}
+	a {color:#c8a0dc; text-decoration:none}
 		
 </style>
 
@@ -357,11 +291,11 @@
 		<!-- <div class="row" style="height:100px; clear:both;"></div> -->
 		<div class="row full-height">
 			<div class="col-lg-6 full-height">
-				<div id="mapwrap" style="width: 100%; height: 80%;">
-					<div id="map" style="width: 70%; height: 100%; margin: 0 auto; text-align:center;">
+				<div id="mapwrap" style="width: 100%; height: 90%;">
+					<div id="map" style="width: 80%; height: 100%; margin: 0 auto; text-align:center;">
 						<div id="menu"></div>
 					</div>
-					<div id="distancemap" style="width: 70%; height: 100%; margin: 0 auto;"></div>						
+					<div id="distancemap" style="width: 80%; height: 100%; margin: 0 auto;"></div>						
 						<script>
 						    var mapContainerDistance = document.getElementById('distancemap'), // 지도를 표시할 div  
 						    mapOptionDistance = {

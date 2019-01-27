@@ -109,7 +109,7 @@
 	.customButton {position:absolute;right:10px;bottom:0;margin:10px 10px 10px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;border-radius: 10px;}
 	
 	.daypanel {position: relative;padding: 5px;border: 1px solid #ccc;border-radius: 5px;}
-	.block {background: #f2f2f2;position: relative;padding: 15px;border: 1px solid #ccc;border-radius: 5px;}
+	.block {background: #f2f2f2;position: relative;padding: 4px;border: 1px solid #ccc;border-radius: 5px;}
 	.modifier {float: right;margin-left: 8px;font-size: 14px;}
 	.action {color: green;}
 	.edit {color: grey;}
@@ -132,11 +132,14 @@
 	.input-group-addon:last-child {border-left: 0;}
 	.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:first-child>.btn-group:not(:first-child)>.btn, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle {
 	    border-top-left-radius: 0;border-bottom-left-radius: 0;}
-	.input-group-addon {padding: 10px 25px 10px 10px;font-size: 14px;font-weight: 400;line-height: 1;color: #555;text-align: center;vertical-align:middle;background-color: #eee;border: 1px solid #ccc;border-radius: 4px;}
+	.input-group-addon {height: 25px; padding: 4px 25px 10px 10px;font-size: 14px;font-weight: 400;line-height: 1;color: #555;text-align: center;vertical-align:middle;background-color: #eee;border: 1px solid #ccc;border-radius: 4px;}
 	.input-group-addon, .input-group-btn {width: 1%;white-space: nowrap;vertical-align: middle;}
 	.input-group .form-control, .input-group-addon, .input-group-btn {display: table-cell;}
 	.input-group {position: relative;border-collapse: separate;text-align: center;}
 	.input-group-addon, .input-group-btn {width: 1%;white-space: nowrap;vertical-align: middle;}
+	.timepickernow{height: 25px;}
+	.bootstrap-timepicker-widget table td input {width: 30px;}
+	.selectedplace {font-size: 15px;}
 	
 	
 </style>
@@ -244,17 +247,25 @@
 			});
 			
 			$("body").on( "click", "#savedate", function() {
+				var mytitle = $('#mytitle').val();
+				if (mytitle == null || !mytitle.replace(/^\s+|\s+$/g, '')) {
+			        alert('여행 제목을 입력해주세요!');
+			        return false;
+				}
 				$(".daypanel").each(function() {
 					var daycnt = $(this).find('.daycnt').text().substr(4);
 					var sldate = $(this).find('.sldate').text();
-					var planplace = $(this).find('.planplace').text();								
+					var planplace = $(this).find('.planplace').text();
+					
 					
 					$(this).children().children('.block').each(function() {
 						var selectedplace = $(this).find('.selectedplace').text();
 						var timepickernow = $(this).find('.timepickernow').val();
 						var timefix;
 						if (timepickernow.length == 8){
-							if (timepickernow.substr(6) == 'PM'){
+							if (timepickernow.substr(6) == 'PM' && timepickernow.substr(0,2) == 12){
+								timefix = timepickernow.substr(0,2)+timepickernow.substr(3,2);
+							} else if (timepickernow.substr(6) == 'PM'){
 								timefix = (parseInt(timepickernow.substr(0,2))+12)+timepickernow.substr(3,2);
 							} else if ( timepickernow.substr(6) == 'AM' && timepickernow.substr(0,2) == 12 ) {
 								timefix = '00'+timepickernow.substr(3,2);
@@ -274,6 +285,7 @@
 																'<td><input name="selectedplace" value="'+selectedplace+'"/></td>'+
 																'<td><input name="sldate" value="'+sldate+'"/></td>'+
 																'<td><input name="planplace" value="'+planplace+'"/></td>'+
+																'<td><input name="mytitle" value="'+mytitle+'"/></td>'+
 																'</tr>');
 					});
 				});
@@ -343,6 +355,13 @@
 						<!-- <div class="edit modifier edit-block">
 										<i class="fas fa-pencil-alt"></i>
 							</div> -->
+					<div class="card border-dark mb-2" style="max-width: 18rem;">
+                        <div class="card-header" style="padding: 0.25rem;">여행 제목</div>
+                        <div class="card-body" style="padding: 0.25rem;">
+                        	<input type="text" id="mytitle" class="form-control" placeholder="ex)즐거운  ㅁㅁ 여행!" size="25">
+                        </div>
+					</div>
+					
 					<div class="panel panel-default panel-body orderday">
 <%
 							int cnt = 1;
@@ -393,7 +412,7 @@
 					<div class="option">
 						<div>
 							<form onsubmit="searchPlaces(); return false;">
-								키워드 : <input type="text" placeholder="ex)역삼 맛집" id="keyword" size="15">
+								키워드 : <input type="text" placeholder="ex)역삼 맛집" id="keyword" size="12">
 								<button type="submit">검색하기</button>
 							</form>
 						</div>

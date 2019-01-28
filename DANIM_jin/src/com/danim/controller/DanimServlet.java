@@ -98,7 +98,7 @@ public class DanimServlet extends HttpServlet {
 			
 			int res = Ddao.join(dto);
 			if(res>0) {
-				String host = "http://localhost:8787/Danim/";
+				String host = "http://localhost:8787/Danim_jin/";
 				String content= "다음 링크에 접속하여 이메일 확인을 진행하세요." +
 						"<a href='" + host + "danim.do?command=emailCode&id=" + inId + "'>이메일 인증하기</a>";
 				SM.sendEmail(inEmail, content);
@@ -478,12 +478,11 @@ public class DanimServlet extends HttpServlet {
 			
 			int res = dao.multiDelete(array);
 			if(res > 0) {
-				jsResponse(response, "danim.do?command=myhistory&id="+id, "삭제 성공");
+				jsResponse(response, "danim.do?command=myHistory&id="+id, "삭제 성공");
 			} else {
 				System.out.println("false");
 			}
-			
-		} else if(command.equals("like")) {
+		}else if(command.equals("like")) {
 			int boardno = Integer.parseInt(request.getParameter("boardno"));
 			String id = request.getParameter("id");
 			

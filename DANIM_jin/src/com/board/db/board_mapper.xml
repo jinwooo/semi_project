@@ -64,6 +64,13 @@
 		DELETE FROM BOARD
 		WHERE BOARDNO=#{boardno}
 	</delete>
+	 
+	<delete id="muldel" parameterType="hashmap">
+  	DELETE FROM BOARD WHERE BOARDNO IN
+  		<foreach item="item" index="index" collection="seqs" separator="," open="("  close=")">
+  	   		#{item}
+		</foreach>  	
+  </delete>
 </mapper>
 
 

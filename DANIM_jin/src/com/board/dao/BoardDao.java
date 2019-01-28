@@ -124,19 +124,26 @@ public class BoardDao extends SqlMapConfig {
 		return list;
 	}
 	
-	public int multiDelete(String[] array) {
-		SqlSession session= null;
+	public int multiDelete(String[] seq) {
+		SqlSession session = null;
 		int res = 0;
-		session=getSqlSessionFactory().openSession(true);
 		
-		List<String[]> list = new ArrayList<String[]>();
-		list.add(array);
+		Map<String,String[]> map = new HashMap<String,String[]>();
+		map.put("seqs", seq);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
-		
-		res=session.update(namespace+"muldel",list);
-		session.close();
+		try {
+			session = getSqlSessionFactory().openSession(true);
+			res = session.delete(namespace+"muldel",map);	
+			
+			if (res == seq.length) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.close();
+		} finally {
+			
+		}
 		
 		return res;
 	}

@@ -182,9 +182,21 @@ public class DanimServlet extends HttpServlet {
 			
 		}else  if(command.equals("afterLogin")) {
 			String id= request.getParameter("id");
-			session.setAttribute("sessionId", id);
-			session.setMaxInactiveInterval(2*60*60);
-			dispatch(request, response, "danim.do?command=main");
+			
+			DanimDto dto= Ddao.login(id);
+			
+			
+			if (dto.getGrade().equals("admin")) {
+				session.setAttribute("sessionId", id);
+				session.setMaxInactiveInterval(2*60*60);
+				dispatch(request, response, "danim.do?command=adminMain");
+			} else if (dto.getGrade().equals("general")) {
+				session.setAttribute("sessionId", id);
+				session.setMaxInactiveInterval(2*60*60);
+				dispatch(request, response, "danim.do?command=main");
+			}
+			
+			
 		}else if(command.equals("logout")) {
 			// 문제다!
 			
@@ -254,7 +266,7 @@ public class DanimServlet extends HttpServlet {
 			/* 저장이 안되어 있을 경우 db저장시키기 */
 			if(pno == null || pno.equals(null) || pno.equals("")) {
 				/* 아무것도 안나옴  - 저장합시다*/
-				System.out.println("아무것도 없을때 사용하는 if문으로 들어옴1");
+				System.out.println("아무것도 없을때 사용하는 if문으로 들어옴");
 				
 				Pdto.setPno(Integer.toString(Pdao.setPno()));
 				
@@ -539,6 +551,12 @@ public class DanimServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.println(obj.toJSONString());
+		}else if(command.equals("adminMain")) {
+			
+			List<DanimDto> list=Ddao.manageUser();
+			request.setAttribute("list", list);
+			dispatch(request, response, "admainMain.jsp");
+			
 		}
 		
 	}

@@ -56,13 +56,13 @@ public class mapController extends HttpServlet {
 			String title = mytitle[0];
 			
 			// plan insert
-			planDto plandto = new planDto(null,title,firstday,lastday,"",id);			
+			planDto plandto = new planDto(null,title,firstday,lastday,"tmp","tmp",id);			
 			int planRes = plandao.insertPlan(plandto);		
-			System.out.println("planinsert 결과 : " + planRes);
+			//System.out.println("planinsert 결과 : " + planRes);
 			
 			String pno = plandao.selectPno(plandto);
 			
-			System.out.println("pno: " + pno);
+			//System.out.println("pno: " + pno);
 			
 			// detailplan insert
 			for(int i = 0 ; i < daycnt.length ;i++) {
@@ -76,15 +76,21 @@ public class mapController extends HttpServlet {
 					"");
 				list.add(dto);
 			}			
-			System.out.println("list 총 개수: "+list.size());			
+			//System.out.println("list 총 개수: "+list.size());			
 			
 			int detailPlanRes = detaildao.insertDetailPlan(list);
-			System.out.println("저장된 갯수 : " + detailPlanRes);			
+			//System.out.println("저장된 갯수 : " + detailPlanRes);			
 			
-			jsResponse(response,"firstMap.jsp","일정저장 완료");
+			jsResponse(response,"planner.jsp","일정저장 완료");
 			
-		} else if( command.equals("test")) {
-			jsResponse(response,"location.href='firstMap.jsp'","test"); 
+		} else if( command.equals("loadmap")) {
+			String id = (String)session.getAttribute("sessionId");
+			String qno = request.getParameter("qno");
+			
+			//planDto plandto = plandao.selectOne(qno);
+				
+			//request.setAttribute("plandto", plandto);			
+			dispatch(request,response,"detailMap_tmp.jsp");			
 		}
 		
 	}

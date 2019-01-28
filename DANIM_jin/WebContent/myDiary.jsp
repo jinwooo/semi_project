@@ -100,7 +100,7 @@ $(function(){
        <span style="font-weight: bold">MENU</span>
       </li>
       <li><a href="myPage.jsp">개인정보 변경</a></li>
-      <li><a href="danim.do?command=myDiary&id=<%=id%>">내 플래너</a></li>
+      <li><a href="#">내 플래너</a></li>
       <li><a href="danim.do?command=myHistory&id=<%=id%>">내가 올린 글</a></li>
       <li><a href="danim.do?command=payHistory&id=<%=id%>">결제 내역</a></li>
 
@@ -110,23 +110,16 @@ $(function(){
   <!-- /사이드바 -->
 <div align="center">
 	<form action="danim.do?command=muldel" method="post" id="muldelform">
-	<h1>내가 올린 글</h1>
+	<h1>나의 여행 계획</h1>
 	<input type="hidden" name="command" value="" >
 	<table border="1">
-		<col width="50"/>
-		<col width="50"/>
-		<col width="200px"/>
-		<col width="200px"/>
-		<col width="300px"/>
-		<col width="100px"/>
 		<col width="50px"/>
+		<col width="300px"/>
+		<col width="200px"/>
 		<tr>
 			<th><input type="checkbox" name="all" onclick="allchk(this.checked)" /></th>
-			<th>번  호</th>
-			<th>글제목</th>
-			<th>파일이름</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th>여행 제목</th>
+			<th>여행 날짜</th>
 		</tr>
 		<c:choose>
 			<c:when test="${empty list }">
@@ -137,12 +130,9 @@ $(function(){
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td><input type="checkbox" name="chk" value="${dto.boardno }"/>
-						<td>${dto.boardno }</td>
-						<td><a href="danim.do?command=boarddetail&boardno=${dto.boardno }">${dto.title }</a></td>
-						<td>${dto.filename }</td>
-						<td>${dto.regdate }</td>
-						<td>${dto.viewcount }</td>
+						<td><input type="checkbox" name="chk" value="${dto.pno }"/>
+						<td><a href="map.do?command=plandetail&pno=${dto.pno }">${dto.ptitle }</a></td>
+						<td>${dto.psdate }~${dto.pldate }</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

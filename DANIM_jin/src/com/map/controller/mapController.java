@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.map.dao.detailPlanDao;
 import com.map.dao.planDao;
 import com.map.dto.detailPlanDto;
@@ -91,6 +92,18 @@ public class mapController extends HttpServlet {
 				
 			//request.setAttribute("plandto", plandto);			
 			dispatch(request,response,"detailMap_tmp.jsp");			
+		}else if( command.equals("plandetail")) {
+			String pno = request.getParameter("pno");
+			
+		}else if(command.equals("myDiary")) {
+			String id = request.getParameter("id");
+			
+			List<planDto> list=plandao.diaryList(id);
+
+			request.setAttribute("list", list);
+			
+			dispatch(request, response, "myDiary.jsp");
+			
 		}
 		
 	}

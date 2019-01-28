@@ -8,11 +8,12 @@
 		<result property="psdate" column="PSDATE"/>
 		<result property="pldate" column="PLDATE"/>
 		<result property="pdata" column="PDATA"/>
+		<result property = "pimage" column = "PIMAGE"/>
 		<result property="id" column="ID"/>	
 	</resultMap>
 	
 	<select id="selectOne" parameterType="String" resultType="planDto">
-		SELECT PNO, PTITLE, PSDATE, PLDATE, PDATA, ID 
+		SELECT PNO, PTITLE, PSDATE, PLDATE, PDATA, PIMAGE, ID 
 		FROM PLAN 
 		WHERE PNO = #{pno } 
 	</select>
@@ -23,10 +24,25 @@
 	</update>
 	
 	<select id="selectList" resultType="planDto" parameterType="String">
-		SELECT PNO, PTITLE, PSDATE, PLDATE, PDATA, ID
+		SELECT PNO, PTITLE, PSDATE, PLDATE, PDATA, PIMAGE, ID
 		FROM PLAN 
 		WHERE ID = #{id }
 	</select>
+	
+	<select id="checkPno" parameterType="planDto" resultType="planDto">
+		SELECT PNO, PTITLE, PSDATE, PLDATE, PDATA, PIMAGE, ID
+		FROM PLAN
+		WHERE ID = #{id } AND PNO = #{pno }
+	</select>
+	
+	<insert id="insert" parameterType="planDto" >
+		INSERT INTO PLAN VALUES(#{pno} ,#{ptitle}, #{psdate}, #{pldate}, #{pdata },#{pimage }, #{id} )
+	</insert>
+	
+	<select id="setpno" resultType="Integer">
+		SELECT COUNT(*) FROM PLAN
+	</select>
+	
 	
 	
 </mapper>

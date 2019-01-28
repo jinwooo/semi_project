@@ -64,7 +64,16 @@
 		DELETE FROM BOARD
 		WHERE BOARDNO=#{boardno}
 	</delete>
+	
+	<!-- 아이디별 게시글 -->
+	<select  id="idList" parameterType="String" resultType="BoardDto">
+		SELECT BOARDNO,ID,TITLE,LIKENUM,REGDATE,VIEWCOUNT,FILENAME,CONTENT
+		FROM BOARD
+		WHERE ID=#{id}
+		ORDER BY BOARDNO DESC
+	</select>
 	 
+	<!-- 마이페이지 muldel -->
 	<delete id="muldel" parameterType="hashmap">
   	DELETE FROM BOARD WHERE BOARDNO IN
   		<foreach item="item" index="index" collection="seqs" separator="," open="("  close=")">

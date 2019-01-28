@@ -521,6 +521,24 @@ public class DanimServlet extends HttpServlet {
 					System.out.println("unlike 실패");
 				}
 			}
+		}else if(command.equals("payUser")) {
+			String id = request.getParameter("user");			
+			
+			DanimDto dto = Ddao.login(id);
+			
+			String email = dto.getEmail();
+			String name = dto.getName();
+			String phone = dto.getPhone();
+			String addr = dto.getAddr();
+			
+			JSONObject obj = new JSONObject();
+			obj.put("email", email);
+			obj.put("name", name);
+			obj.put("phone", phone);
+			obj.put("addr", addr);
+			
+			PrintWriter out = response.getWriter();
+			out.println(obj.toJSONString());
 		}
 		
 	}

@@ -20,6 +20,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <style type="text/css">
    html, body { padding: 0; margin: 0; overflow: hidden; }
    
@@ -229,14 +232,14 @@
 
 <%
 	String user = (String)request.getAttribute("sessionId"); //dto로 받아와야함
-	String id = "aaa";
+	/* String id = "aaa"; */
 	planDao dao = new planDao();
-	List<planDto> listDto = dao.selectList(id);
+//	List<planDto> listDto = dao.selectList(id);
 %>
 	var pno = "";
 
    $(function() {
-		$("#selDiary").empty();
+<%-- 		$("#selDiary").empty();
 		<%		
 		if(listDto.equals(null)||listDto==null||listDto.size() == 0){
 		%>
@@ -254,7 +257,7 @@
 		<%
 			}
 		}
-		%>
+		%> --%>
 	  
 		$(".accordion").accordion({
 			heightStyle: "content",
@@ -296,39 +299,61 @@
       
       // 297 210
        $("#pdfdown").click(function() { //   $("#pdfdown").click((e) => {
-         
 //          if($(".contentholder").length > 0){
 //             alert("빈 칸을 모두 채워주세요")
 //          } else {
-             
-            $(".display").css({"display":"block","padding":"53px 70px 53px 70px"});
-            $(".canvas").css("border","0");
-            html2canvas(document.querySelector(".canvas")).then(canvas => {
-                  
-               var imgData = canvas.toDataURL('image/png');
-                           
-                var imgWidth = 297;    // 이미지 가로 길이(mm) A4 기준
-                var pageHeight = 210;   // 출력 페이지 가로 길이 계산 A4 기준   
-                var imgHeight = canvas.height * imgWidth / canvas.width;
-                var heightLeft = imgHeight;
-               
-                var doc = new jsPDF('l', 'mm', 'a4');
-                var position = 0;
-                
-                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-               heightLeft -= pageHeight;
-                
-               while(heightLeft >= 0){
-                  position = heightLeft - imgHeight;
-                  doc.addPage();
-                  doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                  heightLeft -= pageHeight;
-               }
-               doc.save('sample-file.pdf'); 
-               $(".display").removeAttr("style");
-                $(".canvas").removeAttr("style");
-            })
 //          }
+
+			alert("결제를 진행해주세요.");
+			 
+			 $.ajax({
+			      url:"danim.do?command=payUser&user=<%=user%>",   
+			            // data : data를 주겠다
+			              // data를 받겠다
+			      dataType:"json",     
+			      success:function(msg){
+			      	
+						var IMP = window.IMP; // 생략가능
+						IMP.init('imp04249110'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+
+
+						IMP.request_pay({
+						    pg : 'nice', // version 1.1.0부터 지원. 나이스정보통신으로 결제이용
+						    pay_method : 'card', //카드로 이용
+						    merchant_uid : 'merchant_' + new Date().getTime(),
+						    name : '주문명:PDF파일생성 및 다운로드',	//제품명
+						    amount : 1000,        //금액설정
+						    buyer_email : msg.email,  //구매자 이메일
+						    buyer_name : msg.name,			//구매자 이름
+						    buyer_tel : msg.phone,	//구매자 연락처
+						    buyer_addr : msg.addr,	//구매자 주소
+						    buyer_postcode : '',		//구매자 우편번호
+						    /* m_redirect_url : 'planner.jsp' //결제한뒤에 이동할 위치 */
+						}, function(rsp) {
+						    if ( rsp.success ) {
+						        var msg = '결제가 완료되었습니다. PDF생성 및 다운로드가 시작됩니다.';
+								alert(msg);
+														        
+/* 						        msg += '고유ID : ' + rsp.imp_uid;
+						        msg += '상점 거래ID : ' + rsp.merchant_uid;
+						        msg += '결제 금액 : ' + rsp.paid_amount;
+						        msg += '카드 승인번호 : ' + rsp.apply_num;
+ */						        
+						        PDFsave();
+						        
+						    } else {
+						        var msg = '결제에 실패하였습니다.';
+						        msg += '에러내용 : ' + rsp.error_msg;
+						    }
+						});
+			         
+			      },
+			      error:function(){
+			         alert("실패;;");
+			      }
+			   });      
+
       })
       
       $(document).on("mouseenter", ".view > .droppable", function() {
@@ -346,12 +371,12 @@
       })
       
       
-      <%
+<%--       <%
 		planDto pdto = new planDto();
       	pdto.setPtitle("sample_Ptitle");
       	pdto.setPsdate("sample_psdate");
       	pdto.setPldate("sample_pldata");
-      %>      
+      %>       --%>
       
       /* 2. [임시저장] 버튼을 선택하는 경우
       2.1 현재 사용하고 있는 아이디와 여행번호, 파일 제목, 저장해야할 텍스트를 servlet에 보낸다.
@@ -359,7 +384,7 @@
         2.2.1 해당 번호가 없으면 새로 정보를 새로 넣는다.
       2.3 해당 번호가 있으면 기존에 있던 정보에 넣는다.
       2.4 해당 번호를 planner.jsp 파일에 보내준다.  */
-      
+<%--       
       $("#planSave").click(function(){
 		var ptitle = "";
 		ptitle = prompt("제목을 입력하세요","");
@@ -378,7 +403,7 @@
  			}
  		});	     
  		
-      });
+      }); --%>
       
 /* 저장된 파일을 불러오는 함수 */
       $(function(){
@@ -431,7 +456,36 @@
 		return res;
 	}
 
-   
+   function PDFsave() {
+		
+       $(".display").css({"display":"block","padding":"53px 70px 53px 70px"});
+       $(".canvas").css("border","0");
+       html2canvas(document.querySelector(".canvas")).then(canvas => {
+             
+          var imgData = canvas.toDataURL('image/png');
+                      
+           var imgWidth = 297;    // 이미지 가로 길이(mm) A4 기준
+           var pageHeight = 210;   // 출력 페이지 가로 길이 계산 A4 기준   
+           var imgHeight = canvas.height * imgWidth / canvas.width;
+           var heightLeft = imgHeight;
+          
+           var doc = new jsPDF('l', 'mm', 'a4');
+           var position = 0;
+           
+           doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+           
+          while(heightLeft >= 0){
+             position = heightLeft - imgHeight;
+             doc.addPage();
+             doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+             heightLeft -= pageHeight;
+          }
+          doc.save('sample-file.pdf'); 
+          $(".display").removeAttr("style");
+           $(".canvas").removeAttr("style");
+       })
+}
 
 </script>
 

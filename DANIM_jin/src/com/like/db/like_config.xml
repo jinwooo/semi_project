@@ -23,7 +23,7 @@
   </environments>
   
   <mappers>
-    <mapper resource="com/cmt/db/like_mapper.xml"/>
+    <mapper resource="com/like/db/like_mapper.xml"/>
   </mappers>
   
 </configuration>

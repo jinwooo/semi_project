@@ -6,6 +6,7 @@ public class BoardCmtDto {
 	private int boardno;
 	private String cmt;
 	private String id;
+	private String cmtdate;
 	
 	
 	public BoardCmtDto() {
@@ -13,12 +14,13 @@ public class BoardCmtDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardCmtDto(int cmtno, int boardno, String cmt, String id) {
+	public BoardCmtDto(int cmtno, int boardno, String cmt, String id, String cmtdate) {
 		super();
 		this.cmtno = cmtno;
 		this.boardno = boardno;
 		this.cmt = cmt;
 		this.id = id;
+		this.cmtdate = cmtdate;
 	}
 
 
@@ -60,5 +62,14 @@ public class BoardCmtDto {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public String getCmtdate() {
+		return cmtdate;
+	}
+
+	public void setCmtdate(String cmtdate) {
+		this.cmtdate = cmtdate;
+	}
+	
 	
 }

@@ -13,7 +13,7 @@ public class SqlMapConfig {
 	
 	public SqlSessionFactory getSqlSessionFactory() {
 		
-		String resource = "com/cmt/db/like_config.xml";
+		String resource = "com/like/db/like_config.xml";
 		
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);

@@ -21,7 +21,7 @@
   </select>
   
   <insert id="insertCmt" parameterType="BoardCmtDto">
-  	INSERT INTO BOARDCMT VALUES(CMTSEQ.NEXTVAL,#{boardno },#{cmt },#{id})
+  	INSERT INTO BOARDCMT VALUES(CMTSEQ.NEXTVAL,#{boardno },#{cmt },#{id},SYSDATE)
   </insert>
   
   <delete id="deleteCmt" parameterType="int">

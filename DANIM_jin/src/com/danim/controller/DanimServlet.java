@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
+import org.json.simple.JSONObject;
 
 import com.board.dao.BoardDao;
 import com.board.dto.BoardDto;
@@ -22,6 +23,8 @@ import com.cmt.dao.BoardCmtdao;
 import com.cmt.dto.BoardCmtDto;
 import com.danim.dao.DanimDao;
 import com.danim.dto.DanimDto;
+import com.like.dao.LikeDao;
+import com.like.dto.LikeDto;
 import com.paging.Paging;
 import com.pay.dao.payDao;
 import com.pay.dto.payDto;
@@ -59,6 +62,7 @@ public class DanimServlet extends HttpServlet {
 		BoardDao dao=new BoardDao();
 		DanimDao Ddao = new DanimDao();
 		BoardCmtdao cmtdao = new BoardCmtdao();
+		LikeDao likedao = new LikeDao();
 		random random = new random();
 		planDto Pdto = new planDto();
 		planDao Pdao = new planDao(); 
@@ -477,6 +481,46 @@ public class DanimServlet extends HttpServlet {
 				jsResponse(response, "danim.do?command=myhistory&id="+id, "삭제 성공");
 			} else {
 				System.out.println("false");
+			}
+			
+		} else if(command.equals("like")) {
+			int boardno = Integer.parseInt(request.getParameter("boardno"));
+			String id = request.getParameter("id");
+			
+			LikeDto dto = new LikeDto(id, boardno);
+			
+			int isLiked = likedao.isLiked(dto);
+			
+			JSONObject obj = new JSONObject();
+			
+			if(isLiked != 0) {
+				int res = likedao.deleteLike(dto);
+				
+				BoardDto likenumdto = dao.selectOne(boardno);
+				int likenum = likenumdto.getLikenum();
+				
+				if(res > 0) {
+					obj.put("msg", "unlike");
+					obj.put("likenum", likenum);
+					response.getWriter().print(obj.toJSONString());
+//					response.getWriter().print("{'msg' : 'unlike'}");
+				} else {
+					System.out.println("like 실패");
+				}
+			} else {
+				int res = likedao.insertLike(dto);
+				
+				BoardDto likenumdto = dao.selectOne(boardno);
+				int likenum = likenumdto.getLikenum();
+				
+				if(res > 0) {
+					obj.put("msg", "like");
+					obj.put("likenum", likenum);
+					response.getWriter().print(obj.toJSONString());
+//					response.getWriter().print("like");
+				} else {
+					System.out.println("unlike 실패");
+				}
 			}
 		}
 		

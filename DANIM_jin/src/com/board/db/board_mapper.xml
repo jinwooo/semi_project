@@ -41,7 +41,7 @@
 	
 	<!-- 게시글 보기 -->
 	<select  id="selectOne" parameterType="int" resultType="BoardDto">
-		SELECT BOARDNO,ID,TITLE,(SELECT COUNT(*) FROM USERLIKE WHERE LIKEYN = 'Y' AND BOARDNO = #{boardno}) AS LIKENUM,REGDATE,VIEWCOUNT,FILENAME,CONTENT
+		SELECT BOARDNO,ID,TITLE,(SELECT COUNT(*) FROM USERLIKE WHERE BOARDNO = #{boardno}) AS LIKENUM,REGDATE,VIEWCOUNT,FILENAME,CONTENT
 		FROM BOARD
 		WHERE BOARDNO = #{boardno}
 	</select>
@@ -64,21 +64,6 @@
 		DELETE FROM BOARD
 		WHERE BOARDNO=#{boardno}
 	</delete>
-	
-	<!-- 아이디별 게시글 -->
-	<select  id="idList" parameterType="String" resultType="BoardDto">
-		SELECT BOARDNO,ID,TITLE,LIKENUM,REGDATE,VIEWCOUNT,FILENAME,CONTENT
-		FROM BOARD
-		WHERE ID=#{id}
-		ORDER BY BOARDNO DESC
-	</select>
-  	<delete id="muldel" parameterType="java.util.Map">
-		DELETE FROM BOARD
-		WHERE BOARDNO=
-		<foreach collection="list" item="item" separator=",">
-			#{item}
-		</foreach>
-	</delete>  
 </mapper>
 
 

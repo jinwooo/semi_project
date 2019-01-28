@@ -7,20 +7,30 @@ public class planDto {
 	private String psdate;
 	private String pldate;
 	private String pdata;
+	private String pimage;
 	private String id;
 	
 	public planDto() {
 		
 	}
 	
-	public planDto(String pno, String ptitle, String psdate, String pldate, String pdata, String id) {
+	public planDto(String pno, String ptitle, String psdate, String pldate, String pdata, String pimage, String id) {
 		super();
 		this.pno = pno;
 		this.ptitle = ptitle;
 		this.psdate = psdate;
 		this.pldate = pldate;
 		this.pdata = pdata;
+		this.pimage = pimage;
 		this.id = id;
+	}
+
+	public String getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
 	}
 
 	public String getPno() {

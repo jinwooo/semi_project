@@ -16,7 +16,7 @@
 String user = (String)session.getAttribute("sessionId"); //dto로 받아와야함
 %>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+ 
 
 
 <style type="text/css">

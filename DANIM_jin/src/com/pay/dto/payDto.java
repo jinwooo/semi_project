@@ -19,7 +19,7 @@ public class payDto {
 
 	public String getPaynum() {
 		return paynum;
-	}
+	} 
 
 	public void setPaynum(String paynum) {
 		this.paynum = paynum;

@@ -19,6 +19,6 @@
 		WHERE ID=#{id}
 		ORDER BY BUYDATE ASC
 	</select>
-
+ 
 
 </mapper>

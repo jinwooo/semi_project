@@ -13,6 +13,31 @@
 
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+
+
+<style type="text/css">
+
+
+
+</style>
+
+</head>
+<body>
+
+<div style="height: 100px;">
+	<jsp:include page="./form/header.jsp"></jsp:include>
+</div>
+
+<div>
+
+
+	<a id="kakao-link-btn" href="javascript:;">
+		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>카카오톡 공유하기
+	</a>
+	
+	<button style="vertical-align: middle"><span>게시판에 자랑하기</span></button>
+</div>	
+
 <script type='text/javascript'>
   //<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -54,30 +79,6 @@
     });
   //]]>
 </script>
-
-<style type="text/css">
-
-
-
-</style>
-
-</head>
-<body>
-
-<div style="height: 100px;">
-	<jsp:include page="./form/header.jsp"></jsp:include>
-</div>
-
-<div>
-
-
-	<a id="kakao-link-btn" href="javascript:;">
-		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>카카오톡 공유하기
-	</a>
-	
-	<button style="vertical-align: middle"><span>게시판에 자랑하기</span></button>
-</div>	
-
 
 </body>
 </html>

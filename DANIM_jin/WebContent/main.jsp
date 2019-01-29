@@ -667,12 +667,8 @@ img{
 	</form>	
 </div>
 
-<div class="pager">
-	<ul>
-		<c:if test="${curPageNum>5 }">
-			<li><a href="/">◀</a></li>
-		</c:if>
-	</ul>
+<div id="shareimg">
+	<img src="sav/1.jsp"> 
 </div>
 <%@ include file="./form/footer.jsp" %>
 

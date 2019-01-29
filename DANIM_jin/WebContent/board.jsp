@@ -25,12 +25,14 @@ table{
 	margin: auto;
 }
 
-.pager{
-	marging:auto;
+#share{
+	font-weight : bold;
+	font-size: 32px;
+	color: #8B8989;
 }
 
 .selected{
-	color:red;
+	color:rgb(200,160,220);
 }
 
 .center-block {
@@ -39,7 +41,7 @@ table{
     margin-left: auto;
 }
 
-.btn-primary{
+.btn-primary,#write,#back{
 	background-color:rgb(200,160,220);
 	border:none;
  	color : white;
@@ -47,18 +49,35 @@ table{
 	font-size:12px;
 	border-radius : 4px;
 }
-.btn-primary:hover,
-.btn-primary:active{
+.btn-primary,#write:hover,
+.btn-primary,#write:active{
 	background-color : rgb(229, 204, 255);
 }
 
-#write{
+.btn-primary,#back:hover,
+.btn-primary,#back:active{
+	background-color : rgb(229, 204, 255);
+}
+
+.pager{
+	font-size:20px;
+	font-weight: bold;
+}
+#write,#back{
+    
 	postion: absolute;
 	width:120px;
 	height:50px;
 	font-size:23px;
 	font-style: normal;
 	font-weight: bold;
+}
+a #detail{
+	color : black;
+}
+#detail:hover,
+#detail:active{
+	font-weight:bold;
 }
 
 
@@ -100,8 +119,12 @@ input[type=button]{
 </head>
 <body>
 
+<div style="height: 100px;">
+	<jsp:include page="./form/header.jsp"></jsp:include>
+</div>
+
 <form action="danim.do" method="post">
-	<h1>Board</h1>
+	<h1 id="share">다른 여행자들의 #DANIM</h1>
 	<input type="hidden" name="command" value="" >
 	<table border="1">
 		<col width="50"/>
@@ -128,7 +151,7 @@ input[type=button]{
 				<c:forEach items="${pagelist }" var="dto">
 					<tr>
 						<td>${dto.boardno }</td>
-						<td><a href="danim.do?command=boarddetail&boardno=${dto.boardno }">${dto.title }</a></td>
+						<td><a href="danim.do?command=boarddetail&boardno=${dto.boardno  }" id="detail">${dto.title }</a></td>
 						<td>${dto.id }</td>
 						<td>${dto.filename }</td>
 						<td>${dto.regdate }</td>
@@ -140,35 +163,40 @@ input[type=button]{
 		
 		<tr></tr>	
 	</table>
-
 </form>
 
-<div class="pager">
+<div class="pager" align="center">
 	
 		<c:if test="${paging.curPageNum>4 }">
-			<a href="danim.do?command=review&page=${paging.blockStartNum-1 }">앞으로</a>	
+			<a href="danim.do?command=review&page=${paging.blockStartNum-1 }">◀</a>	
 		</c:if>
 		<c:forEach var="i" begin="${paging.blockStartNum }" end="${paging.blockLastNum }">
 			<c:choose>
 				<c:when test="${i>paging.lastPageNum || paging.lastPageNum==0 }">
-					<a href="danim.do?command=review&page=${i }">${i }</a>
+					<a href="danim.do?command=review&page=${i }" style="color:gray;">${i }</a>
 				</c:when>
 				<c:when test="${i==paging.curPageNum }">
 					<a href="danim.do?command=review&page=${i }" class="selected">${i }</a>
 				</c:when>	
 				<c:otherwise>
-					<a href="danim.do?command=review&page=${i }">${i }</a>
+					<a href="danim.do?command=review&page=${i }" style="color:gray;">${i }</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		
 		<c:if test="${paging.lastPageNum>paging.blockLastNum }">
-			<a href="danim.do?command=review&page=${paging.blockLastNum+1 }">뒤로</a>
+			<a href="danim.do?command=review&page=${paging.blockLastNum+1 }">▶</a>
 		</c:if>
-
 </div>
-<div>
-	<input type="button"  id="write" value="글쓰기" class="btn-primary center-block" onclick="location.href='danim.do?command=insert'" >
+<br/>
+
+<div align="center">
+	<div style="display: inline-block;  margin-right: 30px;" >
+		<input type="button"  id="write" value="글쓰기" class="btn-primary"  onclick="location.href='danim.do?command=insert'"  >
+	</div>
+	<div style="display: inline-block" >	
+		<input type="button" id="back" value="뒤로가기" class="btn-primary" onclick="location.href='danim.do?command=main'" >
+	</div>
 </div>
 
 

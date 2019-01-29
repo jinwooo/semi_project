@@ -182,21 +182,9 @@ public class DanimServlet extends HttpServlet {
 			
 		}else  if(command.equals("afterLogin")) {
 			String id= request.getParameter("id");
-			
-			DanimDto dto= Ddao.login(id);
-			
-			
-			if (dto.getGrade().equals("admin")) {
-				session.setAttribute("sessionId", id);
-				session.setMaxInactiveInterval(2*60*60);
-				dispatch(request, response, "danim.do?command=adminMain");
-			} else if (dto.getGrade().equals("general")) {
-				session.setAttribute("sessionId", id);
-				session.setMaxInactiveInterval(2*60*60);
-				dispatch(request, response, "danim.do?command=main");
-			}
-			
-			
+			session.setAttribute("sessionId", id);
+			session.setMaxInactiveInterval(2*60*60);
+			dispatch(request, response, "danim.do?command=main");
 		}else if(command.equals("logout")) {
 			// 문제다!
 			
@@ -266,7 +254,7 @@ public class DanimServlet extends HttpServlet {
 			/* 저장이 안되어 있을 경우 db저장시키기 */
 			if(pno == null || pno.equals(null) || pno.equals("")) {
 				/* 아무것도 안나옴  - 저장합시다*/
-				System.out.println("아무것도 없을때 사용하는 if문으로 들어옴");
+				System.out.println("아무것도 없을때 사용하는 if문으로 들어옴1");
 				
 				Pdto.setPno(Integer.toString(Pdao.setPno()));
 				
@@ -424,13 +412,30 @@ public class DanimServlet extends HttpServlet {
 		}else if(command.equals("insert")) {
 			dispatch(request,response,"write.jsp");
 		}else if(command.equals("insertres")) {
+			
+			String id=request.getParameter("id");
+			System.out.println("id : " + id);
 			String title=request.getParameter("title");
+			System.out.println("title1 : " + title);
 			String content=request.getParameter("content");
 			
 			BoardDto dto=new BoardDto();
+			// 좋아요개수&filename 해결해야함
+			dto.setId(id);
 			dto.setTitle(title);
+			dto.setLikenum(0);
+			dto.setViewcount(0);
+			dto.setFilename("fname");
 			dto.setContent(content);
 			// insert dao 만들어야함!!! 매퍼도 수정
+			int res=dao.insert(dto);
+			
+			
+			if(res>0) {
+				jsResponse(response,"danim.do?command=review&page=1","추가성공");
+			}else {
+				jsResponse(response,"danim.do?command=review&page=1","추가실패");
+			}
 			
 			
 		} else if(command.equals("boarddetail")) {
@@ -551,12 +556,6 @@ public class DanimServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.println(obj.toJSONString());
-		}else if(command.equals("adminMain")) {
-			
-			List<DanimDto> list=Ddao.manageUser();
-			request.setAttribute("list", list);
-			dispatch(request, response, "admainMain.jsp");
-			
 		}
 		
 	}

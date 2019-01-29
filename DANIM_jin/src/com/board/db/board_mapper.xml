@@ -49,7 +49,7 @@
 	<!-- 게시글 추가 -->
 	<insert id="insert" parameterType="BoardDto">
 		INSERT INTO BOARD
-		VALUES(BOARDSEQ.NEXTVAL,ID,#{title},LIKENUM,REGDATE,VIEWCOUNT,#{filename},#{content})
+		VALUES(BOARDSEQ.NEXTVAL,#{id},#{title,jdbcType=VARCHAR},#{likenum},SYSDATE,#{viewcount},#{filename},#{content})
 	</insert>	
 	
 	<!-- 게시글 수정 -->

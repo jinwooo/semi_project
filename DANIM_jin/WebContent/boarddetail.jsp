@@ -162,7 +162,7 @@
 				<h3><%=dto.getTitle() %></h3>
 			</div>
 			<div class="content" style="border: 1px solid red; width:1000px; height: 700px;">
-				
+				<textarea></textarea>
 			</div>
 			
 			<div class="userlike">

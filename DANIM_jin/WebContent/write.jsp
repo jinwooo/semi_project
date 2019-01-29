@@ -4,6 +4,8 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>	
 
 <%
+	String id="";
+	id=(String)session.getAttribute("sessionId");
 	String ctx=request.getContextPath();
 %>
 
@@ -57,12 +59,13 @@ $(function(){
 </head>
 <body>
 
-<form action="/insert.jsp" method="post" id="frm">
+<form action="danim.do" method="post" id="frm">
 <input type="hidden" name="command" value="insertres" />
+<input type="hidden" name="id" value=<%=id %> />
 	<table width="100%">
 		<tr>
 			<td>제목</td>
-			<td><input type="text" id="title" style="width:650px"></td>
+			<td><input type="text" name="title" id="title" style="width:650px"></td>
 		</tr>
 		<tr>
 			<td>내용</td>

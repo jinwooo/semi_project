@@ -1,6 +1,7 @@
 package com.danim.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -120,8 +121,19 @@ public class DanimDao extends SqlMapConfig{
 			session.close();
 			
 			return res;
+	}
+		
+		public List<DanimDto> manageUser(){
+
+			SqlSession session= null;
+			List<DanimDto> list=null;
+
+			session=getSqlSessionFactory().openSession(true);
+			list=session.selectList(namespace+"manageUser");
+			session.close();
+
+			return list;
 		}
 		
-
 	
 }

@@ -162,7 +162,7 @@
 	
 	$(document).ready(function(){			
 			reCalculate();
-			
+						
 			$(".blocks").sortable({
 			  	connectWith: '.blocks',
 			  	placeholder:"itemBoxHighlight",
@@ -179,10 +179,26 @@
 			$(".blocks").on('mouseenter', '.block', function() {
 				//$(this).css('backgroundColor', '#f9f9f5');
             	$(this).find('.remove-block').show();
+            	$(this).find(".remove-block").click(function() {
+			        var valueCheck = false;
+			        $(this).parent().parent().find('.selectedplace').each(function() {
+			            if($(this).text() != null && $(this).text() != '') {
+			                valueCheck = true;
+			            }
+			        });			
+			        if(valueCheck) {
+			            var delCheck = confirm('입력하신 내용이 있습니다.\n삭제하시겠습니까?');
+			        }
+			        if(!valueCheck || delCheck == true) {
+			            $(this).parent().parent().remove();
+			            reCalculate();
+			        }
+			    });
 			});
 			$(".blocks").on('mouseleave', '.block', function() {
 				//$(this).css('background', 'none');
 		        $(this).find('.remove-block').hide();
+		        
 			});
 			
 			$(".blocks").on('click', '.block', function() {
@@ -210,10 +226,9 @@
 				$(this).css("background-color","#ffe6e6");
 				$(this).siblings("#placesList .item").css("background-color","#fff");
 				$('#nowselectplace').val($(this).find("h5").text());
-			});
+			});					
 			
-			//$('.block-add').click(function()
-					//closest('.daypanel').			
+			
 			
 			$("body").on( "click", "#addblock", function() {				
 				if (ele == null) {
@@ -229,8 +244,7 @@
 			  				'<span class="patching-numbering"></span>'+
 			  				'<div class="block-actions float-right">'+
 								'<div class="remove modifier remove-block">'+
-								'<i class="fas fa-times"></i></div></div><span class="selectedplace">'+
-							$('#nowselectplace').val()+
+								'<i class="fas fa-times"></i></div></div><span class="selectedplace">'+$('#nowselectplace').val()+
 								'</span><br/><div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">'+
 		   						'<input id="timepicker'+(++cnt)+'" type="text" class="form-control input-small timepickernow">'+
 		 						'<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>'+
@@ -252,6 +266,13 @@
 				        };				
 					});
 				$('#timepicker'+cnt).timepicker('setTime', '12:00 AM');	
+			  	reCalculate();
+			});
+			
+			$("body").on( "click", "#timepickeradd", function() {
+				var tmptime = $('#timepicker'+cnt).val();
+				console.log(tmptime);
+				$('#timepicker'+(++cnt)).timepicker('setTime', tmptime);	
 			  	reCalculate();
 			});
 			
@@ -365,6 +386,9 @@
 <%
 	planDto plandto = (planDto)request.getAttribute("plandto");
 	List<detailPlanDto> list = (List<detailPlanDto>)request.getAttribute("list");
+	String pno = (String)request.getAttribute("pno");
+	String ptitle = plandto.getPtitle();	
+	
 %>
 <%
 	String id = "";
@@ -394,7 +418,8 @@
 		<div class="row full-height">
 			<div class="col-sm-6 col-md-2 full-height">
 				<form action="map.do" method="post" style="display:none;">
-					<input type="hidden" name="command" value="insertdetailplan">					
+					<input type="hidden" name="command" value="resave">
+					<input type="hidden" name="pno" value="<%=pno%>">				
 					<table id="hiddentable">
 						<tbody></tbody>
 					</table>
@@ -407,6 +432,7 @@
 						</div>
 					</div>
 					<input type="hidden" id="nowselectplace"/>
+					<input type="button" id="timepickeradd" style="display:none;"/>
 					
 						<!-- <div class="edit modifier edit-block">
 										<i class="fas fa-pencil-alt"></i>
@@ -414,13 +440,116 @@
 					<div class="card border-dark mb-2" style="max-width: 18rem;">
                         <div class="card-header" style="padding: 0.25rem;">여행 제목</div>
                         <div class="card-body" style="padding: 0.25rem;">
-                        	<input type="text" id="mytitle" class="form-control" placeholder="ex)즐거운  ㅁㅁ 여행!" size="25">
+                        	<input type="text" id="mytitle" class="form-control" placeholder="ex)즐거운  ㅁㅁ 여행!" value="<%=ptitle %>" size="25">
                         </div>
 					</div>
 					
 					<div class="panel panel-default panel-body orderday">						
-
-				</div>
+<%
+ 							int cnt = 0;
+							String psdate = plandto.getPsdate();
+							String pldate = plandto.getPldate();
+							String sdate = psdate.substring(0,4)+"-"+psdate.substring(4,6)+"-"+psdate.substring(6);
+							String edate = pldate.substring(0,4)+"-"+pldate.substring(4,6)+"-"+pldate.substring(6);
+							
+							
+							Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(edate);
+							Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(sdate);
+							Calendar cal = Calendar.getInstance();
+							cal.setTime(startDate);
+							for (int i = 0; i < list.size() ; i++){
+								int dpsq = list.get(i).getDpsq();
+								String dptime = list.get(i).getDptime();
+								String dploc = list.get(i).getDploc();
+								String dpplace = list.get(i).getDpplace();
+								
+								if( i == 0){								
+%>	
+									<div class="daypanel">								
+										<span class="daycnt">DAY <%=dpsq %></span> , <span class="sldate"><%=sdate %></span><br/>
+										<span class="planplace"><%=dpplace %></span>
+										<br/>										
+										<div class="blocks panel panel-default panel-body">
+											<div class="block clearfix ui-sortable-handle">
+								  				<span class="patching-numbering"></span>
+								  				<div class="block-actions float-right">
+													<div class="remove modifier remove-block">
+													<i class="fas fa-times"></i></div></div>
+													<span class="selectedplace"><%=list.get(i).getDploc()%></span><br/>
+													<div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">
+							   							<input id="timepicker<%=(++cnt)%>" type="text" value="<%=list.get(i).getDptime() %>" class="form-control input-small timepickernow">
+							 						<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>
+							 						<script type="text/javascript">
+							   							$('#timepicker'+(++cnt)).timepicker();							   							
+							   						</script>
+											</div>
+<%	
+									if( list.size() == 1){										
+%>
+											</div>
+										</div>
+<%
+									}									
+								} else {									
+									if( dpsq == list.get(i-1).getDpsq()){
+										
+%>
+												<div class="block clearfix ui-sortable-handle">
+									  				<span class="patching-numbering"></span>
+									  				<div class="block-actions float-right">
+														<div class="remove modifier remove-block">
+														<i class="fas fa-times"></i></div></div>
+														<span class="selectedplace"><%=list.get(i).getDploc()%></span><br/>
+														<div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">
+								   							<input id="timepicker<%=(++cnt)%>" type="text" value="<%=list.get(i).getDptime() %>" class="form-control input-small timepickernow">								   							
+								 						<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>
+								 						<script type="text/javascript">
+								   								$('#timepicker'+(++cnt)).timepicker();
+								   						</script>
+												</div>
+												
+<%										
+										if ( i+1 == list.size() ){
+%>
+												</div>
+											</div>
+<%											
+										}
+										continue;											
+									} else {
+										cal.add(Calendar.DATE, 1);
+										SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+										String compareDate = transFormat.format(new Date(cal.getTimeInMillis()));
+%>
+										</div>
+									</div>
+									<div class="daypanel">								
+										<span class="daycnt">DAY <%=dpsq %></span> , <span class="sldate"><%=compareDate%></span><br/>
+										<span class="planplace"><%=dpplace %></span>
+										<br/>										
+										<div class="blocks panel panel-default panel-body">
+											<div class="block clearfix ui-sortable-handle">
+								  				<span class="patching-numbering"></span>
+								  				<div class="block-actions float-right">
+													<div class="remove modifier remove-block">
+													<i class="fas fa-times"></i></div></div>
+													<span class="selectedplace"><%=list.get(i).getDploc()%></span><br/>
+													<div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">
+							   							<input id="timepicker<%=(++cnt)%>" type="text" value="<%=list.get(i).getDptime() %>" class="form-control input-small timepickernow">							   						
+							 						<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>
+							 						<script type="text/javascript">
+							   							$('#timepicker'+(++cnt)).timepicker();							   							
+							   						</script>
+											</div>
+<%
+									}
+								}
+							}									
+%>
+							
+						
+					</div>
+				</div>		
 			</div>
 			<div class="col-sm-6 col-md-2">
 				<div id="menu_wrap" class="full-width bg_white">

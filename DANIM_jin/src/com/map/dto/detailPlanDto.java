@@ -6,18 +6,21 @@ public class detailPlanDto {
 	private String dptime;
 	private String pno;
 	private String dploc;
+	private String dpplace;
 	private String dpcont;
+	
 	
 	public detailPlanDto() {
 		super();
 	}
 	
-	public detailPlanDto(int dpsq, String dptime, String pno, String dploc, String dpcont) {
+	public detailPlanDto(int dpsq, String dptime, String pno, String dploc, String dpplace, String dpcont) {
 		super();
 		this.dpsq = dpsq;
 		this.dptime = dptime;
 		this.pno = pno;
 		this.dploc = dploc;
+		this.dpplace = dpplace;
 		this.dpcont = dpcont;
 	}
 	
@@ -45,11 +48,16 @@ public class detailPlanDto {
 	public void setDploc(String dploc) {
 		this.dploc = dploc;
 	}
+	public String getDpplace() {
+		return dpplace;
+	}
+	public void setDpplace(String dpplace) {
+		this.dpplace = dpplace;
+	}
 	public String getDpcont() {
 		return dpcont;
 	}
 	public void setDpcont(String dpcont) {
 		this.dpcont = dpcont;
 	}
-	
 }

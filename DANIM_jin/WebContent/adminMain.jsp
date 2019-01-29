@@ -3,7 +3,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>    
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,64 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <script type="text/javascript"></script>
 <title>Insert title here</title>
+<script type="text/javascript">
+function allchk(bool){
+	$("input[name=chk]").attr("checked", bool);
+}
 
+$(function(){
+	$("#muldelform").submit(function(){
+		// $("#muldelform input: checked")
+		if($("input[name=chk]:checked").length==0){
+			alert("하나 이상 체크해주세요!")
+			return false;
+		}else{
+			alert("삭제 성공!")
+		}
+
+	});
+	
+	/* $( "#grade" ).change(function() {
+		confirm($('#grade').val()+'\n변경하시겠습니까?');
+		var valueCheck = false;
+		if(valueCheck) {
+	        var delCheck = confirm($('#grade').val()+'\n변경하시겠습니까?');
+	        
+	    }
+		if(!valueCheck == true) {
+            $(this).parent().parent().remove();
+            reCalculate();
+        }
+	}); */
+	
+}); 
+
+
+function gradecheck(){
+/* 	var valueCheck = false;
+	 var delCheck = confirm($('#grade option:selected').val()+'로 변경하시겠습니까?');
+	 if(delCheck==true){
+
+		 alert(ss);
+	 } */
+	 var ss= $(this).closest("td").val();
+	 alert(ss);
+}
+
+function yncheck(){
+	var valueCheck = false;
+	 var delCheck = confirm($('#grade').val()+'로 변경하시겠습니까?');
+	 if(delCheck==true){
+		 alert("안녕");
+	 }
+}
+
+
+
+
+
+
+</script>
 <style>
   /* 사이드바 래퍼 스타일 */
   
@@ -163,22 +220,23 @@ input[type=button]{
   
 
 
-
+<div align="center">
 <h1>회원 관리</h1>
 	<input type="hidden" name="command" value="" >
-	<table border="1">
+	<table border="1" style="text-align: center";>
 
 
+		<col width="100px"/>		
 		<col width="100px"/>
+		<col width="200px"/>
 		<col width="100px"/>
 		<col width="300px"/>
-		<col width="200px"/>
-		<col width="10px"/>
+		<col width="110px"/>
+		<col width="70px"/>
 		<col width="50px"/>
 		<col width="50px"/>
-		<col width="100px"/>
 		<tr>
-			<th><input type="checkbox" name="all" onclick="allchk(this.checked)" /></th>
+
 			<th>아이디</th>
 			<th>별  명</th>
 			<th>주  소</th>
@@ -198,14 +256,23 @@ input[type=button]{
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
-					<tr>
-						<td><input type="checkbox" name="chk" value="${dto.id }"/>
+					<tr id="trr">
+
+						<td>${dto.id }</td>
 						<td>${dto.name }</td>
 						<td>${dto.addr }</td>
 						<td>${dto.phone }</td>
 						<td>${dto.email }</td>
-						<td>${dto.grade }</td>
-						<td>${dto.yn }</td>
+						<td id="tdd">
+							<select class="form-control" id="grade" onchange="gradecheck();">
+							  <option selected="selected" >${dto.grade=="admin"?"admin":"general" }</option>
+							  <option>${dto.grade=="admin"?"general":"admin" }</option>
+							</select></td>
+						<td>
+							<select class="form-control" id="yn" onchange="yncheck();" >
+							  <option selected="selected" >${dto.yn=="Y"?"Y":"N" }</option>
+							  <option>${dto.yn=="Y"?"N":"Y" }</option>
+							</select></td>
 						<td>${dto.confirm }</td>
 						<td>${dto.sns }</td>
 						
@@ -215,7 +282,7 @@ input[type=button]{
 		</c:choose>
 		
 		<tr></tr>	
-	</table>
-	
+	</table> 
+	</div>
 </body>
 </html>

@@ -19,7 +19,7 @@
 	<select id="selectPno" parameterType="planDto" resultType="String">
 		SELECT PNO 
 		FROM PLAN 
-		WHERE PSDATE = #{psdate } AND PLDATE = #{pldate } AND #{ptitle} AND ID = #{id} 
+		WHERE PSDATE = #{psdate } AND PLDATE = #{pldate } AND PTITLE = #{ptitle} AND ID = #{id} 
 	</select>
 	
 	<select id="diaryList" parameterType="String" resultType="planDto">
@@ -34,5 +34,9 @@
 		FROM PLAN 
 		WHERE PNO = #{pno }
 	</select>
+	
+	<delete id="deletePlan" parameterType="String">
+  		DELETE FROM PLAN WHERE PNO = #{pno }
+ 	</delete>
 
 </mapper>

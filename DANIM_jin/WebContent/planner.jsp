@@ -347,7 +347,7 @@
  								setTimeout(() => {
  								location.href="danim.do?command=paySuccess&paynum="+rsp.apply_num+"&paymoney="+rsp.paid_amount+"&id=<%=user%>"
 								}, 5000);
-						          
+						           
  										
 						    } else {
 						        var msg = '결제에 실패하였습니다.';

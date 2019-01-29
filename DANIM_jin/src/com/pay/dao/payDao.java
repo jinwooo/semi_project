@@ -23,7 +23,7 @@ public class payDao extends SqlMapConfig{
 		
 	}
 	
-	 
+	  
 	public int payInsert(payDto dto) {
 		
 		SqlSession session=null;

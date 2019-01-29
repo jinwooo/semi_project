@@ -36,7 +36,7 @@
 	</a>
 	
 	<button style="vertical-align: middle"><span>게시판에 자랑하기</span></button>
-</div>	
+</div>	 
 
 <script type='text/javascript'>
   //<![CDATA[

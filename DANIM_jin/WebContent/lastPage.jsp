@@ -17,7 +17,9 @@
 
 <style type="text/css">
 
-
+.button:hover span {
+  padding-right: 25px;
+}
 
 </style>
 
@@ -35,7 +37,7 @@
 		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>카카오톡 공유하기
 	</a>
 	
-	<button style="vertical-align: middle"><span>게시판에 자랑하기</span></button>
+	<button style="vertical-align: middle "><span >게시판에 글쓰기</span></button>
 </div>	 
 
 <script type='text/javascript'>

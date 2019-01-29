@@ -54,6 +54,10 @@
       UPDATE USERBOARD SET NAME=#{name},ADDR=#{addr},PHONE=#{phone},EMAIL=#{email},PW=#{pw} WHERE ID=#{id}
   	</update>
 
+	<select  id="manageUser"  resultType="DanimDto">
+		SELECT ID,NAME,PW,ADDR,PHONE,EMAIL,GRADE,YN,PENCOUNT,CONFIRM,SNS,IMAGE
+		FROM USERBOARD
+	</select>
 
 
 </mapper>

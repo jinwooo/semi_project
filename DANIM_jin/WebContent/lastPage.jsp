@@ -11,7 +11,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <title>카카오톡 공유하기 버튼</title>
 
-
+ 
 <%
 String user = (String)session.getAttribute("sessionId"); //dto로 받아와야함
 %>

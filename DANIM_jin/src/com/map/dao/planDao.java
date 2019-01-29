@@ -1,5 +1,7 @@
 package com.map.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.map.dto.planDto;
@@ -28,6 +30,28 @@ public class planDao extends SqlMapConfig_plan{
 		session.close();
 		
 		return res;
+	}
+	
+	public List<planDto> diaryList(String id) {
+		SqlSession session = null;
+		List<planDto> res = null;
+		
+		session = getSqlSessionFactory().openSession(true);		
+		res = session.selectList(namespace+"diaryList",id);
+		session.close();
+		
+		return res;
+	}
+	
+	public planDto selectOne(String pno) {
+		SqlSession session = null;
+		planDto dto = new planDto();
+		
+		session = getSqlSessionFactory().openSession(true);		
+		dto = session.selectOne(namespace+"selectOne",pno);
+		session.close();
+		
+		return dto;
 	}
 	
 	

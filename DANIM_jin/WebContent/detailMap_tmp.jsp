@@ -7,6 +7,11 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.map.dto.detailPlanDto"%>
+<%@ page import="com.map.dto.planDto"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!DOCTYPE html>
 <html class="full-height">
@@ -195,6 +200,10 @@
 		        $(this).css("background-color","#ffe6e6");
 		        $(this).siblings(".daypanel").css("background-color","#fff");
 		        ele = $(this);
+		        
+		        var findplace = $(this).find('.planplace').text();
+		        $('#keyword').val(findplace);
+		        searchPlaces();
 			});
 			
 			$("body").on('click', '#placesList .item', function() {				
@@ -352,12 +361,10 @@
 </script>
 
 </head>
-<% 
-	String[] place = request.getParameterValues("place");
-	String[] date = request.getParameterValues("date");
-	
-	/* String place = request.getParameter("place");
-	String date = request.getParameter("date"); */
+
+<%
+	planDto plandto = (planDto)request.getAttribute("plandto");
+	List<detailPlanDto> list = (List<detailPlanDto>)request.getAttribute("list");
 %>
 <%
 	String id = "";
@@ -411,49 +418,8 @@
                         </div>
 					</div>
 					
-					<div class="panel panel-default panel-body orderday">
-<%
-							int cnt = 1;
-							for (int i = 0; i < place.length; i++){
-								Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(date[i].split("~")[1]);
-								Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(date[i].split("~")[0]);								
-								int compare = endDate.compareTo( startDate );
-								
-								Calendar cal = Calendar.getInstance();
-						        cal.setTime(startDate);
-						        
-								if (compare == 0){
-%>
-									<div class="daypanel">								
-										<span class="daycnt">DAY <%=cnt %></span> , <span class="sldate"><%=date[i].split("~")[0]%></span><br/>
-										<span class="planplace"><%=place[i] %></span>
-										<br/>										
-										<div class="blocks panel panel-default panel-body">																														
-										</div>
-									</div>
+					<div class="panel panel-default panel-body orderday">						
 
-<%									
-									cnt++;
-								} else if ( compare > 0 ) {
-									while(new Date(cal.getTimeInMillis()).compareTo( endDate ) <= 0){
-										SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-										String compareDate = transFormat.format(new Date(cal.getTimeInMillis()));
-%>
-										<div class="daypanel">								
-											<span class="daycnt">DAY <%=cnt %></span>,<span class="sldate"><%=compareDate %></span><br/>
-											<span class="planplace"><%=place[i] %></span>
-											<br/>											
-											<div class="blocks panel panel-default panel-body">																																			
-											</div>
-										</div>
-<%															
-										cnt++;
-										cal.add(Calendar.DATE, 1);
-									}			
-								}
-							}
-%>
-					</div>
 				</div>
 			</div>
 			<div class="col-sm-6 col-md-2">

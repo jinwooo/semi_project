@@ -195,6 +195,10 @@
 		        $(this).css("background-color","#ffe6e6");
 		        $(this).siblings(".daypanel").css("background-color","#fff");
 		        ele = $(this);
+		        
+		        var findplace = $(this).find('.planplace').text();
+		        $('#keyword').val(findplace);
+		        searchPlaces();
 			});
 			
 			$("body").on('click', '#placesList .item', function() {				
@@ -440,7 +444,7 @@
 										String compareDate = transFormat.format(new Date(cal.getTimeInMillis()));
 %>
 										<div class="daypanel">								
-											<span class="daycnt">DAY <%=cnt %></span>,<span class="sldate"><%=compareDate %></span><br/>
+											<span class="daycnt">DAY <%=cnt %></span> , <span class="sldate"><%=compareDate %></span><br/>
 											<span class="planplace"><%=place[i] %></span>
 											<br/>											
 											<div class="blocks panel panel-default panel-body">																																			

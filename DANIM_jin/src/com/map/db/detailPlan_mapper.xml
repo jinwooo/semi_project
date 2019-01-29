@@ -16,5 +16,11 @@
 	       VALUES(#{item.dpsq}, #{item.dptime}, #{item.pno}, #{item.dploc}, #{item.dpcont})
   		</foreach>
 	</insert>
+	
+	<select id="detailPlanList" parameterType="String" resultType="detailPlanDto">
+		SELECT DPSQ, DPTIME, PNO, DPLOC, DPCONT
+		FROM DETAILPLAN
+		WHERE PNO = #{pno} ORDER BY DPSQ, DPTIME
+	</select>
 
 </mapper>

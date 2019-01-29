@@ -25,4 +25,15 @@ public class detailPlanDao extends SqlMapConfig_detailPlan {
 		
 		return res;
 	}
+	
+	public List<detailPlanDto> detailPlanList(String pno) {
+		SqlSession session = null;
+		List<detailPlanDto> res = null;
+		
+		session = getSqlSessionFactory().openSession(true);		
+		res = session.selectList(namespace+"detailPlanList",pno);
+		session.close();
+		
+		return res;
+	}
 }

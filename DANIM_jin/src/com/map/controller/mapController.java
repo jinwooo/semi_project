@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.map.dao.detailPlanDao;
 import com.map.dao.planDao;
 import com.map.dto.detailPlanDto;
@@ -83,14 +84,27 @@ public class mapController extends HttpServlet {
 			
 			jsResponse(response,"planner.jsp","일정저장 완료");
 			
-		} else if( command.equals("loadmap")) {
+		} else if( command.equals("plandetail")) {			
 			String id = (String)session.getAttribute("sessionId");
-			String qno = request.getParameter("qno");
+			String pno = request.getParameter("pno");
 			
-			//planDto plandto = plandao.selectOne(qno);
-				
-			//request.setAttribute("plandto", plandto);			
-			dispatch(request,response,"detailMap_tmp.jsp");			
+			planDto plandto = plandao.selectOne(pno);				
+			request.setAttribute("plandto", plandto);
+			
+			List<detailPlanDto> list = detaildao.detailPlanList(pno);
+			request.setAttribute("list", list);
+			
+			dispatch(request,response,"detailMap_tmp.jsp");	
+			
+		}else if(command.equals("myDiary")) {
+			String id = request.getParameter("id");
+			
+			List<planDto> list=plandao.diaryList(id);
+
+			request.setAttribute("list", list);
+			
+			dispatch(request, response, "myDiary.jsp");
+			
 		}
 		
 	}

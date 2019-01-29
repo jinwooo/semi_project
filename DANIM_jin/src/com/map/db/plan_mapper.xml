@@ -19,7 +19,20 @@
 	<select id="selectPno" parameterType="planDto" resultType="String">
 		SELECT PNO 
 		FROM PLAN 
-		WHERE PSDATE = #{psdate } AND PLDATE = #{pldate } AND ID = #{id}
+		WHERE PSDATE = #{psdate } AND PLDATE = #{pldate } AND #{ptitle} AND ID = #{id} 
+	</select>
+	
+	<select id="diaryList" parameterType="String" resultType="planDto">
+		SELECT PNO,PTITLE,PSDATE,PLDATE,PDATA,PIMAGE,ID
+		FROM PLAN 
+		WHERE ID = #{id}
+		ORDER BY PSDATE DESC
+	</select>
+	
+	<select id="selectOne" parameterType="String" resultType="planDto">
+		SELECT PNO,PTITLE,PSDATE,PLDATE,PDATA,PIMAGE,ID 
+		FROM PLAN 
+		WHERE PNO = #{pno }
 	</select>
 
 </mapper>

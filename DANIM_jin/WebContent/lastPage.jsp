@@ -11,16 +11,52 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <title>카카오톡 공유하기 버튼</title>
 
+
+<%
+String user = (String)session.getAttribute("sessionId"); //dto로 받아와야함
+%>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 
 
 <style type="text/css">
 
-.button:hover span {
+.button:hover span,#kakao-link-btn {
   padding-right: 25px;
+  outline: 0px;  
+  border: none;
+}
+.button:hover span:after,#kakao-link-btn {
+  opacity: 1;
+  right: 0;
+  outline: 0px;
+  border: none;
+}
+.button,#kakao-link-btn {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #C8A0FA;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  outline: 0px;
+  
 }
 
+.button span,#kakao-link-btn {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+    outline: 0px;
+  border: none;
+}
 </style>
 
 </head>
@@ -33,13 +69,14 @@
 <div>
 
 
-	<a id="kakao-link-btn" href="javascript:;">
+	<a id="kakao-link-btn" type="button" href="javascript:;">
 		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>카카오톡 공유하기
 	</a>
 	
-	<button style="vertical-align: middle "><span >게시판에 글쓰기</span></button>
+	<button class="button" style="vertical-align: middle " onclick="location.href='danim.do?command=insert'"><span>게시판에 글쓰기>></span></button>
 </div>	 
 
+	
 <script type='text/javascript'>
   //<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.

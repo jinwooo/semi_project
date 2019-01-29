@@ -556,6 +556,27 @@ public class DanimServlet extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.println(obj.toJSONString());
+		}else if(command.equals("paySuccess")){
+			
+			String paynum = request.getParameter("paynum");
+			int paymoney = Integer.parseInt(request.getParameter("paymoney"));
+			String id = request.getParameter("id");
+			
+			System.out.println(paynum);
+			System.out.println(paymoney);
+			System.out.println(id);
+			
+			payDto dto = new payDto(paynum,id,paymoney);
+			payDao PLdao = new payDao();
+			int res = PLdao.payInsert(dto);
+			
+			if(res > 0) {
+				jsResponse(response, "lastPage.jsp", "완료");
+			} else {
+				System.out.println("false");
+			}
+
+			
 		}
 		
 	}

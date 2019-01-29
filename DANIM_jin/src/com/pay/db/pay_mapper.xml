@@ -5,17 +5,16 @@
 	<resultMap type="payDto" id="payMap">
 		<result property="paynum" column="PAYNUM"/>
 		<result property="id" column="ID"/>
-		<result property="buycount" column="BUYCOUNT"/>
 		<result property="buydate" column="BUYDATE"/>
 		<result property="paymoney" column="PAYMONEY"/>
 	</resultMap>
 	
 	<insert id="payInsert" parameterType="payDto">
-		INSERT INTO USEPAY VALUES(#{paynum},#{id},#{buycount},#{buydate},#{paymoney})
+		INSERT INTO USEPAY VALUES(#{paynum},#{id},SYSDATE,#{paymoney})
 	</insert>
 
 	<select  id="payList" parameterType="String" resultType="payDto">
-		SELECT PAYNUM,ID,BUYCOUNT,BUYDATE,PAYMONEY
+		SELECT PAYNUM,ID,BUYDATE,PAYMONEY
 		FROM USEPAY
 		WHERE ID=#{id}
 		ORDER BY BUYDATE ASC

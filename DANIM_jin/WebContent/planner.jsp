@@ -231,7 +231,7 @@
 <script type="text/javascript">
 
 <%
-	String user = (String)request.getAttribute("sessionId"); //dto로 받아와야함
+	String user = (String)session.getAttribute("sessionId"); //dto로 받아와야함
 	/* String id = "aaa"; */
 	planDao dao = new planDao();
 //	List<planDto> listDto = dao.selectList(id);
@@ -341,7 +341,14 @@
 						        msg += '카드 승인번호 : ' + rsp.apply_num;
  */						        
 						        PDFsave();
-						        
+ 								
+ 								
+ 								/* 실행 5초 지연 */
+ 								setTimeout(() => {
+ 								location.href="danim.do?command=paySuccess&paynum="+rsp.apply_num+"&paymoney="+rsp.paid_amount+"&id=<%=user%>"
+								}, 5000);
+						         
+ 										
 						    } else {
 						        var msg = '결제에 실패하였습니다.';
 						        msg += '에러내용 : ' + rsp.error_msg;

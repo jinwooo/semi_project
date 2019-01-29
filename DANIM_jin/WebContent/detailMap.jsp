@@ -232,11 +232,11 @@
 						'</div>')					  	
 					.find(".remove-block").click(function() {
 				        var valueCheck = false;
-				        $(this).parent().find('input').each(function() {
-				            if($(this).attr("name") != "type" && $(this).val() != '') {
+				        $(this).parent().parent().find('.selectedplace').each(function() {
+				            if($(this).text() != null && $(this).text() != '') {
 				                valueCheck = true;
 				            }
-				        });
+				        });	
 				
 				        if(valueCheck) {
 				            var delCheck = confirm('입력하신 내용이 있습니다.\n삭제하시겠습니까?');

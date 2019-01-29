@@ -179,10 +179,26 @@
 			$(".blocks").on('mouseenter', '.block', function() {
 				//$(this).css('backgroundColor', '#f9f9f5');
             	$(this).find('.remove-block').show();
+            	$(this).find(".remove-block").click(function() {
+			        var valueCheck = false;
+			        $(this).parent().parent().find('.selectedplace').each(function() {
+			            if($(this).text() != null && $(this).text() != '') {
+			                valueCheck = true;
+			            }
+			        });			
+			        if(valueCheck) {
+			            var delCheck = confirm('입력하신 내용이 있습니다.\n삭제하시겠습니까?');
+			        }
+			        if(!valueCheck || delCheck == true) {
+			            $(this).parent().parent().remove();
+			            reCalculate();
+			        }
+			    });
 			});
 			$(".blocks").on('mouseleave', '.block', function() {
 				//$(this).css('background', 'none');
 		        $(this).find('.remove-block').hide();
+		        
 			});
 			
 			$(".blocks").on('click', '.block', function() {
@@ -212,6 +228,8 @@
 				$('#nowselectplace').val($(this).find("h5").text());
 			});					
 			
+			
+			
 			$("body").on( "click", "#addblock", function() {				
 				if (ele == null) {
 			        alert('날짜를 선택해주세요!');
@@ -226,8 +244,7 @@
 			  				'<span class="patching-numbering"></span>'+
 			  				'<div class="block-actions float-right">'+
 								'<div class="remove modifier remove-block">'+
-								'<i class="fas fa-times"></i></div></div><span class="selectedplace">'+
-							$('#nowselectplace').val()+
+								'<i class="fas fa-times"></i></div></div><span class="selectedplace">'+$('#nowselectplace').val()+
 								'</span><br/><div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">'+
 		   						'<input id="timepicker'+(++cnt)+'" type="text" class="form-control input-small timepickernow">'+
 		 						'<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>'+
@@ -458,15 +475,12 @@
 								  				<div class="block-actions float-right">
 													<div class="remove modifier remove-block">
 													<i class="fas fa-times"></i></div></div>
-													<span class="selectedplace">
-														<%=list.get(i).getDploc() %>														
-													</span>
-													<br/>
+													<span class="selectedplace"><%=list.get(i).getDploc()%></span><br/>
 													<div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">
 							   							<input id="timepicker<%=(++cnt)%>" type="text" value="<%=list.get(i).getDptime() %>" class="form-control input-small timepickernow">
 							 						<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>
 							 						<script type="text/javascript">
-							   							$('#timepicker'+(++cnt)).timepicker();
+							   							$('#timepicker'+(++cnt)).timepicker();							   							
 							   						</script>
 											</div>
 <%	
@@ -485,10 +499,7 @@
 									  				<div class="block-actions float-right">
 														<div class="remove modifier remove-block">
 														<i class="fas fa-times"></i></div></div>
-														<span class="selectedplace">
-															<%=list.get(i).getDploc() %>														
-														</span>
-														<br/>
+														<span class="selectedplace"><%=list.get(i).getDploc()%></span><br/>
 														<div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">
 								   							<input id="timepicker<%=(++cnt)%>" type="text" value="<%=list.get(i).getDptime() %>" class="form-control input-small timepickernow">								   							
 								 						<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>
@@ -522,15 +533,12 @@
 								  				<div class="block-actions float-right">
 													<div class="remove modifier remove-block">
 													<i class="fas fa-times"></i></div></div>
-													<span class="selectedplace">
-														<%=list.get(i).getDploc() %>														
-													</span>
-													<br/>
+													<span class="selectedplace"><%=list.get(i).getDploc()%></span><br/>
 													<div class="input-group bootstrap-timepicker timepicker" style="width: 150px;">
 							   							<input id="timepicker<%=(++cnt)%>" type="text" value="<%=list.get(i).getDptime() %>" class="form-control input-small timepickernow">							   						
 							 						<span class="input-group-addon"><i class="fas fa-clock"></i></span></div>
 							 						<script type="text/javascript">
-							   							$('#timepicker'+(++cnt)).timepicker();
+							   							$('#timepicker'+(++cnt)).timepicker();							   							
 							   						</script>
 											</div>
 <%

@@ -14,36 +14,21 @@
 <script type="text/javascript"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
-function allchk(bool){
-	$("input[name=chk]").attr("checked", bool);
-}
+
 
 $(function(){
-	$("#muldelform").submit(function(){
-		// $("#muldelform input: checked")
-		if($("input[name=chk]:checked").length==0){
-			alert("하나 이상 체크해주세요!")
-			return false;
-		}else{
-			alert("삭제 성공!")
-		}
+	
+		$("input[name='chk']").click(function(){
+			if($(this).prop('checked')){
+				$("input[name='chk']").prop("checked",false);
+				$(this).prop("checked",true);
+			}
+		})
 
 	});
 	
-	/* $( "#grade" ).change(function() {
-		confirm($('#grade').val()+'\n변경하시겠습니까?');
-		var valueCheck = false;
-		if(valueCheck) {
-	        var delCheck = confirm($('#grade').val()+'\n변경하시겠습니까?');
-	        
-	    }
-		if(!valueCheck == true) {
-            $(this).parent().parent().remove();
-            reCalculate();
-        }
-	}); */
+
 	
-}); 
 
 
 function gradecheck(){
@@ -53,13 +38,13 @@ function gradecheck(){
 
 		 alert(ss);
 	 } */
-	 var ss= $(this).closest("td").val();
-	 alert(ss);
+	var tempText = $(this); 
+	 alert(temtText);
 }
 
 function yncheck(){
 	var valueCheck = false;
-	 var delCheck = confirm($('#grade').val()+'로 변경하시겠습니까?');
+	 var delCheck = confirm($('#yn').val()+'로 변경하시겠습니까?');
 	 if(delCheck==true){
 		 alert("안녕");
 	 }
@@ -223,9 +208,9 @@ input[type=button]{
 <div align="center">
 <h1>회원 관리</h1>
 	<input type="hidden" name="command" value="" >
-	<table border="1" style="text-align: center";>
+	<table border="1" style="text-align: center">
 
-
+		<col width="30px"/>
 		<col width="100px"/>		
 		<col width="100px"/>
 		<col width="200px"/>
@@ -236,7 +221,7 @@ input[type=button]{
 		<col width="50px"/>
 		<col width="50px"/>
 		<tr>
-
+			<th></th>
 			<th>아이디</th>
 			<th>별  명</th>
 			<th>주  소</th>
@@ -255,29 +240,26 @@ input[type=button]{
 			</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="dto">
+			<form action ="danim.do" method="post">
+			<input type="hidden" name="command" value="updateUserForm">
+				<c:forEach items="${list }" var="dto" varStatus="status">
+				 
 					<tr id="trr">
-
+						<td><input type="checkbox"name="chk" value="${dto.id }"/>
 						<td>${dto.id }</td>
 						<td>${dto.name }</td>
 						<td>${dto.addr }</td>
 						<td>${dto.phone }</td>
 						<td>${dto.email }</td>
-						<td id="tdd">
-							<select class="form-control" id="grade" onchange="gradecheck();">
-							  <option selected="selected" >${dto.grade=="admin"?"admin":"general" }</option>
-							  <option>${dto.grade=="admin"?"general":"admin" }</option>
-							</select></td>
-						<td>
-							<select class="form-control" id="yn" onchange="yncheck();" >
-							  <option selected="selected" >${dto.yn=="Y"?"Y":"N" }</option>
-							  <option>${dto.yn=="Y"?"N":"Y" }</option>
-							</select></td>
+						<td>${dto.grade }</td>
+						<td>${dto.yn }</td>
 						<td>${dto.confirm }</td>
 						<td>${dto.sns }</td>
 						
 					</tr>
-				</c:forEach>
+					</c:forEach>
+					<input type="submit" value="수정" >
+				</form>
 			</c:otherwise>
 		</c:choose>
 		

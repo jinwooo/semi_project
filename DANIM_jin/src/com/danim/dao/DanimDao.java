@@ -123,17 +123,31 @@ public class DanimDao extends SqlMapConfig{
 			return res;
 	}
 		
-		public List<DanimDto> manageUser(){
+		public List<DanimDto> adminMain(){
 
 			SqlSession session= null;
 			List<DanimDto> list=null;
 
 			session=getSqlSessionFactory().openSession(true);
-			list=session.selectList(namespace+"manageUser");
+			list=session.selectList(namespace+"adminMain");
 			session.close();
 
 			return list;
 		}
 		
-	
+		public int manageUser(String id,String grade,String yn) {
+			SqlSession session = null;
+			int res = 0;
+			
+			session =getSqlSessionFactory().openSession(true);
+			Map<String, Object> map = new HashMap<String,Object>();
+			map.put("id", id);
+			map.put("grade", grade);
+			map.put("yn", yn);
+			res = session.update(namespace+"manageUser",map);
+			session.close();
+			
+			return res;
+	}
+		
 }

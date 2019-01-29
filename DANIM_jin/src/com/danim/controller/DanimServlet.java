@@ -181,10 +181,19 @@ public class DanimServlet extends HttpServlet {
 			}
 			
 		}else  if(command.equals("afterLogin")) {
-			String id= request.getParameter("id");
-			session.setAttribute("sessionId", id);
-			session.setMaxInactiveInterval(2*60*60);
-			dispatch(request, response, "danim.do?command=main");
+			  String id= request.getParameter("id");
+		         DanimDto dto= Ddao.login(id);
+
+
+		         if (dto.getGrade().equals("admin")) {
+		             session.setAttribute("sessionId", id);
+		             session.setMaxInactiveInterval(2*60*60);
+		             dispatch(request, response, "danim.do?command=adminMain");
+		          } else if (dto.getGrade().equals("general")) {
+		             session.setAttribute("sessionId", id);
+		             session.setMaxInactiveInterval(2*60*60);
+		             dispatch(request, response, "danim.do?command=main");
+		          }
 		}else if(command.equals("logout")) {
 			// 문제다!
 			
@@ -577,7 +586,37 @@ public class DanimServlet extends HttpServlet {
 			}
 
 		
+		}else if(command.equals("adminMain")) {
+
+	         List<DanimDto> list=Ddao.adminMain();
+	         request.setAttribute("list", list);
+	         dispatch(request, response, "adminMain.jsp");
+
+	    }else if(command.equals("updateUserForm")) {
+	    	String id= request.getParameter("chk");
+	    	System.out.println(id);
+	    	DanimDto dto = Ddao.login(id);
+		    request.setAttribute("dto", dto);
+		    dispatch(request, response, "updateUser.jsp");
+
+		}else if(command.equals("updateUser")) {
+	    	String id= request.getParameter("id");
+	    	String grade= request.getParameter("grade");
+	    	String yn= request.getParameter("yn");
+	    	
+	    	System.out.println("id:"+id+"/grade:"+grade+"/yn:"+yn);
+	    	
+	    	int res = Ddao.manageUser(id,grade,yn);
+			if(res>0) {
+				
+				jsResponse(response, "danim.do?command=adminMain", "회원정보 변경 성공");
+			}else {
+				jsResponse(response, "danim.do?command=adminMain", "회원정보 변경 실패");
+			}
+	    	
+
 		}
+
 		
 	}
 

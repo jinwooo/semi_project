@@ -54,10 +54,13 @@
       UPDATE USERBOARD SET NAME=#{name},ADDR=#{addr},PHONE=#{phone},EMAIL=#{email},PW=#{pw} WHERE ID=#{id}
   	</update>
 
-	<select  id="manageUser"  resultType="DanimDto">
+	<select  id="adminMain"  resultType="DanimDto">
 		SELECT ID,NAME,PW,ADDR,PHONE,EMAIL,GRADE,YN,PENCOUNT,CONFIRM,SNS,IMAGE
 		FROM USERBOARD
 	</select>
 
+	<update id="manageUser" parameterType="java.util.Map">
+      UPDATE USERBOARD SET GRADE=#{grade},YN=#{yn} WHERE ID=#{id}
+  	</update>
 
 </mapper>

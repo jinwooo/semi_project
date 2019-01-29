@@ -36,4 +36,15 @@ public class detailPlanDao extends SqlMapConfig_detailPlan {
 		
 		return res;
 	}
+	
+	public int deleteDetailPlan(String pno) {
+		SqlSession session = null;
+		int res = 0;
+				
+		session = getSqlSessionFactory().openSession(true);
+		res = session.delete(namespace+"deleteDetailPlan",pno);	
+		session.close();
+		
+		return res;
+	}	
 }

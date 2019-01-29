@@ -7,20 +7,25 @@
 		<result property="dptime" column="DPTIME"/>
 		<result property="pno" column="PNO"/>
 		<result property="dploc" column="DPLOC"/>
+		<result property="dpplace" column="DPPLACE"/>
 		<result property="dpcont" column="DPCONT"/>
 	</resultMap>
 	
 	<insert id="insertDetailPlan" parameterType="java.util.Map">
 		<foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
-	       INTO DETAILPLAN(dpsq, dptime, pno, dploc, dpcont)
-	       VALUES(#{item.dpsq}, #{item.dptime}, #{item.pno}, #{item.dploc}, #{item.dpcont})
+	       INTO DETAILPLAN(dpsq, dptime, pno, dploc, dpplace, dpcont)
+	       VALUES(#{item.dpsq}, #{item.dptime}, #{item.pno}, #{item.dploc},#{item.dpplace}, #{item.dpcont})
   		</foreach>
 	</insert>
 	
 	<select id="detailPlanList" parameterType="String" resultType="detailPlanDto">
-		SELECT DPSQ, DPTIME, PNO, DPLOC, DPCONT
+		SELECT DPSQ, DPTIME, PNO, DPLOC, DPPLACE, DPCONT
 		FROM DETAILPLAN
 		WHERE PNO = #{pno} ORDER BY DPSQ, DPTIME
 	</select>
+	
+	<delete id="deleteDetailPlan" parameterType="String">
+  		DELETE FROM DETAILPLAN WHERE PNO = #{pno }
+ 	</delete>
 
 </mapper>

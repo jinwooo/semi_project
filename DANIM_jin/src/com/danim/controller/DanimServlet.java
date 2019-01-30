@@ -30,6 +30,7 @@ import com.pay.dao.payDao;
 import com.pay.dto.payDto;
 import com.plan.dao.planDao;
 import com.plan.dto.planDto;
+import com.plan.moveFile.moveFile;
 
 import mail.sendMail;
 import util.SHA256;
@@ -615,7 +616,86 @@ public class DanimServlet extends HttpServlet {
 			}
 	    	
 
-		}
+		}else if(command.equals("saveText")) {
+	         /* 저장버튼을 누르면 처음 들어오는애 */
+	         String pno = request.getParameter("pno");
+	         String text = request.getParameter("text");
+	         String id = request.getParameter("id");
+	         
+	         /*pno = "1";*/
+	            
+	         Pdto.setPno(pno);
+	         Pdto.setPtitle(request.getParameter("ptitle"));
+	         Pdto.setPsdate(request.getParameter("psdate"));
+	         Pdto.setPldate(request.getParameter("pldate"));
+	         Pdto.setPdata("none-data");
+	         Pdto.setPimage("none-date");
+	         Pdto.setId(id);
+	         
+	         
+	         System.out.println(Pdto.getPno()+":"+Pdto.getPtitle()+":"+Pdto.getPsdate()+":"+Pdto.getPldate()+":"+Pdto.getPdata()+":"+Pdto.getId());
+	   
+	         int tempDto = 0;
+	         
+	         System.out.println(pno.getClass().getName());
+	         
+	         
+	         /*이미지 옮기는 작업*/
+	         
+	         moveFile mvfile = new moveFile();
+	         System.out.println(request.getParameter("pimage"));
+	         mvfile.moveFile(request.getParameter("pimage"),"C:\\Users\\user2\\Downloads\\"+request.getParameter("pimage")+".png", "C:\\workspace_semiProject\\Danim_190125\\WebContent\\sav");
+	         
+	         Pdto.setPimage(request.getParameter("pimage")+".png");
+	         
+	         /* 저장이 안되어 있을 경우 db저장시키기 */
+	         if(pno == null || pno.equals(null) || pno.equals("")) {
+	            /* 아무것도 안나옴  - 저장합시다*/
+	            System.out.println("아무것도 없을때 사용하는 if문으로 들어옴");
+	            
+	            Pdto.setPno(Integer.toString(Pdao.setPno()));
+	            
+	            int res = Pdao.insert(Pdto);
+	            
+	            System.out.println("::insert가 됨 값은 : " +res);
+	            
+	            if(res > 0) {
+	               System.out.println("성공적으로 저장");
+	               Pdto.setPdata(text);
+	            }else {
+	               System.out.println("안됨");
+	            }
+	         }else {
+	            System.out.println("else로 들어옴");
+	            tempDto = Pdao.checkPno(id, pno);
+	            System.out.println("tempDto는 : "+tempDto);
+	            if(tempDto != 1) {
+	               /* 아무것도 안나옴  - 저장합시다*/
+	               System.out.println("아무것도 없을때 사용하는 if문으로 들어옴2");
+	               
+	               Pdto.setPno(Integer.toString(Pdao.setPno()));
+	               
+	               int res = Pdao.insert(Pdto);
+	               
+	               System.out.println("::insert가 됨 값은 : " +res);
+	               
+	               if(res > 0) {
+	                  System.out.println("성공적으로 저장");
+	                  Pdto.setPdata(text);
+	               }else {
+	                  System.out.println("안됨");
+	               }
+	            }else {
+	               Pdto.setPno(pno);
+	               Pdto.setPdata(text);
+	            }
+	         }      
+	         
+	         request.setAttribute("dto", Pdto);
+	         System.out.println("여기까진 옴");
+	         dispatch(request, response, "tempOption.jsp");
+	         
+	      }
 
 		
 	}

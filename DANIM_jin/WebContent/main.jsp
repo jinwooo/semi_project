@@ -667,8 +667,8 @@ img{
 	</form>	
 </div>
 
-<div id="shareimg">
-	<img src="sav/1.jsp"> 
+<div id="shareimg1">
+	<img src="sav/"> 
 </div>
 <%@ include file="./form/footer.jsp" %>
 

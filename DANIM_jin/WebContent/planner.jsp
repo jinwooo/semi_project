@@ -138,6 +138,11 @@
       display: none;
    }
    
+   	#editor .wrapper .canvas .display .inputtext{
+		background: none;
+		border: 0;	
+	}
+   
    #editor .wrapper .canvas .display.selected{
       display: block;
    }
@@ -273,27 +278,66 @@
             
       $("#editor .wrapper .canvas").disableSelection(); //이 부분은 반드시 필요한 부분은 아닌데, 아이템 내부의 글자를 드래그 해서 선택하지 못하도록 하는 기능 입니다.
       
-      $(document).on("mouseenter", ".droppable", function() {
-     	 $(this).droppable({
-         accept: ".draggable",      // draggable만 drop
-         tolerance: "intersect",      // 50%이상 겹치면 drop가능
-         hoverClass: "drophover",   // css를 통해 해당 element위에 올라와있을때 변화시킴
-         drop: function(ev, ui) {
-            if($(this).find(".contentholder").length > 0){
-               $(this).find(".contentholder").remove();
-               $(this).append($(ui.draggable).clone().attr({width: 500, height: 175}))
-               $(this).append("<button class='contentDel'>삭제</button>");
-            }
-		}
-  	    });
-      });
+		$(document).on("mouseenter", ".draggable", function() {
+			$(".droppable").droppable({
+				accept: ".draggable",		// draggable만 drop
+				tolerance: "intersect",		// 50%이상 겹치면 drop가능
+				hoverClass: "drophover",	// css를 통해 해당 element위에 올라와있을때 변화시킴
+				drop: function(ev, ui) {
+					if($(this).find(".contentholder").length > 0){
+						$(this).find(".contentholder").remove();
+						
+						if($(ui.draggable).clone().find("img")) {
+							$(this).append($(ui.draggable).clone().find("img").attr({width: 500, height: 175}))
+						}
+						
+						$(this).append("<button class='contentDel'>삭제</button>");
+					}
+				}
+			})
+		})
+		
+		
+		$(document).on("mouseenter", ".draggableOther", function() {
+			$(".view").droppable({
+				accept: ".draggableOther",		// draggable만 drop
+				tolerance: "pointer",		// 50%이상 겹치면 drop가능
+				hoverClass: "drophover",	// css를 통해 해당 element위에 올라와있을때 변화시킴
+				drop: function(ev, ui) {
+					
+					if($(ui.draggable).clone().is(".draggableOther.text")){
+						$(this).prepend($(ui.draggable).clone().attr({"class":"draggableincanvas"}).css({"position" : "absolute"}))
+						$(".draggableincanvas").html("<textarea class='inputtext'>글상자</textarea>");
+					}
+				}
+			})
+		})
+		
+		$(document).on("mouseenter", ".draggableincanvas", function() {
+			$(this).hover(function() {
+				$(this).css("border","2px solid blue")
+			}, function () {
+				$(this).css("border","0")
+			}
+			),
+			$(this).draggable({
+				appendTo: "body",
+				refreshPositions: true,
+				scroll: false,
+			})
+		})
       
+		$(".draggableOther").draggable({
+			appendTo: "body",
+			helper: "clone",
+			scroll: false
+		})
+		
       $(".draggable").draggable({
          appendTo: "body",
          refreshPositions: true,
          helper: "clone",
-         scroll: false,
-         opacity: 0.7
+         scroll: false
       })
       
       
@@ -359,9 +403,14 @@
 			      error:function(){
 			         alert("실패;;");
 			      }
-			   });      
-
-      })
+			   });
+			 
+		$("#picupload").click(function() {
+			
+			
+		});
+	
+	})
       
       $(document).on("mouseenter", ".view > .droppable", function() {
          $(this).hover(function() {
@@ -492,6 +541,11 @@
 		
        $(".display").css({"display":"block","padding":"53px 70px 53px 70px"});
        $(".canvas").css("border","0");
+       
+		for(var i = 0; i < <%=dpsq %>; i++){
+				$(document).find(".inputtext").eq(i).css({"top":(753*i)+(53*(i+1)),"left":70,"position":"absolute"});
+		}
+       
        html2canvas(document.querySelector(".canvas")).then(canvas => {
              
           var imgData = canvas.toDataURL('image/png');
@@ -515,6 +569,7 @@
           }
           doc.save('sample-file.pdf'); 
           $(".display").removeAttr("style");
+          $(".inputtext").removeAttr("style");
            $(".canvas").removeAttr("style");
        })
 }
@@ -548,27 +603,18 @@
          <div class="accordion">
 				<h3>여행경로</h3>
 				<div>
-					<img class="draggable" style="background:white;" width="200px" height="100px" src="image/DotGrid.png">
-					<img class="draggable" style="background:white;" width="200px" height="100px" src="image/DotGrid.png">
-					<img class="draggable" style="background:white;" width="200px" height="100px" src="image/DotGrid.png">
-					<img class="draggable" style="background:white;" width="200px" height="100px" src="image/DotGrid.png">
+					<div class="draggable">
+						<img style="background:white;" width="200px" height="100px" src="image/DotGrid.png">
+					</div>
 				</div>
 				<h3>날짜</h3>
 				<div>
-					<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
+				
 				</div>
 				<h3>비용</h3>
 				<div>
-					<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
-					<ul>
-						<li>List item</li>
-						<li>List item</li>
-						<li>List item</li>
-						<li>List item</li>
-						<li>List item</li>
-						<li>List item</li>
-						<li>List item</li>
-					</ul>
+				
+
 				</div>
 				<h3>리뷰</h3>
 				<div>
@@ -584,11 +630,14 @@
 				</div>
 				<h3>사진</h3>
 				<div>
-					
+					<input type="file" name="file" id="myFile" accept=".jpg, .jpeg, .png" style="width:220px;">
+					<button id="picupload" class="btn">업로드</button>
 				</div>
 				<h3>글상자</h3>
 				<div>
-					
+					 <div class="draggableOther text">
+						<img src="image/text.png" width="100px" height="100px">
+					</div>
 				</div>
 				<h3>스티커</h3>
 				<div>

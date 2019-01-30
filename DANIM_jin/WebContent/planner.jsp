@@ -232,14 +232,14 @@
 
 <%
 	String user = (String)session.getAttribute("sessionId"); //dto로 받아와야함
-	/* String id = "aaa"; */
+	 String id = "aaa"; 
 	planDao dao = new planDao();
-//	List<planDto> listDto = dao.selectList(id);
+	List<planDto> listDto = dao.selectList(id);
 %>
 	var pno = "";
 
    $(function() {
-<%-- 		$("#selDiary").empty();
+		$("#selDiary").empty();
 		<%		
 		if(listDto.equals(null)||listDto==null||listDto.size() == 0){
 		%>
@@ -257,7 +257,7 @@
 		<%
 			}
 		}
-		%> --%>
+		%> 
 	  
 		$(".accordion").accordion({
 			heightStyle: "content",
@@ -378,12 +378,12 @@
       })
       
       
-<%--       <%
+     <%
 		planDto pdto = new planDto();
       	pdto.setPtitle("sample_Ptitle");
       	pdto.setPsdate("sample_psdate");
       	pdto.setPldate("sample_pldata");
-      %>       --%>
+      %>      
       
       /* 2. [임시저장] 버튼을 선택하는 경우
       2.1 현재 사용하고 있는 아이디와 여행번호, 파일 제목, 저장해야할 텍스트를 servlet에 보낸다.
@@ -391,11 +391,24 @@
         2.2.1 해당 번호가 없으면 새로 정보를 새로 넣는다.
       2.3 해당 번호가 있으면 기존에 있던 정보에 넣는다.
       2.4 해당 번호를 planner.jsp 파일에 보내준다.  */
-<%--       
+       
       $("#planSave").click(function(){
+    	  
+    	 var element = $(".canvas")[0];
+         html2canvas(element).then(function(canvas){
+         	 	
+         	var imgData = canvas.toDataURL();
+        	fileName = setPno();
+         	downloadURI(imgData,fileName);
+          	
+         });
+         
+         
 		var ptitle = "";
 		ptitle = prompt("제목을 입력하세요","");
-		alert(ptitle);
+		
+		fileName = setPno();
+		
 		$.ajax({
  			url : "danimServlet",
  			type : "POST",
@@ -406,11 +419,12 @@
  				text : delSpace($("#openFile").html()),
  				ptitle : ptitle,
  				psdate : "<%=pdto.getPsdate() %>",
- 				pldate : "<%=pdto.getPldate() %>"
+ 				pldate : "<%=pdto.getPldate() %>",
+ 				pimage : fileName
  			}
  		});	     
  		
-      }); --%>
+      }); 
       
 /* 저장된 파일을 불러오는 함수 */
       $(function(){
@@ -434,7 +448,19 @@
         }); 
       
    });
-      
+   
+   function setPno(){
+	   return <%=dao.setPno() %>
+   }
+ 
+   function downloadURI(uri, name) {
+	    var link = document.createElement("a");
+
+	    link.download = name;
+	    link.href = uri;
+	    document.body.appendChild(link);
+	    link.click();
+   }    
    
    
    function prevPage() {

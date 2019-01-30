@@ -98,7 +98,7 @@ public class DanimServlet extends HttpServlet {
 			
 			int res = Ddao.join(dto);
 			if(res>0) {
-				String host = "http://localhost:8787/Danim_jin/";
+				String host = "http://localhost:8787/DANIM_jin/";
 				String content= "다음 링크에 접속하여 이메일 확인을 진행하세요." +
 						"<a href='" + host + "danim.do?command=emailCode&id=" + inId + "'>이메일 인증하기</a>";
 				SM.sendEmail(inEmail, content);

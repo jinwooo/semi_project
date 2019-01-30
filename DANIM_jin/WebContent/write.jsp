@@ -18,7 +18,7 @@
 <!-- 스마트 에디터 소스 추가 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="<%=ctx %>/SE2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=ctx %>/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <script type="text/javascript">
 var oEditors=[];
@@ -27,7 +27,7 @@ $(function(){
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef:oEditors,
 		elPlaceHolder:"smarteditor", // textarea에서 지정한 id
-		sSkinURI:"/DANIM_jin/SE2/SmartEditor2Skin.html",
+		sSkinURI:"/DANIM_jin/se2/SmartEditor2Skin.html",
 		htParams : {
 			//툴바 사용 여부
 			bUserToolbar : true,

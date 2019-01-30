@@ -401,11 +401,7 @@
             	fileName = setPno();
              	downloadURI(imgData,fileName);
               	
-             });	  <%-- 
-        	 var s = <%=dpsq%>;
-        	 for(var i = 0; i<s;i++){
-    	 } --%>
-    	 
+             });	  
          
          
 		var ptitle = "";

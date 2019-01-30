@@ -375,7 +375,7 @@ public class DanimServlet extends HttpServlet {
 			}
 			
 		}else if(command.equals("confirmchk")) {
-			String id = request.getParameter("id");
+			String id =(String)session.getAttribute("sessionId");
 			DanimDto dto = Ddao.login(id);
 			String confirm = dto.getConfirm();
 			PrintWriter out = response.getWriter();

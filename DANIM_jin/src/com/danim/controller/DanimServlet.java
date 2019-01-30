@@ -505,7 +505,14 @@ public class DanimServlet extends HttpServlet {
 			
 			int res = dao.multiDelete(array);
 			if(res > 0) {
-				jsResponse(response, "danim.do?command=myHistory&id="+id, "삭제 성공");
+				String referer = request.getHeader("referer");
+	/*			String msg= "삭제 성공";
+				String tmp = "<script type='text/javascript'>"+"alert('"+msg+"');"+"history.back();"+"</script>";
+				PrintWriter out = response.getWriter();
+				out.print(tmp);*/
+				
+				jsResponse(response, referer, "삭제 성공");
+				
 			} else {
 				System.out.println("false");
 			}
@@ -616,6 +623,17 @@ public class DanimServlet extends HttpServlet {
 			}
 	    	
 
+		}else if(command.equals("manageWritingForm")) {
+			String id= (String)session.getAttribute("sessionId");
+	         DanimDto dto= Ddao.login(id);
+	         if (dto.getGrade().equals("admin")) {
+		            List<BoardDto> list = dao.selectAll();
+		            request.setAttribute("list", list);
+		             dispatch(request, response, "manageWriting.jsp");
+		          } else if (dto.getGrade().equals("general")) {
+		            jsResponse(response, "danim.do?command=main", "관리자가 아닙니다.");
+		          }
+
 		}else if(command.equals("saveText")) {
 	         /* 저장버튼을 누르면 처음 들어오는애 */
 	         String pno = request.getParameter("pno");
@@ -698,9 +716,11 @@ public class DanimServlet extends HttpServlet {
 	         
 	      }
 
+	         
 		
 	}
-
+		
+	
 	
 	public void dispatch(HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException {
 		RequestDispatcher dispatch=request.getRequestDispatcher(url);

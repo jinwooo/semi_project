@@ -101,7 +101,7 @@ function logchk(){
 
 <%
 		String as = request.getParameter("id");
-		System.out.println("as:"+as);
+
 %> 
 		$.ajax({
 			url:"danim.do?command=confirmchk&id=<%=as%>",	
@@ -471,8 +471,8 @@ img{
          url: '/v1/user/me',
          success: function(res) {
    
-               alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
-               alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+               //alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
+               //alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
    
                console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
                console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)

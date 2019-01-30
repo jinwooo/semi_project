@@ -447,9 +447,6 @@ img{
      });
    }
    
-   function fbLogout(){
-	 
-   }
 
 
 </script>
@@ -461,7 +458,7 @@ img{
     Kakao.init('067cd728aca1925331e19dd03a049443');
     function loginWithKakao() {
       // 로그인 창을 띄웁니다.
-      Kakao.Auth.login({
+     Kakao.Auth.loginForm({
         success: function(authObj) {
           //alert(JSON.stringify(authObj));
 
@@ -470,23 +467,10 @@ img{
          url: '/v1/user/me',
          success: function(res) {
    
-               //alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
-               //alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-   
-               console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
-               console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
-               //console.log(res.profile_image);
-               console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
-               // res.properties.nickname으로도 접근 가능 )
-               //console.log(res.created);
-               //console.log(res.status);
-               console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
-   				
-   			$("#status").html('카톡 이름 : '+res.properties.nickname+' / 아이디 : '+res.id);
-              //document.write(res.properties.nickname+"님 환영합니다.");
-
+              
+				kout();
               location.href="danim.do?command=snsLogin&id="+res.id+"&name="+res.properties.nickname
-   
+              
              }
            })
 
@@ -496,22 +480,15 @@ img{
         }
       });
     };
+    
+ 
   //]]>
-    function Logout() {
-
-        Kakao.Auth.logout();
-
-        
+    function kout(){
+    	
+    	Kakao.Auth.logout(function(data){
+                alert(data)
+            });
     }
-	function loginformOut() {
-		$("#loginform").hide();
-		$("#main").css("opacity","1");
-	}
-	function loginform() {
-		$("#loginform").show();
-		//$("#main").hide();
-		$("#main").css("opacity","0.5");
-	}
 </script>
 <body>
 <div data-text-content="true" id="title">

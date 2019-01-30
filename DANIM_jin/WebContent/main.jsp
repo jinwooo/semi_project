@@ -532,7 +532,7 @@ img{
 									<div class="fb-login-button" scope="public_profile,email" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
 								</div></br>
 										<div align="right" > 
-                    						<a href="findInfo.jsp">아이디/비밀번호찾기</a><span>      </span><a href="join.jsp"  >회원가입</a>
+                    						<a href="findInfo.jsp">아이디/비밀번호찾기</a><span>  <span>    &nbsp;|&nbsp;    </span>    </span><a href="join.jsp"  >회원가입</a>
                     					</div> 
 									</form>
 								</div> 

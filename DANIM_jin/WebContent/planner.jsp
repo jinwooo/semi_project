@@ -232,9 +232,9 @@
 
 <%
 	String user = (String)session.getAttribute("sessionId"); //dto로 받아와야함
-	 String id = "aaa"; 
+	// String id = "aaa"; 
 	planDao dao = new planDao();
-	List<planDto> listDto = dao.selectList(id);
+	List<planDto> listDto = dao.selectList(user);
 %>
 	var pno = "";
 
@@ -414,7 +414,7 @@
  			type : "POST",
  			data : {
  				command : "saveText",
- 				id : "<%=id %>",
+ 				id : "<%=user %>",
  				pno : pno,
  				text : delSpace($("#openFile").html()),
  				ptitle : ptitle,

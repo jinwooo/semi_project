@@ -393,15 +393,19 @@
       2.4 해당 번호를 planner.jsp 파일에 보내준다.  */
        
       $("#planSave").click(function(){
-    	  
-    	 var element = $(".canvas")[0];
-         html2canvas(element).then(function(canvas){
-         	 	
-         	var imgData = canvas.toDataURL();
-        	fileName = setPno();
-         	downloadURI(imgData,fileName);
-          	
-         });
+			$(".display").css("display","block");
+    		 var element = $(".canvas")[0];
+             html2canvas(element).then(function(canvas){
+             	 	
+             	var imgData = canvas.toDataURL();
+            	fileName = setPno();
+             	downloadURI(imgData,fileName);
+              	
+             });	  <%-- 
+        	 var s = <%=dpsq%>;
+        	 for(var i = 0; i<s;i++){
+    	 } --%>
+    	 
          
          
 		var ptitle = "";
@@ -423,7 +427,7 @@
  				pimage : fileName
  			}
  		});	     
- 		
+		$(".display").removeAttr("style")
       }); 
       
 /* 저장된 파일을 불러오는 함수 */
@@ -455,7 +459,6 @@
  
    function downloadURI(uri, name) {
 	    var link = document.createElement("a");
-
 	    link.download = name;
 	    link.href = uri;
 	    document.body.appendChild(link);

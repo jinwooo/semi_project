@@ -181,8 +181,8 @@
             	$(this).find('.remove-block').show();
             	$(this).find(".remove-block").click(function() {
 			        var valueCheck = false;
-			        $(this).parent().parent().find('.selectedplace').each(function() {
-			            if($(this).text() != null && $(this).text() != '') {
+			        $(this).parent().find('input').each(function() {
+			            if($(this).attr("name") != "type" && $(this).val() != '') {
 			                valueCheck = true;
 			            }
 			        });			
@@ -542,6 +542,13 @@
 							   						</script>
 											</div>
 <%
+										
+										if ( i+1 == list.size() ){
+%>
+												</div>
+											</div>
+<%											
+										}
 									}
 								}
 							}									

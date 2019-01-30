@@ -378,7 +378,6 @@ img{
      // for FB.getLoginStatus().
      if (response.status === 'connected') {
        // Logged into your app and Facebook.
-              
        testAPI();
      } else {
        // The person is not logged into your app or we are unable to tell.
@@ -442,14 +441,14 @@ img{
    	    }, 10000);
     	 
        console.log('Successful login for: ' + response.name);
-       document.getElementById('status').innerHTML =
-         '너의 이름: ' + response.name + '/ 너의 아이디: '+response.id + '!';
-       location.href="danim.do?command=snsLogin&id="+response.id+"&name="+response.name
+      
+       location.href="danim.do?command=snsLogin&id="+response.id+"&name="+response.name;
+       FB.logout();
      });
    }
    
    function fbLogout(){
-	   FB.logout();
+	 
    }
 
 
@@ -464,7 +463,7 @@ img{
       // 로그인 창을 띄웁니다.
       Kakao.Auth.login({
         success: function(authObj) {
-          alert(JSON.stringify(authObj));
+          //alert(JSON.stringify(authObj));
 
           Kakao.API.request({
    

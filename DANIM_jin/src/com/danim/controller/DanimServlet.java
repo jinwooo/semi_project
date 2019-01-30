@@ -644,7 +644,8 @@ public class DanimServlet extends HttpServlet {
 	         
 	         moveFile mvfile = new moveFile();
 	         System.out.println(request.getParameter("pimage"));
-	         mvfile.moveFile(request.getParameter("pimage"),"C:\\Users\\user2\\Downloads\\"+request.getParameter("pimage")+".png", "C:\\workspace_semiProject\\Danim_190125\\WebContent\\sav");
+	         // 내꺼에 맞게 경로바꾸기
+	         mvfile.moveFile(request.getParameter("pimage"),"C:\\Users\\user2\\Downloads\\"+request.getParameter("pimage")+".png", "C:\\Users\\user2\\git\\semi_project\\DANIM_jin\\WebContent\\sav");
 	         
 	         Pdto.setPimage(request.getParameter("pimage")+".png");
 	         

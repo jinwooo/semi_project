@@ -668,7 +668,10 @@ img{
 </div>
 
 <div id="shareimg1">
-	<img src="sav/"> 
+	<p>테스트이미지</p>
+	<a href="#"><img src="sav/2019_01_30_170328.jsp" width="100px" height="100px">
+	</a>
+	
 </div>
 <%@ include file="./form/footer.jsp" %>
 

@@ -290,23 +290,19 @@ hr{
 		width:300px;
 	}
 	#log{
-	width: 300px;
+	
+	
+	  all: unset;
+      width: 300px;
 	height: 49px;
-	
-	font-size: 18px;
-	font-weight: 700;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    border: 1px solid #ccc;
-	margin-bottom: 5px;
-	
-	color: #fff;
-	border-color: #b22520;
-	box-shadow: inset 0 1px 0 rgba(242,164,162,.6), 0 1px 2px rgba(0,0,0,.05);
-	background-color: #e85b54;
-	background-image: linear-gradient(to bottom,#e85b54 0,#b22520 100%);
+      background-color: rgb(200, 160, 220);
+      border-radius: 7px;
+      color: white;
+      font-size: 10pt;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 5px;
+      font-size: 17px;
 	
 	}
 	.inputInform{
@@ -530,7 +526,7 @@ img{
 										</div>
 										<span id="loginError" style="color:red">아이디 또는 비밀번호가 틀렸습니다.</span>
 										<div id="loginGroup">
-                    					<input id="log" type="button" value="로그인" onclick="logchk();"/>
+                    					<input id="log" type="button" value="#DANIM으로 로그인" onclick="logchk();"/>
                     					
                     					<a id="custom-login-btn" href="javascript:loginWithKakao()"><br/><img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/></a><br/>
 									<div class="fb-login-button" scope="public_profile,email" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>

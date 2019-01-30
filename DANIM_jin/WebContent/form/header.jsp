@@ -164,7 +164,7 @@ a{
 <div id="afterLogin">
 <span id="welcome"><%=id %>님 환영합니다 </span>
 <div data-obj-type="element">	
-	<input type="button" id="myPage" value="내 정보" class="btn-success">
+	<input type="button" id="myPage" value="내 정보" class="btn-success" onclick="location.href='myPage.jsp'">
 </div>
 <div data-obj-type="element">	
 	<input type="button" id="logout" value="로그아웃" class="btn-success" onclick="location.href='danim.do?command=logout'">

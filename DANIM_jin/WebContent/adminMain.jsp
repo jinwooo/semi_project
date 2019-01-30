@@ -242,7 +242,7 @@ input[type=button]{
       </li>
       <li><a href="manageUser.jsp">회원 관리</a></li>
       <li><a href="danim.do?command=manageWriting">글 관리</a></li>
-
+	  <li><a href="danim.do?command=manageWriting">다이어리 관리</a></li>	
     </ul>
   </div>
 </div>

@@ -323,7 +323,7 @@ hr{
 	.modal-content{
 		left: 90px;
 		width: 390px;
-		height: 370px;
+		height: 410px;
 	}
 	.modal {
         text-align: center;
@@ -531,8 +531,8 @@ img{
                     					<a id="custom-login-btn" href="javascript:loginWithKakao()"><br/><img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/></a><br/>
 									<div class="fb-login-button" scope="public_profile,email" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
 								</div></br>
-										<div align="right" > 
-                    						<a href="findInfo.jsp">아이디/비밀번호찾기</a><span>  <span>    &nbsp;|&nbsp;    </span>    </span><a href="join.jsp"  >회원가입</a>
+										<div align="center" > 
+                    						<a href="findInfo.jsp" style="color:rgb(200, 160, 220)">아이디/비밀번호찾기</a><span>  <span>    &nbsp;|&nbsp;    </span>    </span><a href="join.jsp" style="color:rgb(200, 160, 220)" >회원가입</a>
                     					</div> 
 									</form>
 								</div> 

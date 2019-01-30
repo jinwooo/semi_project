@@ -174,6 +174,51 @@ input[type=button]{
 	top: 20px;
 }
 
+
+#write,#back{
+    
+
+	width:60px;
+	height:30px;
+	font-size:40px;
+	font-style: normal;
+	font-weight: bold;
+}
+.btn-primary{
+	background-color:rgb(200,160,220);
+	border:none;
+ 	color : white;
+	text-align : center;
+	font-size:30px;
+	border-radius : 4px;
+}
+	
+
+.btn-primary,#write,#back{
+
+	float: right;
+	background-color:rgb(200,160,220);
+	border:none;
+ 	color : white;
+	text-align : center;
+	font-size:15px;
+	border-radius : 4px;
+	left: 50px;
+}
+.btn-primary,#write:hover,
+.btn-primary,#write:active{
+	background-color : rgb(229, 204, 255);
+}
+
+.btn-primary,#back:hover,
+.btn-primary,#back:active{
+	background-color : rgb(229, 204, 255);
+}
+
+</style>
+<style type="text/css">
+
+
 </style>
 </head>
 <%
@@ -258,7 +303,9 @@ input[type=button]{
 						
 					</tr>
 					</c:forEach>
-					<input type="submit" value="수정" >
+	
+		<input type="submit" id="back" value="수정" class="btn-primary"  >
+
 				</form>
 			</c:otherwise>
 		</c:choose>

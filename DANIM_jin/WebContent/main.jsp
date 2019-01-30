@@ -439,7 +439,7 @@ img{
     	 setTimeout(function(){
    	      FB.logout(); 
    	    }, 10000);
-    	 
+    
        console.log('Successful login for: ' + response.name);
       
        location.href="danim.do?command=snsLogin&id="+response.id+"&name="+response.name;

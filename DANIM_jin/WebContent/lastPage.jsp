@@ -69,7 +69,7 @@ String user = (String)session.getAttribute("sessionId"); //dto로 받아와야�
 <div>
 
 
-	<a id="kakao-link-btn" type="button" href="javascript:;">
+	<a id="kakao-link-btn" href="javascript:;">
 		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>카카오톡 공유하기
 	</a>
 	

@@ -171,7 +171,7 @@ html, body{
 	font-style : italic;
 	color : rgb(200,160,220);
 	height: 55px;
-    top: 20px;
+    top: 27px;
     left: 20px;
     position: relative;
 }
@@ -368,8 +368,12 @@ img{
     width: 1000px;
 }
 
-#board{
+#share td{
+	padding: 5px 25px;
+}
 
+
+#board{
 	margin-right: auto;
     margin-left: auto;
 	width:150px;
@@ -378,6 +382,7 @@ img{
 	font-stlye :  normal;
 	font-weight : bold;
 }
+
 
 
 
@@ -617,21 +622,27 @@ img{
 	
 	<div id="share">
 		<table>
-			<col width="250px">
-			<col width="250px">
-			<col width="250px">
-			<col width="250px">
+			<col width="200px">
+			<col width="200px">
+			<col width="200px">
+			<col width="200px">
 			<tr>
-				<td align="center">테스트이미지</td>
-				<td align="center">테스트이미지</td>
-				<td align="center">테스트이미지</td>
-				<td align="center">테스트이미지</td>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+			</tr>
+			<tr style="font-size: 14pt; font-weight: bold;">
+				<td>테스트이미지</td>
+				<td>테스트이미지</td>
+				<td>테스트이미지</td>
+				<td>테스트이미지</td>
 			</tr>
 			<tr>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+				<td>#갬성 #여행 #당일치기</td>
+				<td>#갬성 #여행 #당일치기</td>
+				<td>#갬성 #여행 #당일치기</td>
+				<td>#갬성 #여행 #당일치기</td>
 			</tr>
 		</table>
 	</div>
@@ -644,7 +655,7 @@ img{
 <br/>
 
 <div>
-	<div class="hr-sect">&nbsp; &nbsp; 자유게시판</div>
+	<div class="hr-sect">자유게시판</div>
 	<div  align="center">
 		<input type="button" value="게시판 입장" class="btn-primary" id="board" onclick="location.href='danim.do?command=review&page=1'"/>
 	</div>

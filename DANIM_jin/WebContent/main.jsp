@@ -155,32 +155,44 @@ input[type=button]{
 	font-family: 'BMHANNAAir'; 
 }
 
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
+#mainbody{
+	margin: auto;
+	width: 1200px;
+}
+
 #title{
 	font-weight : bold;
 	font-size: 36px;
 	font-style : italic;
 	color : rgb(200,160,220);
-	
+	height: 55px;
+    top: 20px;
+    left: 20px;
+    position: relative;
 }
 
 #demo{
-	border : none;
-	resize : none;
-	position : absolute;
-	top:130px;
-	left:280px;
-	width:450px;
-	height:316px;
-	font-size:19px;
-	line-height:2em;
-	font-weight : bold;
-	font-stlye :  normal;
-	color : #333333;
+    margin-left: 50px;
+	border: none;
+    resize: none;
+    position: absolute;
+    top: 200px;
+    width: 450px;
+    font-size: 19px;
+    line-height: 2em;
+    font-weight: bold;
+    font-stlye: normal;
+    color: #333333;
 }
 #mainimg{
 	position : absolute;
-	top : 133px;
-	left : 850px;
+	top : 140px;
+	left : 950px;
 }
 #welcome{
 	position : absolute;
@@ -190,13 +202,13 @@ input[type=button]{
 #login, #myPage{
 	position : absolute;
 	top : 38px;
-	left : 1400px;
+	left : 1350px;
 	
 }
 #join, #logout{
 	position:absolute;
 	top : 38px;
-	left : 1475px;
+	left : 1430px;
 }
 .btn-success{
 	width : 65.9286px;
@@ -216,8 +228,8 @@ input[type=button]{
 
 #start{
 	position : absolute;
-	top: 581px;
-	left:650px;
+	top: 600px;
+	left: 40%;
 	width:150px;
 	height:50px;
 	font-size:23px;
@@ -227,8 +239,8 @@ input[type=button]{
 
 #start2{
 	position : absolute;
-	top: 581px;
-	left:850px;
+	top: 600px;
+	right: 40%;
 	width:150px;
 	height:50px;
 	font-size:23px;
@@ -237,9 +249,6 @@ input[type=button]{
 }
 
 #review p input{
-	position: absolute; 
-	top: 820px; 
-	left: 1750px; 
 	width: 86px;
 	height: 36px;
 	font-stlye :  normal;
@@ -262,16 +271,14 @@ hr{
 	font-style : italic;
 	font-weight : bold;
 	font-size : 30px;
-	margin: 8px 0px;
 }
 .hr-sect::after{
-	content:"";
-	flex-grow:1;
-	background: #C0C0C0;
-	height : 2px;
-	font-size: 0px;
-	line-height: 2px;
-	margin: 0px 50px;
+    content: "";
+    flex-grow: 1;
+    background: #C0C0C0;
+    height: 2px;
+    font-size: 0px;
+    margin: 0 0 0 20px;
 }
 .btn-primary{
 	background-color:rgb(200,160,220);
@@ -357,8 +364,8 @@ img{
 }
 
 #share{
-	position:relative;
-	left : 500px;
+	margin: auto;
+    width: 1000px;
 }
 
 #board{
@@ -504,19 +511,14 @@ img{
     }
 </script>
 <body>
+
+<div id="mainbody">
+
 <div data-text-content="true" id="title">
 #DANIM
 </div>
 
-<div id="user">
-	<div id="not-connection">
-	
-	</div>
-	<div id="connection">
-	
-	</div>
 
-</div>
 
 <div id="beforeLogin">
 <div data-obj-type="element">
@@ -547,7 +549,8 @@ img{
                     					
                     					<a id="custom-login-btn" href="javascript:loginWithKakao()"><br/><img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/></a><br/>
 									<div class="fb-login-button" scope="public_profile,email" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
-								</div></br>
+								</div>
+										<br>
 										<div align="center" > 
                     						<a href="findInfo.jsp" style="color:rgb(200, 160, 220)">아이디/비밀번호찾기</a><span>  <span>    &nbsp;|&nbsp;    </span>    </span><a href="join.jsp" style="color:rgb(200, 160, 220)" >회원가입</a>
                     					</div> 
@@ -573,17 +576,17 @@ img{
 </div>
 </div>
 <br/>
-<div><hr></div>
+
+<hr>
+
 <br/>
 <br/>
 <div data-obj-type="element" id="demo">
-	<p><br></p>
 	<p>
 		"감성 여행 플래너 & 다이어리에 대한 설명...
-        diam maecenas ultricies mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae 
-        proin sagittis nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices 
-        어쩌고 저쩌고 소개어쩔"
-		<br>
+		diam maecenas ultricies mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae 
+		proin sagittis nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices 
+		 어쩌고 저쩌고 소개어쩔"
 	</p>
 </div>
 <div data-obj-type="image" id="mainimg">
@@ -595,7 +598,7 @@ img{
 <br/>
 
 <div data-obj-type="element" >
-	<input type="button" value="플래너" spellcheck="false"  class="btn-primary" id="start" onclick="confirmChk();">
+	<input type="button" value="여행 만들기" spellcheck="false"  class="btn-primary" id="start" onclick="confirmChk();">
 </div>
 <div data-obj-type="element" >
 	<input type="button" value="다이어리" spellcheck="false"  class="btn-primary" id="start2" onclick="confirmChk2();" >
@@ -607,33 +610,32 @@ img{
 %>
 
 <div id="review">
-	<div class="hr-sect">&nbsp; &nbsp; Dairy</div>
+	<div class="hr-sect">Diary</div>
 	<p align="right">
 		<input type="button" value="더보기" class="btn-primary" onclick="location.href='danim.do?command=diary&page=1'"/>
 	</p>
-	<br/>
 	
 	<div id="share">
-		<div style="display: inline-block; margin-right: 30px;">
-			<p id=test1>테스트이미지1</p>
-			<a href="#"><img src="sav/2019_01_30_181829.jpg" width="200px" height="200px" ></a>
-		</div>
-
-		<div style="display: inline-block; margin-right: 30px;">
-			<p id=test1>테스트이미지2</p>
-			<a href="#"><img src="sav/travel1.jpg" width="200px" height="200px" ></a>
-		</div>
-
-		<div style="display: inline-block; margin-right: 30px;">
-			<p id=test1>테스트이미지3</p>
-			<a href="#"><img src="sav/travel2.jpg" width="200px" height="200px" ></a>
-		</div>
-
-		<div style="display: inline-block; margin-right: 30px;">
-			<p id=test1>테스트이미지4</p>
-			<a href="#"><img src="sav/travel3.jpg" width="200px" height="200px" ></a>
-		</div>
+		<table>
+			<col width="250px">
+			<col width="250px">
+			<col width="250px">
+			<col width="250px">
+			<tr>
+				<td align="center">테스트이미지</td>
+				<td align="center">테스트이미지</td>
+				<td align="center">테스트이미지</td>
+				<td align="center">테스트이미지</td>
+			</tr>
+			<tr>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+			</tr>
+		</table>
 	</div>
+	
 	
 </div>
 
@@ -650,42 +652,12 @@ img{
 
 <br/><br/><br/><br/><br/><br/>
 
+</div>
 
 <%@ include file="./form/footer.jsp" %>
 
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

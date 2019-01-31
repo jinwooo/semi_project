@@ -732,8 +732,21 @@ body {
 					</div>
 					Dot Grid 리뷰
 				</div>
-				<h3>표지</h3>
-				<div></div>
+				<h3>여행경로</h3>
+				<div>
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/Route.png">
+					</div>
+					빈 여행경로
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/RouteGrid.png">
+					</div>
+					Grid 여행경로
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/RouteDotGrid.png">
+					</div>
+					Dot Grid 여행경로
+				</div>
 				<h3>사진</h3>
 				<div>
 					<form id="picUpload" action="imgup.jsp" method="post"

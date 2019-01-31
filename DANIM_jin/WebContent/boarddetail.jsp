@@ -27,6 +27,10 @@
 	LikeDao likedao = new LikeDao();
 	LikeDto likedto = new LikeDto(id, boardno);
 	int isLiked = likedao.isLiked(likedto);
+	
+	//String id=request.getParameter("id");
+	
+	
 
 %>
 
@@ -266,8 +270,9 @@
 			</div>
 		</div>
 	
+
 	<div align="center">
-		<input type="button" id="update" class="btn-primary" value="수정하기" onclick="location.href='danim.do?command=updateboard&boardno=<%=boardno%>">
+		<input type="button" id="update" class="btn-primary" value="수정하기" onclick="location.href='danim.do?command=updateboard&boardno=<%=boardno%>&id=<%=id%>'"/>
 	</div>	
 		
 	</div>

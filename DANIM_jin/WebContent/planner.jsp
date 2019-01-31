@@ -317,6 +317,9 @@ body {
 			for(planDto dto : listDto){
 				map.put(dto.getPno(), dto);
 			}
+		%>
+	  		$("#selDiary").append("<option value=" + "" + ">" + "" + "</option>" );
+	  	<%
 			for(Map.Entry<String,planDto> cnt : map.entrySet()){
 		%>
 		  		$("#selDiary").append("<option value=" + "<%=cnt.getKey() %>" + ">" + "<%=cnt.getValue().getPtitle() %>" + "</option>" );
@@ -529,11 +532,17 @@ body {
             	fileName = setPno();
              	downloadURI(imgData,fileName);
               	
-             });	  
-         
+             });
+             $(".display").removeAttr("style");         
          
 		var ptitle = "";
-		ptitle = prompt("제목을 입력하세요","");
+		
+		if(pno == null||pno == ""){
+			ptitle = prompt("제목을 입력하세요","");
+		}else{
+			ptitle =  $("#selDiary option:selected").text();
+			
+		}
 		
 		fileName = setPno();
 		
@@ -551,7 +560,7 @@ body {
  				pimage : fileName
  			}
  		});	     
-		$(".display").removeAttr("style");
+		
       }); 
       
 /* 저장된 파일을 불러오는 함수 */
@@ -666,8 +675,8 @@ body {
 						style="width: 55px;">
 				</div>
 
-				<div class="menu">
-					<input type="button" value="메인으로" class="btn"> <input
+				<div class="menu"> 
+					<input type="button" value="메인으로" class="btn" onclick="location.href = 'main.jsp'"> <input
 						type="button" value="임시저장" id="planSave" class="btn"> <input
 						type="button" value="PDF 저장" id="pdfdown" class="btn">
 				</div>

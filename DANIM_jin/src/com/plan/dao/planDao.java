@@ -163,6 +163,17 @@ public class planDao extends SqlMapConfig {
 		return res;
 	}
 	
+	public int deletePlan(String pno) {
+		SqlSession session = null;
+		int res = 0;
+				
+		session = getSqlSessionFactory().openSession(true);
+		res = session.delete(namespace+"deletePlan",pno);	
+		session.close();
+		
+		return res;
+	}	
+	
 	
 
 }

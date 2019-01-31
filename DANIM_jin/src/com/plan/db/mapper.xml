@@ -60,7 +60,9 @@
 		FROM PLAN
 	</select>
 	
-	
+	<delete id="deletePlan" parameterType="String">
+  		DELETE FROM PLAN WHERE PNO = #{pno }
+ 	</delete>	
 	
 	<!-- 페이징처리를 위한 select -->
 	

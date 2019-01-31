@@ -15,10 +15,9 @@ CREATE TABLE "USERBOARD" (
 	"IMAGE" VARCHAR2(255) NULL
 );
 
-INSERT INTO "USERBOARD"
-VALUES('admin','김진우','rlawlsdn','주소','01066727677','propose_7677@naver.com','admin','N',0,'N','origin','');
 
-UPDATE USERBOARD SET GRADE='admin' WHERE ID='admin';
+INSERT INTO USERBOARD VALUES('admin','admin','d1e9fddaa025fe5dc9f817c774bca132f2c8bc4ee8ec7387b12ea6eed41403e7',
+'admin','admin','admin','admin','Y','0','Y','origin','');
 
 SELECT * FROM "USERBOARD";
 

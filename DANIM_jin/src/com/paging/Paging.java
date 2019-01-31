@@ -5,7 +5,7 @@ import com.plan.dao.planDao;
 
 public class Paging {
 	
-	 private static int pageCount = 4;
+	 private static int pageCount = 5;
 	 private int blockStartNum=0;
 	 private int blockLastNum=0;
 	 private int lastPageNum=0;

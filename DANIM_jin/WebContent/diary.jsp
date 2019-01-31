@@ -21,7 +21,8 @@
 <style type="text/css">
 
 table{
-	margin: auto;
+	display:inline-block; 
+	align : center;
 }
 
 #title{
@@ -70,61 +71,33 @@ input[type=button]{
 </div>
 
 <form action="danim.do" method="post">
-	<h1 id="title">다른 여행자들의 Diary</h1>
-		<div id="share">
-			<table>
-			<col width="200px">
-			<col width="200px">
-			<col width="200px">
-			<col width="200px">
-			<tr>
-				<td align="center"></td>
-			
-			
-			</tr>
-			
-			
-			</table>
-		
-		</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
+<h1 id="title">&nbsp; &nbsp;다른 여행자들의 Diary</h1>
 	<input type="hidden" name="command" value="" >
-	<table border="1">
-		<col width="50px"/>
-		<col width="300px"/>
-		<col width="200px"/>
-		<tr>
-			<th>No</th>
-			<th>#diary</th>
-			<th>다이어리 설명</th>
-		</tr>
+	<div id="share">		
 		<c:choose>
 			<c:when test="${empty pagelist }">
-			<tr>
-				<td colspan="3">---작성된 글이 없습니다----</td>
-			</tr>
+				<div>---작성된 글이 없습니다.----</div>
 			</c:when>
-			<c:otherwise>
-				<c:forEach items="${pagelist }" var="Pdto">
-					<tr>
-						<td>${Pdto.pno }</td>					
-						<td><a href="danim.do?command=diarydetail&pno=${Pdto.pno }"><img src="sav/${Pdto.pimage }.png" width="200px" height="200px"></a></td>
-						<td>${Pdto.id } &nbsp;&nbsp; ${Pdto.ptitle }</td>
-					</tr>	
-				</c:forEach>
+			<c:otherwise>				
+			<c:forEach items="${pagelist }" var="Pdto" >
+			<table>
+			<col width="200px">
+				<tr>
+					<td align="center"><a href="danim.do?command=diarydetail&pno=${Pdto.pno }"><img src="sav/${Pdto.pimage }" width="200px" height="200px" ></a></td>
+				</tr>
+				<tr style="font-size: 14pt; font-weight: bold;">
+					<td> ${Pdto.ptitle }</td>
+				</tr>
+				<tr>
+					<td>#갬성 #여행 #당일치기</td>
+				</tr>		
+			</table>
+			</c:forEach>
 			</c:otherwise>
 		</c:choose>
-	</table>
-</form>
-
+	</div>
+</form>	
+	
 <div class="pager" align="center">
 	
 		<c:if test="${paging.curPageNum>4 }">

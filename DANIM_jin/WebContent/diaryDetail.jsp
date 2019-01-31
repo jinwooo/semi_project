@@ -60,7 +60,7 @@
 	font-weight : bold;
 	font-size: 25px;
 	font-family: Arial;
-	width:50px;
+	width:400px;
 	height:50px;
 	margin:auto;
 }
@@ -118,7 +118,7 @@ input[type=button]{
 		<!-- content -->
 		<div class="content"  >
 			<div class="title">
-				<%=Pdto.getPtitle() %>
+				<p><%=Pdto.getPtitle() %></p>
 			</div>
 			<div class="diary" style="width:500px; height:500px; margin:auto;">
 				<img src="sav/<%=Pdto.getPimage()%>" style="width:600px; height:600px;">

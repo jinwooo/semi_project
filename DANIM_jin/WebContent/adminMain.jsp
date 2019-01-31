@@ -25,9 +25,21 @@ $(function(){
          }
       })
 
-   });
-   
+      
+  	$("#muldelform").submit(function(){
+		// $("#muldelform input: checked")
+		if($("input[name=chk]:checked").length==0){
+			alert("하나 이상 체크해주세요!")
+			return false;
+		}else{
+			
+		}
 
+				
+		
+	});
+      
+   });
    
 
 
@@ -285,7 +297,7 @@ input[type=button]{
          </tr>
          </c:when>
          <c:otherwise>
-         <form action ="danim.do" method="post">
+         <form action ="danim.do" method="post" id="muldelform">
          <input type="hidden" name="command" value="updateUserForm">
             <c:forEach items="${list }" var="dto" varStatus="status">
              

@@ -12,7 +12,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
  <script src="js/bootstrap.min.js"></script>
  <script type="text/javascript">
-	
+<%
+String id="손";
+%>
 	// 아이디 중복 체크 및 체크박스 동의를 안누르고 그 외 공간 눌러서 체크건드릴 때 대처
 	$(function () {
 		$("#warning").hide();
@@ -111,78 +113,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div style="height: 100px;">
+	<jsp:include page="./form/header_ex.jsp"></jsp:include>
+</div>
  
 
-<nav class="navbar navbar-default">
-
-<div class="naver-header">
-
-<button type="button" class="navbar-toggle collapsed"
-
-data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-
-aria-expanded="false">
-
-
-<span class="icon-bar"></span> 
-
-<span class="icon-bar"></span> 
-
-<span class="icon-bar"></span>
-
-
-</button>
-
-<a class="navbar-brand" href="main.jsp">#ㄷ</a>
-
-</div>
-
-
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-<ul class="nav navbar-nav">
-
-<li><a href="main.jsp">메인</a>
-
-<li><a href="bbs.jsp">게시판</a>
-
-</ul>
-
-<ul class="nav navbar-nav navbar-right">
-
-<li class="dropdown">
-
-<a href="#" class="dropdown-toggle" 
-
-data-toggle="dropdown" role="button" aria-haspopup="true" 
-
-aria-expanded="false">접속하기<span class="caret"></span></a>
-
-
-<ul class="dropdown-menu">
-
-<li class="active"><a href="login.jsp">로그인</a></li>
-
-<li><a href="join.jsp">회원가입</a></li>
-
-</ul>
-
-</li>
-
-</ul>
-
-</div>
-
-</nav>
-
+<div>
 
         <article class="container">
             <div class="page-header">
                 <div class="col-md-6 col-md-offset-3">
+                <br/>
                 <h3>회원가입 Form</h3>
                 </div>
             </div>
+            <br/>
             <div class="col-sm-6 col-md-offset-3">
                 <form action="danim.do" role="form" method="post">
                 <input type="hidden" name="command" value="join"/>
@@ -261,7 +206,7 @@ aria-expanded="false">접속하기<span class="caret"></span></a>
 
         </article>
 
-
+</div>
 
 </body>
 </html>

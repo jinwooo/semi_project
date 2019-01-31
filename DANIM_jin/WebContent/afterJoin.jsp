@@ -56,9 +56,9 @@ input[type=button]{
 </style>
 </head>
 <body>
-	<div style="height: 100px;">
-		<jsp:include page="./form/header.jsp"></jsp:include>
-	</div>
+<div style="height: 100px;">
+	<jsp:include page="./form/header_ex.jsp"></jsp:include>
+</div>
 	<br />
 	<br />
 	<br />

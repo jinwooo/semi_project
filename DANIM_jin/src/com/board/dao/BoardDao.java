@@ -179,6 +179,18 @@ public class BoardDao extends SqlMapConfig {
 		return list;
 	}
 	
+	public int update(BoardDto dto) {
+		
+		SqlSession session=null;
+		int res=0;
+		
+		session=getSqlSessionFactory().openSession(true);
+		res=session.update(namespace+"update",dto);
+		session.close();
+		
+		return res;
+	}
+	
 	
 }
 

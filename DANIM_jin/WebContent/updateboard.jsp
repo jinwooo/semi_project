@@ -66,21 +66,14 @@ $(function(){
 
 </script>
 
-<style>
-@font-face { font-family: 'BMHANNAAir'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff'); font-weight: normal; font-style: normal; }
-input[type=button]{
-	font-family: 'BMHANNAAir'; 
-}
-
-</style>
 
 </head>
 <body>
 
 <h1>내 게시글 수정</h1>
 <form action="danim.do" method="post" id="frm"> 
-<input type=hidden name="command" value="updateres">
-<input type="hidden" name="boardno" value=<%=boardno %>>
+<input type=hidden name="command" value="updateboardres"/>
+<input type="hidden" name="id" value=<%=id %>>
 
 	<table width="100%">
 		<tr>
@@ -99,7 +92,7 @@ input[type=button]{
 		<tr>
 			<td colspan="2"> 
 				<input type="submit" id="save" value="저장"/>
-				<input type="button" value="취소" onclick="danim.do?command=boarddetail" />
+				<input type="button" id="cancel" value="취소" onclick="location.href='danim.do?command=boarddetail'" />
 			</td>
 		</tr>
 	

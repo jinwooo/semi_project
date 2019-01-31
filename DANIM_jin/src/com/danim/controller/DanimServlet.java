@@ -455,17 +455,22 @@ public class DanimServlet extends HttpServlet {
          dispatch(request,response,"write.jsp");
       }else if(command.equals("insertres")) {
          
+     	 int boardno=Integer.parseInt(request.getParameter("boardno")); 
          String id=request.getParameter("id");
          System.out.println("id : " + id);
          String title=request.getParameter("title");
          System.out.println("title1 : " + title);
          String content=request.getParameter("content");
          
+         BoardDto likenumdto = dao.selectOne(boardno);
+	     int likenum = likenumdto.getLikenum();
+         
+         
          BoardDto dto=new BoardDto();
          // 좋아요개수&filename 해결해야함
          dto.setId(id);
          dto.setTitle(title);
-         dto.setLikenum(0);
+         dto.setLikenum(likenum);
          dto.setViewcount(0);
          dto.setFilename("fname");
          dto.setContent(content);
@@ -720,11 +725,30 @@ public class DanimServlet extends HttpServlet {
 			
 			if(dto.getId().equals(id)) {
 				dispatch(request,response,"updateboard.jsp");
+			}else {
+				dispatch(request,response,"boarddetail.jsp");
 			}
 			
 		}else if(command.equals("updateboardres")) {
 			
+			int boardno=Integer.parseInt(request.getParameter("boardno"));
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			String id=request.getParameter("id");
+
+			BoardDto dto=new BoardDto();
 			
+			dto.setBoardno(boardno);
+			dto.setTitle(title);
+			dto.setContent(content);
+			
+			int res=dao.update(dto);
+			
+			if(res>0) {
+				jsResponse(response,"danim.do?command=review&page=1","수정 성공");
+			}else {
+				jsResponse(response,"danim.do?command=boarddetail","수정 실패");
+			}
 			
 		}
             

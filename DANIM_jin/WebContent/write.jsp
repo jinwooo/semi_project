@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>	
+<% response.setContentType("text/html; charset=UTF-8"); %>
+<%@page import="com.board.dto.BoardDto"%>  
 
 <%
 	String id="";
 	id=(String)session.getAttribute("sessionId");
 	String ctx=request.getContextPath();
+	
+	BoardDto dto=new BoardDto();
 %>
 
 <!DOCTYPE html>
@@ -61,6 +64,7 @@ $(function(){
 
 <form action="danim.do" method="post" id="frm">
 <input type="hidden" name="command" value="insertres" />
+<input type="hidden" name="boardno" value=<%=dto.getBoardno() %>>
 <input type="hidden" name="id" value=<%=id %> />
 	<table width="100%">
 		<tr>

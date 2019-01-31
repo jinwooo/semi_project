@@ -655,7 +655,7 @@ img{
 <br/>
 
 <div>
-	<div class="hr-sect">자유게시판</div>
+	<div class="hr-sect">Community</div>
 	<div  align="center">
 		<input type="button" value="게시판 입장" class="btn-primary" id="board" onclick="location.href='danim.do?command=review&page=1'"/>
 	</div>

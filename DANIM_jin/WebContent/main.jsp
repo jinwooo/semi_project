@@ -139,12 +139,12 @@ function logchk(){
                   location.href='planner.jsp'; 
             
             }else if(msg=="N"){
-               alert("로그인 후 이용해주세요!")
+               alert("이메일 인증")
             }
 
          },
          error:function(){
-            alert("ajax실패");
+            alert("로그인 후 이용해주세요!");
          }
       }); 
       

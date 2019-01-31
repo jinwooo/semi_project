@@ -131,7 +131,7 @@ $(function(){
 				<c:forEach items="${list }" var="dto">
 					<tr>
 						<td><input type="checkbox" name="chk" value="${dto.pno }"/>
-						<td><a href="map.do?command=plandetail&pno=${dto.pno }">${dto.ptitle }</a></td>
+						<td><a href="danim.do?command=diarydetail&pno=${dto.pno }">${dto.ptitle }</a></td>
 						<td>${dto.psdate }~${dto.pldate }</td>
 					</tr>
 				</c:forEach>

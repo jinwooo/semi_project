@@ -4,7 +4,7 @@
 <%@page import="com.plan.dao.planDao"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -17,256 +17,272 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style type="text/css">
-   html, body { padding: 0; margin: 0; overflow: hidden; }
-   
-   body { background: gray; width: 100%; height: 100%;   }
-   
-   #body { padding: 0; margin: 0; width: 100%; height: 100%; }
-   
-   /* 상단 메뉴 */
-   #topmenu {
-      background: white;
-      width: 100%;
-      height: 49px;
-      position: fixed;
-      padding: 0;
-      margin: 0;
-      border-bottom: 1px solid #ccc;
-      min-width: 650px;
-   }
-   
-   #topmenu .topmenu_wrapper {
-      top: 10px;
-      right: 15px;
-      left: 15px;
-      position: absolute;
-   }
-   
-   #topmenu .topmenu_wrapper .planSelect { float: left; }
-   
-   #topmenu .topmenu_wrapper .menu { text-align: right; }
-   
-	/* side menu bar */
-	#sidemenu {
-		all: unset;
-		background: white;
-		top: 50px;
-		width: 246px;
-		height: 100%;
-		position: fixed;
-		padding: 2px;
-		margin: 0;
-		overflow: auto;
-	}
-		
-	#sidemenu .accordion > div{
-		padding: 5px;
-		text-align: center;
-	}
-		
-	#sidemenu .accordion > h3{
-		border: 1px solid #eee;
-	    font-size: 10pt;
-	    font-weight: bold;
-	}
-	
-	#sidemenu .accordion > .ui-state-active {
-		background: rgb(200, 160, 220);
-	}
-	
-	#sidemenu .accordion > div .draggable{
-		border: 1px solid lightgray;
-		cursor: move;
-	}
-	
-	#sidemenu .accordion > div input[type=submit]{
-		margin: 0;
-		margin-top: 10px;
-	}
-	
-   /* editor */
-   #editor {
-      top: 50px;
-      left: 250px;
-      right: 0;
-      bottom: 0;
-      background-color: #eee;
-      padding: 0;
-      position: fixed;
-      overflow: auto;
-   }
-   
-   #editor .wrapper {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      bottom: 0px;
-      min-width: 1200px;
-   }
-   
-   #editor .wrapper .prev{
-      top: 40%;
-      left: 2%;
-      position: absolute;
-      font-size: 50px;
-   }
-   
-   #editor .wrapper .next{
-      top: 40%;
-      right: 2%;
-      position: absolute;
-      font-size: 50px;
-   }
-   
-   #editor .wrapper .prev, #editor .wrapper .next{
-      cursor: pointer; 
-      color: rgb(200, 160, 220);
-   }
-   
-   #editor .wrapper .canvas {
-      top: 10%;
-      margin-bottom: 5%; 
-      left: 50%;
-      margin-left: -500px;
-      position: absolute;
-      border: 1px solid #aaa;
-   }
-   
-   #editor .wrapper .canvas .display{
-      display: none;
-   }
-   
-   	#editor .wrapper .canvas .display .inputText{
-		background: none;
-		border: 0;
-		outline: none;
-	}
-	 
-	#editor .wrapper .canvas .display .inputText:focus{
-		background: white;
-	}
-   
-   #editor .wrapper .canvas .display.selected{
-      display: block;
-   }
+html, body {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
 
-   #editor .wrapper .canvas .display .view {
-      width: 1000px;
-      height: 700px;
-      background: white;
-      overflow: hidden;
-   }
-   
-   #editor .wrapper .canvas .page{
-      position: absolute;
-      bottom: -50px;
-      left: 45%; 
-      color: rgb(200, 160, 220);
-   }
-   
-   
-   /* content */
-   #editor .wrapper .canvas .view .droppable{
-      width: 500px;
-      height: 175px;
-      float: left;
-      cursor: move;
-   }
-   
-   .placeholder{
-      width: 500px;
-      height: 175px;
-      background-color: #ffeedd;
-      float: left;
-   }
-   
-   #editor .wrapper .canvas .view .droppable .contentholder{
-      width: 500px;
-      height: 175px;
-      background-image: url(image/placeholder.png);
-   }
-   
-   .ui-droppable.drophover{
-      opacity: 0.3;
-   }
-   
-   
-   
-   
-   /* button */
-   .btn {
-      all: unset;
-      width: 85px;
-      height: 30px;
-      margin-left: 5px;
-      background-color: rgb(200, 160, 220);
-      border-radius: 7px;
-      color: white;
-      font-size: 10pt;
-      text-align: center;
-      cursor: pointer;
-   }
-   
-   .contentDel{
-      all: unset;
-      display: none;
-      width: 50px;
-      height: 50px;
-      top: -55px;
-      position: relative;
-      left: 5px;
-      border-radius: 50px;
-      background-color: rgb(200, 160, 220);
-      color: white;
-      font-size: 10pt;
-      text-align: center;
-      cursor: pointer;
-   }
-   
-	.contentOtherDel{
-		all: unset;
-		display: none;
-	    width: 20px;
-	    height: 20px;
-	    border-radius: 15px;
-	    background-color: rgb(200, 160, 220);
-	    color: white;
-	    font-size: 11pt;
-	    font-weight: bold;
-	    text-align: center;
-	    cursor: pointer;
-	    position: absolute;
-	    top: -10px;
-	    right: -10px;
-	    line-height: 0.5;
-	}
-	
-	.textMove{
-	    top: 0px;
-	    left: -40px;
-	    padding: 5px;
-	    width: 30px;
-	    height: 30px;
-	    color: rgb(200, 160, 220);
-		border: 1px solid rgb(200, 160, 220);
-	    border-radius: 30px;
-	    background: white;
-	    position: absolute;
-	    font-size: 10pt;
-	    line-height: 2.3;
-	    text-align: center;
-	    cursor: move;
-	    opacity: 0.8;
-	    display: none;
-	}
-   
+body {
+	background: gray;
+	width: 100%;
+	height: 100%;
+}
+
+#body {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* 상단 메뉴 */
+#topmenu {
+	background: white;
+	width: 100%;
+	height: 49px;
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	border-bottom: 1px solid #ccc;
+	min-width: 650px;
+}
+
+#topmenu .topmenu_wrapper {
+	top: 10px;
+	right: 15px;
+	left: 15px;
+	position: absolute;
+}
+
+#topmenu .topmenu_wrapper .planSelect {
+	float: left;
+}
+
+#topmenu .topmenu_wrapper .menu {
+	text-align: right;
+}
+
+/* side menu bar */
+#sidemenu {
+	all: unset;
+	background: white;
+	top: 50px;
+	width: 246px;
+	height: 100%;
+	position: fixed;
+	padding: 2px;
+	margin: 0;
+	overflow: auto;
+}
+
+#sidemenu .accordion>div {
+	padding: 5px;
+	text-align: center;
+}
+
+#sidemenu .accordion>h3 {
+	border: 1px solid #eee;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+#sidemenu .accordion>.ui-state-active {
+	background: rgb(200, 160, 220);
+}
+
+#sidemenu .accordion>div .draggable {
+	border: 1px solid lightgray;
+	cursor: move;
+}
+
+#sidemenu .accordion>div input[type=submit] {
+	margin: 0;
+	margin-top: 10px;
+}
+
+/* editor */
+#editor {
+	top: 50px;
+	left: 250px;
+	right: 0;
+	bottom: 0;
+	background-color: #eee;
+	padding: 0;
+	position: fixed;
+	overflow: auto;
+}
+
+#editor .wrapper {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	bottom: 0px;
+	min-width: 1200px;
+}
+
+#editor .wrapper .prev {
+	top: 40%;
+	left: 2%;
+	position: absolute;
+	font-size: 50px;
+}
+
+#editor .wrapper .next {
+	top: 40%;
+	right: 2%;
+	position: absolute;
+	font-size: 50px;
+}
+
+#editor .wrapper .prev, #editor .wrapper .next {
+	cursor: pointer;
+	color: rgb(200, 160, 220);
+}
+
+#editor .wrapper .canvas {
+	top: 10%;
+	margin-bottom: 5%;
+	left: 50%;
+	margin-left: -500px;
+	position: absolute;
+	border: 1px solid #aaa;
+}
+
+#editor .wrapper .canvas .display {
+	display: none;
+}
+
+#editor .wrapper .canvas .display .inputText {
+	background: none;
+	border: 0;
+	outline: none;
+}
+
+#editor .wrapper .canvas .display .inputText:focus {
+	background: white;
+}
+
+#editor .wrapper .canvas .display.selected {
+	display: block;
+}
+
+#editor .wrapper .canvas .display .view {
+	width: 1000px;
+	height: 700px;
+	background: white;
+	overflow: hidden;
+}
+
+#editor .wrapper .canvas .page {
+	position: absolute;
+	bottom: -50px;
+	left: 45%;
+	color: rgb(200, 160, 220);
+}
+
+/* content */
+#editor .wrapper .canvas .view .droppable {
+	width: 500px;
+	height: 175px;
+	float: left;
+	cursor: move;
+}
+
+.placeholder {
+	width: 500px;
+	height: 175px;
+	background-color: #ffeedd;
+	float: left;
+}
+
+#editor .wrapper .canvas .view .droppable .contentholder {
+	width: 500px;
+	height: 175px;
+	background-image: url(image/placeholder.png);
+}
+
+.ui-droppable.drophover {
+	opacity: 0.3;
+}
+
+/* button */
+.btn {
+	all: unset;
+	width: 85px;
+	height: 30px;
+	margin-left: 5px;
+	background-color: rgb(200, 160, 220);
+	border-radius: 7px;
+	color: white;
+	font-size: 10pt;
+	text-align: center;
+	cursor: pointer;
+}
+
+.contentDel {
+	all: unset;
+	display: none;
+	width: 50px;
+	height: 50px;
+	top: -55px;
+	position: relative;
+	left: 5px;
+	border-radius: 50px;
+	background-color: rgb(200, 160, 220);
+	color: white;
+	font-size: 10pt;
+	text-align: center;
+	cursor: pointer;
+}
+
+.contentOtherDel {
+	all: unset;
+	display: none;
+	width: 20px;
+	height: 20px;
+	border-radius: 15px;
+	background-color: rgb(200, 160, 220);
+	color: white;
+	font-size: 11pt;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	line-height: 0.5;
+}
+
+.textMove {
+	top: 0px;
+	left: -40px;
+	padding: 5px;
+	width: 30px;
+	height: 30px;
+	color: rgb(200, 160, 220);
+	border: 1px solid rgb(200, 160, 220);
+	border-radius: 30px;
+	background: white;
+	position: absolute;
+	font-size: 10pt;
+	line-height: 2.3;
+	text-align: center;
+	cursor: move;
+	opacity: 0.8;
+	display: none;
+}
 </style>
 
 <%
@@ -282,7 +298,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-
 <%
 	String user = (String)session.getAttribute("sessionId"); //dto로 받아와야함
 	// String id = "aaa"; 
@@ -290,7 +305,6 @@
 	List<planDto> listDto = dao.selectList(user);
 %>
 	var pno = "";
-
    $(function() {
 		$("#selDiary").empty();
 		<%		
@@ -375,7 +389,6 @@
 				$(this).find(".textMove").css("display","none")
 				  
 			});
-
 			$(this).draggable({
 				appendTo: "body",
 				refreshPositions: true,
@@ -383,7 +396,6 @@
 			});
 			
 			$(this).children().eq(0).resizable();
-
 		})
 		
 		$(".draggableOther").draggable({
@@ -406,7 +418,6 @@
 //             alert("빈 칸을 모두 채워주세요")
 //          } else {
 //          }
-
 			alert("결제를 진행해주세요.");
 			 
 			 $.ajax({
@@ -418,9 +429,6 @@
 			      	
 						var IMP = window.IMP; // 생략가능
 						IMP.init('imp04249110'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-
-
-
 						IMP.request_pay({
 						    pg : 'nice', // version 1.1.0부터 지원. 나이스정보통신으로 결제이용
 						    pay_method : 'card', //카드로 이용
@@ -489,10 +497,9 @@
 			   $(this).parent().append("<div class='contentholder'></div>")
 			   $(this).parent().find("img").remove()
 			   $(this).parent().find(".contentDel").remove()
-			})
+			
 		});
 		
-
 		
 		$(document).on("click", ".contentOtherDel", function() {
 			   $(this).parent().remove()
@@ -564,10 +571,10 @@
   			}) .fail (function() {
                   alert('failure');
   			});
-
         	});
         	
-        }); 
+        });
+  });
       
    function setPno(){
 	   return <%=dao.setPno() %>
@@ -598,16 +605,11 @@
 		var res = text.replace(/\t/g,'');
 		
 		res = res.replace(/\s+/, "");//왼쪽 공백제거
-
 		res = res.replace(/\s+$/g, "");//오른쪽 공백제거
-
 		res = res.replace(/\n/g, "");//행바꿈제거
-
 		res = res.replace(/\r/g, "");//엔터제거
-
 		return res;
 	}
-
    function PDFsave() {
 		
        $(".display").css({"display":"block","padding":"53px 70px 53px 70px"});
@@ -645,73 +647,65 @@
           $(".inputSticker").parent().removeAttr("style");
           $(".canvas").removeAttr("style");
        })
-}
-
+	}
 </script>
 
 </head>
 
 <body>
-<%--   <jsp:include page="./form/header.jsp"></jsp:include> --%> 
-   <div id="body">
-      <div id="topmenu">
-         <div class="topmenu_wrapper">
-            <div class="planSelect">
-				<select id="selDiary" style="width:200px; height:30px; color: rgb(200, 160, 220); font-weight: bold;">
-				   <option selected disabled style="display: none;">여행불러오기</option>
-				   <option>2019.01.11 부산</option>
-				   <option>2019.02.01 제주</option>
-				</select>
-				<input type="button" value="선택" id="planSelect" class="btn" style="width: 55px;">
-          </div>
+	<%--   <jsp:include page="./form/header.jsp"></jsp:include> --%>
+	<div id="body">
+		<div id="topmenu">
+			<div class="topmenu_wrapper">
+				<div class="planSelect">
+					<select id="selDiary"
+						style="width: 200px; height: 30px; color: rgb(200, 160, 220); font-weight: bold;">
+						<option selected disabled style="display: none;">여행불러오기</option>
+						<option>2019.01.11 부산</option>
+						<option>2019.02.01 제주</option>
+					</select> <input type="button" value="선택" id="planSelect" class="btn"
+						style="width: 55px;">
+				</div>
 
-            <div class="menu">
-               <input type="button" value="메인으로" class="btn">
-               <input type="button" value="임시저장" id="planSave" class="btn">
-               <input type="button" value="PDF 저장" id="pdfdown" class="btn">
-            </div>
-         </div>
-      </div>
-      <div id="sidemenu">
-         <div class="accordion">
+				<div class="menu">
+					<input type="button" value="메인으로" class="btn"> <input
+						type="button" value="임시저장" id="planSave" class="btn"> <input
+						type="button" value="PDF 저장" id="pdfdown" class="btn">
+				</div>
+			</div>
+		</div>
+		<div id="sidemenu">
+			<div class="accordion">
 				<h3>여행경로</h3>
 				<div>
 					<div class="draggable">
-						<img style="background:white;" width="200px" height="100px" src="image/DotGrid.png">
+						<img style="background: white;" width="200px" height="100px"
+							src="image/DotGrid.png">
 					</div>
 				</div>
 				<h3>날짜</h3>
-				<div>
-				
-				</div>
+				<div></div>
 				<h3>비용</h3>
-				<div>
-				
-
-				</div>
+				<div></div>
 				<h3>리뷰</h3>
-				<div>
-					
-				</div>
+				<div></div>
 				<h3>일기메모</h3>
-				<div>
-					
-				</div>
+				<div></div>
 				<h3>표지</h3>
-				<div>
-					
-				</div>
+				<div></div>
 				<h3>사진</h3>
 				<div>
-					<form id="picUpload" action="danim.do?" method="post"  enctype="multipart/form-data">
-						<input type="file" name="file" id="myFile" accept=".jpg, .jpeg, .png" style="width:220px;">
-						<input type="submit" class="btn" value="업로드">
+					<form id="picUpload" action="danim.do?" method="post"
+						enctype="multipart/form-data">
+						<input type="file" name="file" id="myFile"
+							accept=".jpg, .jpeg, .png" style="width: 220px;"> <input
+							type="submit" class="btn" value="업로드">
 					</form>
-					
+
 				</div>
 				<h3>글상자</h3>
 				<div>
-					 <div class="draggableOther text">
+					<div class="draggableOther text">
 						<img src="image/text.png" width="100px" height="100px">
 					</div>
 				</div>
@@ -722,45 +716,65 @@
 					</div>
 				</div>
 			</div>
-      </div>
+		</div>
 
-      <div id="editor">
-         <div class="wrapper">
-            <div class="prev"><p onclick="prevPage()">◀</p></div>
-            
-            <div class="canvas" id="openFile">
+		<div id="editor">
+			<div class="wrapper">
+				<div class="prev">
+					<p onclick="prevPage()">◀</p>
+				</div>
 
-<%
+				<div class="canvas" id="openFile">
+
+					<%
             for(int i = 1; i <= dpsq; i++){
 %>
-            <div class="display <%=i==1?"selected":"" %>">
-               <div class="view">
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="droppable"><div class="contentholder"></div></div>
-                  <div class="page">
-                     <span style="cursor:pointer;" onclick="prevPage()">◀</span>
-                     <%= i + " / " + dpsq %> PAGE
-                     <span style="cursor:pointer;" onclick="nextPage()">▶</span>
-                  </div>
-               </div>
-            </div>
-<%
+					<div class="display <%=i==1?"selected":"" %>">
+						<div class="view">
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="droppable">
+								<div class="contentholder"></div>
+							</div>
+							<div class="page">
+								<span style="cursor: pointer;" onclick="prevPage()">◀</span>
+								<%= i + " / " + dpsq %>
+								PAGE <span style="cursor: pointer;" onclick="nextPage()">▶</span>
+							</div>
+						</div>
+					</div>
+					<%
             }
 %>
-            </div>
-            
+				</div>
 
-            
-            <div class="next"><p onclick="nextPage()">▶</p></div>
-         </div>
-      </div>
-   </div>
+
+
+				<div class="next">
+					<p onclick="nextPage()">▶</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

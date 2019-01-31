@@ -301,6 +301,9 @@ public class DanimServlet extends HttpServlet {
                   System.out.println("아무것도 없을때 사용하는 if문으로 들어옴2");
                   
                   //Pdto.setPno(Integer.toString(Pdao.setPno()));
+                  int resdel = Pdao.deletePlan(pno);
+                  System.out.println("pno:"+pno);
+                  System.out.println("resdel:"+resdel);
                   
                   int res = Pdao.insertPlan(Pdto);
                   
@@ -320,7 +323,7 @@ public class DanimServlet extends HttpServlet {
                   Pdto.setPno(pno);
                   Pdto.setPdata(text);
                }
-            }      
+            }           
             
             request.setAttribute("dto", Pdto);
             System.out.println("여기까진 옴");

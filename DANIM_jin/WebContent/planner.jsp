@@ -148,7 +148,7 @@
 		border: 0;
 		outline: none;
 	}
-	
+	 
 	#editor .wrapper .canvas .display .inputText:focus{
 		background: white;
 	}

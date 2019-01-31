@@ -165,6 +165,21 @@ public class BoardDao extends SqlMapConfig {
 	//}
 	
 	//dto.setFileName(filename);
+	
+	
+	public List<BoardDto> selectMain(){
+		
+		SqlSession session= null;
+		List<BoardDto> list=null;
+		
+		session=getSqlSessionFactory().openSession(true);
+		list=session.selectList(namespace+"selectMain");
+		session.close();
+		
+		return list;
+	}
+	
+	
 }
 
 

@@ -79,7 +79,7 @@ public class DanimServlet extends HttpServlet {
       HttpSession session = request.getSession();
       
       if(command.equals("main")) {
-         List<BoardDto> list=dao.selectAll();
+         List<BoardDto> list=dao.selectMain();
          request.setAttribute("list", list);
          dispatch(request,response,"main.jsp");
       }else if(command.equals("list")) {

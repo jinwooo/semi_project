@@ -80,7 +80,7 @@ body {
 	background: white;
 	top: 50px;
 	width: 246px;
-	height: 100%;
+	height: 95%;
 	position: fixed;
 	padding: 2px;
 	margin: 0;
@@ -484,10 +484,10 @@ body {
 			if($(this).children().is("img")){
 			   $(this).hover(function() {
 				   $(this).find(".contentDel").css("display","inline-block")
-				   $(this).children().css({"border":"2px dashed rgb(200, 160, 220)"}).attr({"width":496,"height":171})
+				   $(this).children("img").css({"border":"2px dashed rgb(200, 160, 220)"}).attr({"width":496,"height":171})
 				}, function () {
 			 	  $(this).find(".contentDel").css("display","none")
-			 	  $(this).children().css({"border":""}).attr({"width":500,"height":175})
+			 	  $(this).children("img").css({"border":""}).attr({"width":500,"height":175})
 			 	})
 			}
 		 	  
@@ -615,8 +615,8 @@ body {
        $(".canvas").css("border","0");
        
 		for(var i = 0; i < <%=dpsq %>; i++){
-			$(document).find(".display").eq(i).find(".inputText").parent().css({"top":(753*i)+(53*(i+1)),"left":70,"position":"absolute"});
-			$(document).find(".display").eq(i).find(".inputSticker").parent().css({"top":(753*i)+(53*(i+1)),"left":70,"position":"absolute"});
+			$(document).find(".display").eq(i).find(".inputText").parent().css({"top":(753*i)+(53*(i+1)),"left":70});
+			$(document).find(".display").eq(i).find(".inputSticker").parent().css({"top":(753*i)+(53*(i+1)),"left":70});
 		}
        
        html2canvas(document.querySelector(".canvas")).then(canvas => {
@@ -675,20 +675,35 @@ body {
 		</div>
 		<div id="sidemenu">
 			<div class="accordion">
-				<h3>여행경로</h3>
+				<h3>속지</h3>
 				<div>
 					<div class="draggable">
-						<img style="background: white;" width="200px" height="100px"
-							src="image/DotGrid.png">
+						<img style="background: white;" width="200px" height="100px" src="image/Empty.png">
 					</div>
+					빈 속지
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/DotGrid.png">
+					</div>
+					Dot Grid
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/Grid.png">
+					</div>
+					Grid
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/Line.png">
+					</div>
+					줄 노트
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/marginLine.png">
+					</div>
+					여백이 있는 줄 노트
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/Expense.png">
+					</div>
+					리갈패드
+					
 				</div>
-				<h3>날짜</h3>
-				<div></div>
-				<h3>비용</h3>
-				<div></div>
 				<h3>리뷰</h3>
-				<div></div>
-				<h3>일기메모</h3>
 				<div></div>
 				<h3>표지</h3>
 				<div></div>
@@ -710,9 +725,11 @@ body {
 				</div>
 				<h3>스티커</h3>
 				<div>
+				<% for(int i = 1; i < 41; i++){ %>
 					<div class="draggableOther sticker">
-						<img src="image/like.png" width="100px" height="100px">
+						<img src="image/sticker/sticker (<%=i %>).png" width="100px" height="100px">
 					</div>
+				<% } %>
 				</div>
 			</div>
 		</div>

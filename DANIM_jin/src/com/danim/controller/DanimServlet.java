@@ -152,7 +152,7 @@ public class DanimServlet extends HttpServlet {
          DanimDto dto = Ddao.login(id);
          String pass = dto.getPw();
          PrintWriter out = response.getWriter();
-         if(dto.getYn()=="Y") {
+         if(dto.getYn().equals("Y")) {
             
          
             if(pw.equals(pass)) {

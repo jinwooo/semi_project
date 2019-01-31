@@ -9,7 +9,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.File"%>
 <%@ page import="java.io.FileOutputStream"%>
-	  
+     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
     
 <!DOCTYPE html>
@@ -38,139 +38,139 @@ id = (String)session.getAttribute("sessionId");            // request에서 id �
 if(id==null||id.equals("")){                            // id가 Null 이거나 없을 경우
 %>
 
-	<script type="text/javascript">
-		$(function(){
-			$("#beforeLogin").show();
-			$("#afterLogin").hide();
-		});
-	</script>
+   <script type="text/javascript">
+      $(function(){
+         $("#beforeLogin").show();
+         $("#afterLogin").hide();
+      });
+   </script>
 
-<%	
+<%   
 }else{
-	System.out.println(id);
+   System.out.println(id);
 %>
 
 <script type="text/javascript">
-	$(function(){
-		$("#beforeLogin").hide();
-		$("#afterLogin").show();
-	});
+   $(function(){
+      $("#beforeLogin").hide();
+      $("#afterLogin").show();
+   });
 </script>
 
-<%	
+<%   
 }
 
 %>
 
 <script type="text/javascript">
 
-	// 비밀번호 확인
+   // 비밀번호 확인
 
 function logchk(){
- 	var id= $("#formId").val();
-	var pw= $("#formPw").val();
+    var id= $("#formId").val();
+   var pw= $("#formPw").val();
 
- 	$.ajax({
-		url:"danim.do?command=login&id="+id+"&pw="+pw,	
-				// data : data를 주겠다
-				  // data를 받겠다
-		success:function(msg){
-			if(msg=="ok"){
-				alert("성공")
-				location.href="danim.do?command=afterLogin&id="+id;
-			
-			}else if(msg=="no"){
-				$("#loginError").show();
-			}
+    $.ajax({
+      url:"danim.do?command=login&id="+id+"&pw="+pw,   
+            // data : data를 주겠다
+              // data를 받겠다
+      success:function(msg){
+         if(msg=="ok"){
+            alert("성공")
+            location.href="danim.do?command=afterLogin&id="+id;
+         
+         }else if(msg=="no"){
+            $("#loginError").show();
+         }
 
-		},
-		error:function(){
-			alert("없는 id인듯");
-			$("#loginError").show();
-		}
-	});   					
+      },
+      error:function(){
+         alert("없는 id인듯");
+         $("#loginError").show();
+      }
+   });                  
  }
 
 
-	
-	$(function(){
-		$("#loginError").hide();
-	});
-	
-	 function confirmChk(){ 	
+   
+   $(function(){
+      $("#loginError").hide();
+   });
+   
+    function confirmChk(){    
 
 <%
-		String as = request.getParameter("id");
+      String as = request.getParameter("id");
 
 %> 
-		$.ajax({
-			url:"danim.do?command=confirmchk&id=<%=as%>",	
-					// data : data를 주겠다
-					  // data를 받겠다
-			success:function(msg){
-				if(msg=="Y"){
-						location.href='firstMap.jsp';
-				}else if(msg=="N"){
-					alert("이메일 인증을 해주세요.")
-				}
+      $.ajax({
+         url:"danim.do?command=confirmchk&id=<%=as%>",   
+               // data : data를 주겠다
+                 // data를 받겠다
+         success:function(msg){
+            if(msg=="Y"){
+                  location.href='firstMap.jsp';
+            }else if(msg=="N"){
+               alert("이메일 인증을 해주세요.")
+            }
 
-			},
-			error:function(){
-				alert("로그인 후 이용해주세요!");
-			}
-		}); 
-		
-		}
-	 
-	 function confirmChk2(){ 	
+         },
+         error:function(){
+            alert("로그인 후 이용해주세요!");
+         }
+      }); 
+      
+      }
+    
+    function confirmChk2(){    
 
 <%
-		String bs = request.getParameter("id");
+      String bs = request.getParameter("id");
 %> 
-		$.ajax({
-			url:"danim.do?command=confirmchk&id=<%=id%>",	
-					// data : data를 주겠다
-					  // data를 받겠다
-			success:function(msg){
-				if(msg=="Y"){
-						location.href='planner.jsp'; 
-				
-				}else if(msg=="N"){
-					alert("이메일 인증을 해주세요.")
-				}
+      $.ajax({
+         url:"danim.do?command=confirmchk&id=<%=id%>",   
+               // data : data를 주겠다
+                 // data를 받겠다
+         success:function(msg){
+            if(msg=="Y"){
+                  location.href='planner.jsp'; 
+            
+            }else if(msg=="N"){
+               alert("로그인 후 이용해주세요!")
+            }
 
-			},
-			error:function(){
-				alert("ajax실패");
-			}
-		}); 
-		
-		}
+         },
+         error:function(){
+            alert("ajax실패");
+         }
+      }); 
+      
+      }
 </script>
 
 <style type="text/css">
 
 @font-face { font-family: 'BMHANNAAir'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff'); font-weight: normal; font-style: normal; }
 input[type=button]{
-	font-family: 'BMHANNAAir'; 
+   font-family: 'BMHANNAAir'; 
 }
 
 html, body{
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 #mainbody{
-	margin: auto;
-	width: 1200px;
+   margin: auto;
+   width: 1200px;
 }
 
 #title{
-	font-weight : bold;
-	font-size: 36px;
-	font-style : italic;
-	color : rgb(200,160,220);
-	height: 55px;
+   font-weight : bold;
+   font-size: 36px;
+   font-style : italic;
+   color : rgb(200,160,220);
+   height: 55px;
     top: 27px;
     left: 20px;
     position: relative;
@@ -178,7 +178,7 @@ html, body{
 
 #demo{
     margin-left: 50px;
-	border: none;
+   border: none;
     resize: none;
     position: absolute;
     top: 200px;
@@ -190,87 +190,87 @@ html, body{
     color: #333333;
 }
 #mainimg{
-	position : absolute;
-	top : 140px;
-	left : 950px;
+   position : absolute;
+   top : 140px;
+   left : 950px;
 }
 #welcome{
-	position : absolute;
-	top : 43px;
-	left : 1230px;
+   position : absolute;
+   top : 43px;
+   left : 1230px;
 }
 #login, #myPage{
-	position : absolute;
-	top : 38px;
-	left : 1350px;
-	
+   position : absolute;
+   top : 38px;
+   left : 1350px;
+   
 }
 #join, #logout{
-	position:absolute;
-	top : 38px;
-	left : 1430px;
+   position:absolute;
+   top : 38px;
+   left : 1430px;
 }
 .btn-success{
-	width : 65.9286px;
-	height : 34px;
-	font-size : 15px;
-	color : rgb(255,255,255);
-	line-height:2.5em;
-	border-radius :4px;
-	background-color:rgb(190,190,190);
-	text-align : center;
-	font-weight : bold;
-	border : none;
+   width : 65.9286px;
+   height : 34px;
+   font-size : 15px;
+   color : rgb(255,255,255);
+   line-height:2.5em;
+   border-radius :4px;
+   background-color:rgb(190,190,190);
+   text-align : center;
+   font-weight : bold;
+   border : none;
 }
 .btn-success:hover{
- background-color:	#D3D3D3;
+ background-color:   #D3D3D3;
 }
 
 #start{
-	position : absolute;
-	top: 600px;
-	left: 40%;
-	width:150px;
-	height:50px;
-	font-size:23px;
-	font-stlye :  normal;
-	font-weight : bold;
+   position : absolute;
+   top: 600px;
+   left: 40%;
+   width:150px;
+   height:50px;
+   font-size:23px;
+   font-stlye :  normal;
+   font-weight : bold;
 }
 
 #start2{
-	position : absolute;
-	top: 600px;
-	right: 40%;
-	width:150px;
-	height:50px;
-	font-size:23px;
-	font-stlye :  normal;
-	font-weight : bold;
+   position : absolute;
+   top: 600px;
+   right: 40%;
+   width:150px;
+   height:50px;
+   font-size:23px;
+   font-stlye :  normal;
+   font-weight : bold;
 }
 
 #review p input{
-	width: 86px;
-	height: 36px;
-	font-stlye :  normal;
-	font-weight : bold;
-	cursor: pointer;
+   width: 86px;
+   height: 36px;
+   font-stlye :  normal;
+   font-weight : bold;
+   cursor: pointer;
     font-size: 12pt;
 }
 
 hr{
-	border:none;
-	background-color : #C0C0C0;
-	height :2px;
+   border:none;
+   background-color : #C0C0C0;
+   height :2px;
 }
 .hr-sect{
 
-	display :flex;
-	flex-basis : 100%;
-	align-items : center;
-	color : rgb(200,160,220);
-	font-style : italic;
-	font-weight : bold;
-	font-size : 30px;
+   display :flex;
+   flex-basis : 100%;
+   align-items : center;
+   color : rgb(200,160,220);
+   font-style : italic;
+   font-weight : bold;
+   font-size : 30px;
 }
 .hr-sect::after{
     content: "";
@@ -281,27 +281,27 @@ hr{
     margin: 0 0 0 20px;
 }
 .btn-primary{
-	background-color:rgb(200,160,220);
-	border:none;
- 	color : white;
-	text-align : center;
-	font-size:12px;
-	border-radius : 4px;
+   background-color:rgb(200,160,220);
+   border:none;
+    color : white;
+   text-align : center;
+   font-size:12px;
+   border-radius : 4px;
 }
 .btn-primary:hover,
 .btn-primary:active{
-	background-color : rgb(229, 204, 255);
+   background-color : rgb(229, 204, 255);
 }
 
-	span{
-		width:300px;
-	}
-	#log{
-	
-	
-	  all: unset;
+   span{
+      width:300px;
+   }
+   #log{
+   
+   
+     all: unset;
       width: 300px;
-	height: 49px;
+   height: 49px;
       background-color: rgb(200, 160, 220);
       border-radius: 7px;
       color: white;
@@ -310,29 +310,29 @@ hr{
       cursor: pointer;
       margin-bottom: 5px;
       font-size: 17px;
-	
-	}
-	.inputInform{
+   
+   }
+   .inputInform{
 
-		text-align: left;
-		margin-bottom: 10px;
-		width: 300px;
-		height: 40px;
-	
+      text-align: left;
+      margin-bottom: 10px;
+      width: 300px;
+      height: 40px;
+   
 
-	}
-	.logInput{
-		position:   relative;
-		left: 25px;
-		width: 300px;
-		height: 35px;
-	}
-	.modal-content{
-		left: 90px;
-		width: 390px;
-		height: 410px;
-	}
-	.modal {
+   }
+   .logInput{
+      position:   relative;
+      left: 25px;
+      width: 300px;
+      height: 35px;
+   }
+   .modal-content{
+      left: 90px;
+      width: 390px;
+      height: 410px;
+   }
+   .modal {
         text-align: center;
 }
  
@@ -358,39 +358,39 @@ img{
 
 #loginGroup{
  position:   relative;
-	width : 330px;
-	top: 10px;
-	left: 25px;
+   width : 330px;
+   top: 10px;
+   left: 25px;
 }
 
 #share{
-	margin: auto;
+   margin: auto;
     width: 1000px;
 }
 
 #share td{
-	padding: 5px 25px;
+   padding: 5px 25px;
 }
 
 
 #board{
-	margin-right: auto;
+   margin-right: auto;
     margin-left: auto;
-	width:150px;
-	height:50px;
-	font-size:23px;
-	font-stlye :  normal;
-	font-weight : bold;
+   width:150px;
+   height:50px;
+   font-size:23px;
+   font-stlye :  normal;
+   font-weight : bold;
 }
 
 
 th {
-	text-align: center;
+   text-align: center;
 }
 
 #community {
-	margin: 50px auto;
-	width: 800px;
+   margin: 50px auto;
+   width: 800px;
 }
 
 
@@ -458,21 +458,21 @@ th {
 
    // Load the SDK asynchronously
    (function(d, s, id) {
-	   var js, fjs = d.getElementsByTagName(s)[0];
-	   if (d.getElementById(id)) return;
-	   js = d.createElement(s); js.id = id;
-	   js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.2';
-	   fjs.parentNode.insertBefore(js, fjs);
-	 }(document, 'script', 'facebook-jssdk'));
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.2';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
    // Here we run a very simple test of the Graph API after login is
    // successful.  See statusChangeCallback() for when this call is made.
    function testAPI() {
      console.log('Welcome!  Fetching your information.... ');
      FB.api('/me',{fields: 'email,name'}, function(response) {
-    	 setTimeout(function(){
-   	      FB.logout(); 
-   	    }, 10000);
+        setTimeout(function(){
+            FB.logout(); 
+          }, 10000);
     
        console.log('Successful login for: ' + response.name);
       
@@ -502,7 +502,7 @@ th {
          success: function(res) {
    
               
-				kout();
+            kout();
               location.href="danim.do?command=snsLogin&id="+res.id+"&name="+res.properties.nickname
               
              }
@@ -518,8 +518,8 @@ th {
  
   //]]>
     function kout(){
-    	
-    	Kakao.Auth.logout(function(data){
+       
+       Kakao.Auth.logout(function(data){
                 alert(data)
             });
     }
@@ -536,57 +536,57 @@ th {
 
 <div id="beforeLogin">
 <div data-obj-type="element">
-	<input type="button" id="login" value="로그인" class="btn-success" data-toggle="modal" data-target="#myModal">
+   <input type="button" id="login" value="로그인" class="btn-success" data-toggle="modal" data-target="#myModal">
 </div>
-				 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" > 
-                    	<div class="modal-dialog"> 
-                    		<div class="modal-content"> 
-                    			<div class="modal-header"> 
-                    				<h4 class="modal-title" id="myModalLabel">Login</h4> 
-                    				<button type="button" class="close" data-dismiss="modal">
-                    					<span aria-hidden="true">×</span>
-                    					<span class="sr-only">Close</span>
-                    				</button> 
-                    			</div> 
-                    			<div class="modal-body"> 	
-                    				<form action="danim.do" method="post">
-                    				<input type="hidden" name="command" value="login"/>
-                    					<div class="inputInform">
-											<input id="formId"class="logInput" type="text" placeholder="아이디를 입력해주세요" value="" name="id"/>
-										</div>
-										<div class="inputInform">
-											<input id="formPw"class="logInput" type="password" placeholder="비밀번호를 입력해주세요" value="" name="pw"/>
-										</div>
-										<span id="loginError" style="color:red">아이디 또는 비밀번호가 틀렸습니다.</span>
-										<div id="loginGroup">
-                    					<input id="log" type="button" value="#DANIM으로 로그인" onclick="logchk();"/>
-                    					
-                    					<a id="custom-login-btn" href="javascript:loginWithKakao()"><br/><img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/></a><br/>
-									<div class="fb-login-button" scope="public_profile,email" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
-								</div>
-										<br>
-										<div align="center" > 
-                    						<a href="findInfo.jsp" style="color:rgb(200, 160, 220)">아이디/비밀번호찾기</a><span>  <span>    &nbsp;|&nbsp;    </span>    </span><a href="join.jsp" style="color:rgb(200, 160, 220)" >회원가입</a>
-                    					</div> 
-									</form>
-								</div> 
-                    		
-                    		</div> 
-                    	</div> 
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" > 
+                       <div class="modal-dialog"> 
+                          <div class="modal-content"> 
+                             <div class="modal-header"> 
+                                <h4 class="modal-title" id="myModalLabel">Login</h4> 
+                                <button type="button" class="close" data-dismiss="modal">
+                                   <span aria-hidden="true">×</span>
+                                   <span class="sr-only">Close</span>
+                                </button> 
+                             </div> 
+                             <div class="modal-body">    
+                                <form action="danim.do" method="post">
+                                <input type="hidden" name="command" value="login"/>
+                                   <div class="inputInform">
+                                 <input id="formId"class="logInput" type="text" placeholder="아이디를 입력해주세요" value="" name="id"/>
+                              </div>
+                              <div class="inputInform">
+                                 <input id="formPw"class="logInput" type="password" placeholder="비밀번호를 입력해주세요" value="" name="pw"/>
+                              </div>
+                              <span id="loginError" style="color:red">아이디 또는 비밀번호가 틀렸습니다.</span>
+                              <div id="loginGroup">
+                                   <input id="log" type="button" value="#DANIM으로 로그인" onclick="logchk();"/>
+                                   
+                                   <a id="custom-login-btn" href="javascript:loginWithKakao()"><br/><img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/></a><br/>
+                           <div class="fb-login-button" scope="public_profile,email" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
+                        </div>
+                              <br>
+                              <div align="center" > 
+                                      <a href="findInfo.jsp" style="color:rgb(200, 160, 220)">아이디/비밀번호찾기</a><span>  <span>    &nbsp;|&nbsp;    </span>    </span><a href="join.jsp" style="color:rgb(200, 160, 220)" >회원가입</a>
+                                   </div> 
+                           </form>
+                        </div> 
+                          
+                          </div> 
+                       </div> 
                     </div> 
 
-<div data-obj-type="element">	
-	<input type="button" id="join" value="회원가입" class="btn-success" onclick="location.href='join.jsp'">
+<div data-obj-type="element">   
+   <input type="button" id="join" value="회원가입" class="btn-success" onclick="location.href='join.jsp'">
 </div>
 </div>
 <div id="afterLogin">
 <span id="welcome"><%=id %>님 환영합니다 </span>
-<div data-obj-type="element">	
-	<input type="button" id="myPage" value="내 정보" class="btn-success" onclick="location.href='myPage.jsp'">
-	
+<div data-obj-type="element">   
+   <input type="button" id="myPage" value="내 정보" class="btn-success" onclick="location.href='myPage.jsp'">
+   
 </div>
-<div data-obj-type="element">	
-	<input type="button" id="logout" value="로그아웃" class="btn-success" onclick="location.href='danim.do?command=logout'">
+<div data-obj-type="element">   
+   <input type="button" id="logout" value="로그아웃" class="btn-success" onclick="location.href='danim.do?command=logout'">
 </div>
 </div>
 <br/>
@@ -596,15 +596,15 @@ th {
 <br/>
 <br/>
 <div data-obj-type="element" id="demo">
-	<p>
-		"감성 여행 플래너 & 다이어리에 대한 설명...
-		diam maecenas ultricies mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae 
-		proin sagittis nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices 
-		 어쩌고 저쩌고 소개어쩔"
-	</p>
+   <p>
+      "감성 여행 플래너 & 다이어리에 대한 설명...
+      diam maecenas ultricies mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae 
+      proin sagittis nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices 
+       어쩌고 저쩌고 소개어쩔"
+   </p>
 </div>
 <div data-obj-type="image" id="mainimg">
-	<img src="image/main.jpg" style="width :530px; height : 350px;">
+   <img src="image/main.jpg" style="width :530px; height : 350px;">
 </div>
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -612,51 +612,51 @@ th {
 <br/>
 
 <div data-obj-type="element" >
-	<input type="button" value="여행 만들기" spellcheck="false"  class="btn-primary" id="start" onclick="confirmChk();">
+   <input type="button" value="여행 만들기" spellcheck="false"  class="btn-primary" id="start" onclick="confirmChk();">
 </div>
 <div data-obj-type="element" >
-	<input type="button" value="다이어리" spellcheck="false"  class="btn-primary" id="start2" onclick="confirmChk2();" >
+   <input type="button" value="다이어리" spellcheck="false"  class="btn-primary" id="start2" onclick="confirmChk2();" >
 </div>
 
 <br/><br/><br/><br/><br/><br/><br/><br/>
 <%
-	int curPageNum=0;
+   int curPageNum=0;
 %>
 
 <div id="review">
-	<div class="hr-sect">Diary</div>
-	<p align="right">
-		<input type="button" value="더보기" class="btn-primary" onclick="location.href='danim.do?command=diary&page=1'"/>
-	</p>
-	
-	<div id="share">
-		<table>
-			<col width="200px">
-			<col width="200px">
-			<col width="200px">
-			<col width="200px">
-			<tr>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-				<td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-			</tr>
-			<tr style="font-size: 14pt; font-weight: bold;">
-				<td>테스트이미지</td>
-				<td>테스트이미지</td>
-				<td>테스트이미지</td>
-				<td>테스트이미지</td>
-			</tr>
-			<tr>
-				<td>#갬성 #여행 #당일치기</td>
-				<td>#갬성 #여행 #당일치기</td>
-				<td>#갬성 #여행 #당일치기</td>
-				<td>#갬성 #여행 #당일치기</td>
-			</tr>
-		</table>
-	</div>
-	
-	
+   <div class="hr-sect">Diary</div>
+   <p align="right">
+      <input type="button" value="더보기" class="btn-primary" onclick="location.href='danim.do?command=diary&page=1'"/>
+   </p>
+   
+   <div id="share">
+      <table>
+         <col width="200px">
+         <col width="200px">
+         <col width="200px">
+         <col width="200px">
+         <tr>
+            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
+         </tr>
+         <tr style="font-size: 14pt; font-weight: bold;">
+            <td>테스트이미지</td>
+            <td>테스트이미지</td>
+            <td>테스트이미지</td>
+            <td>테스트이미지</td>
+         </tr>
+         <tr>
+            <td>#갬성 #여행 #당일치기</td>
+            <td>#갬성 #여행 #당일치기</td>
+            <td>#갬성 #여행 #당일치기</td>
+            <td>#갬성 #여행 #당일치기</td>
+         </tr>
+      </table>
+   </div>
+   
+   
 </div>
 
 <br/>
@@ -664,56 +664,56 @@ th {
 <br/>
 
 <div>
-	<div class="hr-sect">Community</div>
-	
-	<div id="community">
-		<table border="1">
-			<col width="50px">
-			<col width="400px">
-			<col width="100px">
-			<col width="200px">
-			<col width="50px">
-	
-			<tr>
-				<th>No.</th>
-				<th>제목</th>
-				<th>글쓴이</th>
-				<th>작성일</th>
-				<th>♥</th>
-			</tr>
-			<tr align="center">
-				<td>1</td>
-				<td align="left">어머님,,감당가능하실,,? 이건,,임의로 넣은 row입니다↘,,,</td>
-				<td>쓰앵님</td>
-				<td>2019-01-28 15:34:57</td>
-				<td>234</td>
-			</tr>
-	
-			<c:choose>
-				<c:when test="${empty list }">
-					<tr align="center">
-						<td colspan="4">- - - 작성된 글이 없습니다 - - -</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${list }" var="dto">
-						<tr align="center">
-							<td>${dto.boardno }</td>
-							<td style="text-align: left;">${dto.title }</td>
-							<td>${dto.id }</td>
-							<td>${dto.regdate }</td>
-							<td>${dto.likenum }</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-	
-		</table>
-	</div>
-	
-	<div  align="center">
-		<input type="button" value="게시판 입장" class="btn-primary" id="board" onclick="location.href='danim.do?command=review&page=1'"/>
-	</div>
+   <div class="hr-sect">Community</div>
+   
+   <div id="community">
+      <table border="1">
+         <col width="50px">
+         <col width="400px">
+         <col width="100px">
+         <col width="200px">
+         <col width="50px">
+   
+         <tr>
+            <th>No.</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>작성일</th>
+            <th>♥</th>
+         </tr>
+         <tr align="center">
+            <td>1</td>
+            <td align="left">어머님,,감당가능하실,,? 이건,,임의로 넣은 row입니다↘,,,</td>
+            <td>쓰앵님</td>
+            <td>2019-01-28 15:34:57</td>
+            <td>234</td>
+         </tr>
+   
+         <c:choose>
+            <c:when test="${empty list }">
+               <tr align="center">
+                  <td colspan="5">- - - 작성된 글이 없습니다 - - -</td>
+               </tr>
+            </c:when>
+            <c:otherwise>
+               <c:forEach items="${list }" var="dto">
+                  <tr align="center">
+                     <td>${dto.boardno }</td>
+                     <td style="text-align: left;">${dto.title }</td>
+                     <td>${dto.id }</td>
+                     <td>${dto.regdate }</td>
+                     <td>${dto.likenum }</td>
+                  </tr>
+               </c:forEach>
+            </c:otherwise>
+         </c:choose>
+   
+      </table>
+   </div>
+   
+   <div  align="center">
+      <input type="button" value="게시판 입장" class="btn-primary" id="board" onclick="location.href='danim.do?command=review&page=1'"/>
+   </div>
 </div>
 
 <br/><br/><br/><br/><br/><br/>
@@ -725,5 +725,4 @@ th {
 
 </body>
 </html>
-
 

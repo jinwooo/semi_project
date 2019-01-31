@@ -708,7 +708,15 @@ public class DanimServlet extends HttpServlet {
 			request.setAttribute("pno",pno);
 			
 			dispatch(request,response,"diaryDetail.jsp");
-		}	
+		}else if(command.equals("updateboard"))	{
+			
+			int boardno=Integer.parseInt(request.getParameter("boardno"));
+			
+			BoardDto dto=dao.selectOne(boardno);
+			request.setAttribute("dto", dto);
+			dispatch(request,response,"updateboard.jsp");
+
+		}
 	         
 		
 	}

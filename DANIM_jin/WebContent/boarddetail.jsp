@@ -34,6 +34,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+ <script src="js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -103,8 +106,29 @@
 		all: unset;
 		cursor: pointer;
 	}
+	.btn-primary,#update{
+		background-color:rgb(200,160,220);
+		border:none;
+ 		color : white;
+		text-align : center;
+		font-size:12px;
+		border-radius : 4px;
+	}
 	
-   
+   	.btn-primary,#update:hover,
+	.btn-primary,#update:active{
+		background-color : rgb(229, 204, 255);
+	}
+	#update{
+	
+		postion: absolute;
+		width:120px;
+		height:50px;
+		font-size:23px;
+		font-style: normal;
+		font-weight: bold;
+		margin-top:20px;
+	}
    
 	
 </style>
@@ -241,6 +265,11 @@
 				</table>
 			</div>
 		</div>
+	
+	<div align="center">
+		<input type="button" id="update" class="btn-primary" value="수정하기" onclick="location.href='danim.do?command=updateboard&boardno=<%=boardno%>">
+	</div>	
+		
 	</div>
 	
 

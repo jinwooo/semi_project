@@ -42,18 +42,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+ <script src="js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
 
-table{
-	margin: auto;
-}
-
 #name{
+	margin : auto;
 	font-weight : bold;
 	font-size: 32px;
 	color: #8B8989;
+}
+
+.title{
+	font-weight : bold;
+	font-size: 25px;
+	font-family: Arial;
+	width:50px;
+	height:50px;
+	margin:auto;
+}
+
+.content{
+	margin:auto;	
+}
+
+.btn-primary,#back{
+	background-color:rgb(200,160,220);
+	border:none;
+ 	color : white;
+	text-align : center;
+	font-size:12px;
+	border-radius : 4px;
+}
+
+.btn-primary,#back:hover,
+.btn-primary,#back:active{
+	background-color : rgb(229, 204, 255);
+}
+
+#back{
+	postion: relative;
+	width:120px;
+	height:50px;
+	font-size:23px;
+	font-style: normal;
+	font-weight: bold;
+	margin-top: 120px;
+
 }
 
 
@@ -65,27 +103,36 @@ input[type=button]{
 </style>
 
 
-</head>
 <body>
+	<!-- 헤더 -->
+	<div style="height: 100px;">
+		<jsp:include page="./form/header.jsp"></jsp:include>
+	</div>
 
-<div style="height: 100px;">
-	<jsp:include page="./form/header.jsp"></jsp:include>
-</div>
-
-<form action="danim.do" method="post">
-	<h1 id="name" ><%=Pdto.getId() %> 님의 다이어리</h1>
-	<input type="hidden" name="command" value="">
-	<div class="title" >
-		<%=Pdto.getPtitle() %>
+	<!-- 본문 -->
+	<h1 id="name"><%=Pdto.getId() %> 님의 다이어리</h1>
+	
+	<br/><br/><br/>
+	<div align="center">
+	<div id="diarybody">	
+		<!-- content -->
+		<div class="content"  >
+			<div class="title">
+				<%=Pdto.getPtitle() %>
+			</div>
+			<div class="diary" style="width:500px; height:500px; margin:auto;">
+				<img src="sav/<%=Pdto.getPimage()%>" style="width:600px; height:600px;">
+			</div>
+		
+		</div>		
 	</div>
 	
-	<div class="dairy">
-		<img src="sav/<%=Pdto.getPimage()%>" width="500px" height="500px">
-		<span><%=dto.getLikenum() %></span>
+
+		<div>
+			<input type="button" id=back value=뒤로가기 class="btn-primary" onclick="location.href='danim.do?command=main'" >
+		</div>
+	
 	</div>
-
-</form>
-
 
 
 </body>

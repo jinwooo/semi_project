@@ -31,7 +31,7 @@
 	</insert>
 	
 	<insert id="snsJoin" parameterType="DanimDto">
-		INSERT INTO USERBOARD VALUES(#{id},#{name},#{pw},#{addr},#{phone},#{email},'general','Y',0,'N','sns','')
+		INSERT INTO USERBOARD VALUES(#{id},#{name},#{pw},#{addr},#{phone},#{email},'general','Y',0,'Y','sns','')
 	</insert>
 	
 	<update id="confirm" parameterType="String">

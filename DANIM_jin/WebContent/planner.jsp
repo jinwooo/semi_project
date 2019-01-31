@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.plan.dto.planDto"%>
 <%@page import="java.util.List"%>
@@ -735,12 +736,43 @@ body {
 				<div></div>
 				<h3>사진</h3>
 				<div>
-					<form id="picUpload" action="danim.do?" method="post"
+					<form id="picUpload" action="imgup.jsp" method="post"
 						enctype="multipart/form-data">
+						<input type="hidden" name="id" value="null" />
 						<input type="file" name="file" id="myFile"
 							accept=".jpg, .jpeg, .png" style="width: 220px;"> <input
 							type="submit" class="btn" value="업로드">
 					</form>
+					
+					<%
+	
+					boolean load = false;
+					load = Boolean.parseBoolean(request.getParameter("load"));
+					String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\semi_project\\semi_project\\DANIM_jin\\WebContent\\img\\null";
+					File dirFile=new File(savePath);
+					File []fileList=dirFile.listFiles();
+					
+					%>
+					
+					<div>
+					<%
+					if(load){
+						for(File tempFile : fileList) {
+						  if(tempFile.isFile()) {
+						    String tempPath=tempFile.getParent();
+						    String tempFileName=tempFile.getName();
+						    System.out.println("Path="+tempPath);
+							System.out.println("FileName="+tempFileName);
+							%>
+							<div class="draggableOther sticker">
+								<img src="img/null/<%=tempFileName %>" width="100px" height="100px">
+							</div>
+							<%
+							}
+						}
+					}
+					%>
+					</div>
 
 				</div>
 				<h3>글상자</h3>

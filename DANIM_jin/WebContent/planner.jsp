@@ -738,7 +738,7 @@ body {
 				<div>
 					<form id="picUpload" action="imgup.jsp" method="post"
 						enctype="multipart/form-data">
-						<input type="hidden" name="id" value="null" />
+						<input type="hidden" name="id" value="null" /> 
 						<input type="file" name="file" id="myFile"
 							accept=".jpg, .jpeg, .png" style="width: 220px;"> <input
 							type="submit" class="btn" value="업로드">

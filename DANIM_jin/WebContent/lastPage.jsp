@@ -32,7 +32,7 @@ String user = (String)session.getAttribute("sessionId"); //dto로 받아와야�
   outline: 0px;
   border: none;
 }
-.button,#kakao-link-btn {
+.button{
   display: inline-block;
   border-radius: 4px;
   background-color: #C8A0FA;
@@ -40,8 +40,8 @@ String user = (String)session.getAttribute("sessionId"); //dto로 받아와야�
   color: #FFFFFF;
   text-align: center;
   font-size: 15px;
-  padding: 20px;
-  width: 200px;
+  padding: 10px;
+  width: 80px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -62,20 +62,44 @@ String user = (String)session.getAttribute("sessionId"); //dto로 받아와야�
 </head>
 <body>
 
+
 <div style="height: 100px;">
-	<jsp:include page="./form/header.jsp"></jsp:include>
+	<jsp:include page="./form/header_ex.jsp"></jsp:include>
 </div>
 
-<div>
+<div align="center">
+<br/><br/><br/><br/><br/>
+<h1>PDF 저장 및 결제가 완료되었습니다.</h1>
+<br/><br/><br/><br/><br/><br/><br/>
+<!-- 
 
-
+<div align="center"style="display: inline;" >
 	<a id="kakao-link-btn" href="javascript:;">
 		<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>카카오톡 공유하기
 	</a>
-	
-	<button class="button" style="vertical-align: middle " onclick="location.href='danim.do?command=insert'"><span>게시판에 글쓰기>></span></button>
-</div>	 
+</div>	
 
+<div>
+<a href="#">
+<img src="image/home.png" style="width: 70px; height: 70px;"><span>home</span>
+</a>
+</div>
+
+<div style="display: inline;">
+	<button class="button" style="vertical-align: middle " onclick="location.href='danim.do?command=insert'"><span>게시판에 글쓰기>></span></button>
+</div>	  -->
+
+<table style="text-align: center;">
+<col width="100"/>
+<col width="100"/>
+<col width="100"/>
+	<tr><th><img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/></th><th><img src="image/home.png" style="width: 70px; height: 70px;"></th><th>	<button class="button" style="vertical-align: middle " onclick="location.href='danim.do?command=insert'"><span>게시판에<br/>글쓰기</span></button></th></tr>
+	<tr><td><a id="kakao-link-btn" href="javascript:;">공유하기</a></td><td><a href="#">Home</a></td></tr>
+</table>
+
+
+
+</div>
 	
 <script type='text/javascript'>
   //<![CDATA[

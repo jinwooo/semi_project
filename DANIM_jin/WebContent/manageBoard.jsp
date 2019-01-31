@@ -210,29 +210,7 @@ input[type=button]{
 <script type="text/javascript" src="js/jquery-3.3.1.min.js">
 </script>
 <script type="text/javascript">
-<!--
-	function goPage(i){
-		if(i==null){
-			i=1;
-		}
-		var cur=i;
-		alert(cur);
-		
-	  $.ajax({
-      url:"danim.do?command=review&page="+i,   
-      type:"get",
-      ascyc:true,
-     
-      success:function(t){
-    	alert("연결성공!");
-     	alert(msg);
-      },
-      error:function(){
-       
-      }
-   });  
-		  		
-	}-->
+
 </script>
 
 </head>
@@ -282,11 +260,13 @@ input[type=button]{
 		<c:choose>
 			<c:when test="${empty pagelist }">
 			<tr>
-				<td colspan="6">---작성된 글이 없습니다----</td>
+				<td colspan="7" style="text-align: center;">----작성된 글이 없습니다----</td>
 			</tr>
 			</c:when>
 			<c:otherwise>
+	
 				<c:forEach items="${pagelist }" var="dto">
+			
 					<tr>
 					<td><input type="checkbox" name="chk" value="${dto.boardno }"/>
 						<td>${dto.boardno }</td>
@@ -298,6 +278,7 @@ input[type=button]{
 					</tr>
 				</c:forEach>
 				 <tr style="border-right:hidden; border-left:hidden; border-bottom:hidden;"><td colspan="10"><input type="submit" id="back" value="삭제" class="btn-primary" ></td></tr>
+				 
 			</c:otherwise>
 		</c:choose>
 		

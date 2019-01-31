@@ -186,7 +186,7 @@ input[type=button]{
 		<c:choose>
 			<c:when test="${empty pagelist }">
 			<tr>
-				<td colspan="3">---작성된 글이 없습니다----</td>
+				<td colspan="4" style="text-align: center;">----작성된 글이 없습니다----</td>
 			</tr>
 			</c:when>
 			<c:otherwise>

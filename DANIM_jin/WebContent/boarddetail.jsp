@@ -161,8 +161,9 @@
 			<div>
 				<h3><%=dto.getTitle() %></h3>
 			</div>
-			<div class="content" style="border: 1px solid red; width:1000px; height: 700px;">
-				<textarea></textarea>
+			<div class="content" style="border: 1px solid red; width:1000px; height: 700px;" >
+				<%=dto.getContent() %>
+				<img src="sav/<%=dto.getFilename() %>" width="200px" height="200px" >
 			</div>
 			
 			<div class="userlike">

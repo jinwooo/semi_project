@@ -140,6 +140,17 @@ public class planDao extends SqlMapConfig {
 			
 		return pagelist;
 	}
+	
+	public int insertPlan(planDto dto) {
+		
+		SqlSession session = null;
+		int res = 0;
+		session=getSqlSessionFactory().openSession(true);
+		res = session.insert(namespace+"insertPlan",dto);
+		session.close();
+		
+		return res;
+	}
 
 }
 	

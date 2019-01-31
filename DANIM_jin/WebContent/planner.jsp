@@ -523,7 +523,7 @@ body {
       $("#planSave").click(function(){
 			$(".display").css("display","block");
     		 var element = $(".canvas")[0];
-             html2canvas(element).then(function(canvas){
+             html2canvas(document.querySelector(".canvas")).then(function(canvas){
              	 	
              	var imgData = canvas.toDataURL();
             	fileName = setPno();
@@ -551,7 +551,7 @@ body {
  				pimage : fileName
  			}
  		});	     
-		$(".display").removeAttr("style")
+		$(".display").removeAttr("style");
       }); 
       
 /* 저장된 파일을 불러오는 함수 */

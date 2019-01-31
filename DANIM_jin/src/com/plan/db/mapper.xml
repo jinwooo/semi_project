@@ -43,6 +43,10 @@
 		SELECT COUNT(*) FROM PLAN
 	</select>
 	
+	<insert id="insertPlan" parameterType="planDto">
+		INSERT INTO PLAN VALUES(PLANSEQUENCE.NEXTVAL,#{ptitle},#{psdate},#{pldate},#{pdata},#{pimage},#{id})
+	</insert>
+	
 	<!-- 게시글 수 count -->
 	
 	<select id="getCount" resultType="int">

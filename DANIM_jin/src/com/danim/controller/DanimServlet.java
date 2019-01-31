@@ -182,7 +182,8 @@ public class DanimServlet extends HttpServlet {
 			}
 			
 		}else  if(command.equals("afterLogin")) {
-			  String id= request.getParameter("id");
+			String id =(String)request.getParameter("id");
+			  
 		         DanimDto dto= Ddao.login(id);
 
 
@@ -296,9 +297,9 @@ public class DanimServlet extends HttpServlet {
 	               /* 아무것도 안나옴  - 저장합시다*/
 	               System.out.println("아무것도 없을때 사용하는 if문으로 들어옴2");
 	               
-	               Pdto.setPno(Integer.toString(Pdao.setPno()));
-	               
-	               int res = Pdao.insert(Pdto);
+	               //Pdto.setPno(Integer.toString(Pdao.setPno()));
+		            
+		            int res = Pdao.insertPlan(Pdto);
 	               
 	               System.out.println("::insert가 됨 값은 : " +res);
 	               
@@ -427,7 +428,18 @@ public class DanimServlet extends HttpServlet {
 			pagelist=dao.getPaging(paging);
 			
 			request.setAttribute("pagelist", pagelist);
-			dispatch(request,response,"board.jsp");
+			String id= (String)session.getAttribute("sessionId");
+	         DanimDto dto= Ddao.login(id);
+		       if (dto.getGrade().equals("admin")) {
+		             
+		             dispatch(request, response, "manageBoard.jsp");
+		          } else if (dto.getGrade().equals("general")) {
+		            
+		        	  dispatch(request,response,"board.jsp");
+		          }
+			
+			
+			
 			
 		}else if(command.equals("insert")) {
 			dispatch(request,response,"write.jsp");
@@ -645,6 +657,7 @@ public class DanimServlet extends HttpServlet {
 		          }
 
 		}else if(command.equals("diary")) {
+			 
 			int curpage=Integer.parseInt(request.getParameter("page"))==1?1:Integer.parseInt(request.getParameter("page"));
 			
 			List<planDto> pagelist=new ArrayList<planDto>();
@@ -669,7 +682,16 @@ public class DanimServlet extends HttpServlet {
 			pagelist=Pdao.getPaging(paging);
 			
 			request.setAttribute("pagelist", pagelist);
-			dispatch(request,response,"diary.jsp");
+			
+			String id= (String)session.getAttribute("sessionId");
+	         DanimDto dto= Ddao.login(id);
+		       if (dto.getGrade().equals("admin")) {
+		             
+		             dispatch(request, response, "manageDiary.jsp");
+		          } else if (dto.getGrade().equals("general")) {
+		            
+		             dispatch(request, response, "diary.jsp");
+		          }
 		}else if(command.equals("manageDiary")) {
 			int curpage=Integer.parseInt(request.getParameter("page"))==1?1:Integer.parseInt(request.getParameter("page"));
 			

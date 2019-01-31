@@ -241,8 +241,8 @@ input[type=button]{
        <span style="font-weight: bold">MENU</span>
       </li>
       <li><a href="manageUser.jsp">회원 관리</a></li>
-      <li><a href="danim.do?command=manageBoard&page=1">글 관리</a></li>
-	  <li><a href="danim.do?command=manageDiary&page=1">다이어리 관리</a></li>
+      <li><a href="danim.do?command=review&page=1">글 관리</a></li>
+	  <li><a href="danim.do?command=diary&page=1">다이어리 관리</a></li>
     </ul>
   </div>
 </div>

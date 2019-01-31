@@ -356,6 +356,23 @@ img{
 	left: 25px;
 }
 
+#share{
+	position:relative;
+	left : 500px;
+}
+
+#board{
+
+	margin-right: auto;
+    margin-left: auto;
+	width:150px;
+	height:50px;
+	font-size:23px;
+	font-stlye :  normal;
+	font-weight : bold;
+}
+
+
 
 </style>
 
@@ -592,59 +609,48 @@ img{
 <div id="review">
 	<div class="hr-sect">&nbsp; &nbsp; Sit amet</div>
 	<p align="right">
-		<input type="button" value="더보기" class="btn-primary" onclick="location.href='danim.do?command=review&page=1'"/>
+		<input type="button" value="더보기" class="btn-primary" onclick="location.href='danim.do?command=diary&page=1'"/>
 	</p>
 	<br/>
-	<form action="danim.do" method="post">
-		<input type="hidden" name="command" value="list">
-		<input type="submit" value= >
-		<table border="1" align="center">
-			<col width="50"/>
-			<col width="200px"/>
-			<col width="50px"/>
-			<col width="300px"/>
-			<col width="100px"/>
-			<col width="100px"/>
-			<tr>
-				<th>번  호</th>
-				<th>글제목</th>
-				<th>id</th>
-				<th>파일이름</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-			<c:choose>
-				<c:when test="${empty list }">
-				<tr>
-					<td colspan="6">---작성된 글이 없습니다---</td>
-				</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${list }" var="dto">
-					<%
-					System.out.println("${list}");
-					%>
-						<tr>
-							<td>${dto.boardno }</td>
-							<td><a href="danim.do?command=detail&boardno=${dto.boardno }">${dto.title }</a></td>
-							<td>${dto.id }</td>
-							<td>${dto.filename }</td>
-							<td>${dto.regdate }</td>
-							<td>${dto.viewcount }</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</table>
-	</form>	
-</div>
+	
+	<div id="share">
+		<div style="display: inline-block; margin-right: 30px;">
+			<p id=test1>테스트이미지1</p>
+			<a href="#"><img src="sav/2019_01_30_181829.jpg" width="200px" height="200px" ></a>
+		</div>
 
-<div id="shareimg1">
-	<p>테스트이미지</p>
-	<a href="#"><img src="sav/2019_01_30_170328.jsp" width="100px" height="100px">
-	</a>
+		<div style="display: inline-block; margin-right: 30px;">
+			<p id=test1>테스트이미지2</p>
+			<a href="#"><img src="sav/travel1.jpg" width="200px" height="200px" ></a>
+		</div>
+
+		<div style="display: inline-block; margin-right: 30px;">
+			<p id=test1>테스트이미지3</p>
+			<a href="#"><img src="sav/travel2.jpg" width="200px" height="200px" ></a>
+		</div>
+
+		<div style="display: inline-block; margin-right: 30px;">
+			<p id=test1>테스트이미지4</p>
+			<a href="#"><img src="sav/travel3.jpg" width="200px" height="200px" ></a>
+		</div>
+	</div>
 	
 </div>
+
+<br/>
+<br/>
+<br/>
+
+<div>
+	<div class="hr-sect">&nbsp; &nbsp; 자유게시판</div>
+	<div  align="center">
+		<input type="button" value="게시판 입장" class="btn-primary" id="board" onclick="location.href='danim.do?command=review&page=1'"/>
+	</div>
+</div>
+
+<br/><br/><br/><br/><br/><br/>
+
+
 <%@ include file="./form/footer.jsp" %>
 
 

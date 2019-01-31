@@ -644,7 +644,33 @@ public class DanimServlet extends HttpServlet {
 		            jsResponse(response, "danim.do?command=main", "관리자가 아닙니다.");
 		          }
 
-		}
+		}else if(command.equals("diary")) {
+			int curpage=Integer.parseInt(request.getParameter("page"))==1?1:Integer.parseInt(request.getParameter("page"));
+			
+			List<planDto> pagelist=new ArrayList<planDto>();
+			System.out.println("클릭한 페이지 :" + curpage);
+			
+			Paging paging=new Paging();
+			
+			paging.setCurPageNum(curpage);
+			paging.makeBlock(curpage);
+			paging.makeLastDPageNum();
+			// 위에 걸로 다시 계산 
+			int blockLastNum=paging.getBlockStartNum();
+			int blockStartNum=paging.getBlockLastNum();
+			int lastPageNum=paging.getLastPageNum();
+			
+			request.setAttribute("curPageNum", curpage);
+			request.setAttribute("blockStartNum", blockStartNum);
+			request.setAttribute("blockLastNum", blockLastNum);
+			request.setAttribute("lastPageNum", lastPageNum);
+			request.setAttribute("paging", paging);	
+			
+			pagelist=Pdao.getPaging(paging);
+			
+			request.setAttribute("pagelist", pagelist);
+			dispatch(request,response,"diary.jsp");
+		}	
 	         
 		
 	}

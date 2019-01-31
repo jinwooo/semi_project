@@ -43,6 +43,39 @@
 		SELECT COUNT(*) FROM PLAN
 	</select>
 	
+	<!-- 게시글 수 count -->
 	
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PLAN
+	</select>
+	
+	<!-- 페이징처리를 위한 select -->
+	
+	<select id="getPaging" parameterType="map" resultType="planDto">
+		SELECT PNO,PTITLE,PSDATE,PLDATE,PDATA,PIMAGE,ID
+		FROM(SELECT A.*,ROW_NUMBER() OVER(ORDER BY PNO DESC) AS RNUM FROM PLAN A)
+		WHERE RNUM BETWEEN #{startPageNo,jdbcType=INTEGER} AND #{endPageNo,jdbcType=INTEGER}
+	</select>
 	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

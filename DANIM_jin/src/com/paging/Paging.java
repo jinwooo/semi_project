@@ -1,6 +1,7 @@
 package com.paging;
 
 import com.board.dao.BoardDao;
+import com.plan.dao.planDao;
 
 public class Paging {
 	
@@ -69,6 +70,17 @@ public class Paging {
 	public void makeLastPageNum() {
 		BoardDao dao=new BoardDao();
 		int total=dao.countAll();
+		
+		if(total%pageCount==0) {
+			lastPageNum=(int)Math.floor(total/pageCount);
+		}else {
+			lastPageNum=(int)Math.floor(total/pageCount)+1;
+		}	
+	}
+	
+	public void makeLastDPageNum() {
+		planDao Pdao=new planDao();
+		int total=Pdao.countAll();
 		
 		if(total%pageCount==0) {
 			lastPageNum=(int)Math.floor(total/pageCount);

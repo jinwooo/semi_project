@@ -1,9 +1,13 @@
 package com.plan.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.board.dto.BoardDto;
+import com.paging.Paging;
 import com.plan.dto.planDto;
 
 public class planDao extends SqlMapConfig {
@@ -101,4 +105,43 @@ public class planDao extends SqlMapConfig {
 		
 		return res;
 	}
+	
+	public int countAll() {
+		SqlSession session=null;
+		session=getSqlSessionFactory().openSession(true);
+		
+		int total=session.selectOne(namespace+"getCount");
+		System.out.println(total);
+		session.close();
+		
+		return total;
+	}
+	
+	public List<planDto> getPaging(Paging paging){
+		
+		int startPage=(paging.getCurPageNum()-1)*paging.getPagecount()+1;
+		int endPage=startPage+paging.getPagecount();
+		System.out.println("start :" +startPage + "end : " + endPage);
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		map.put("startPageNo",startPage);
+		map.put("endPageNo", endPage);
+		
+		System.out.println(map);
+		
+		SqlSession session=null;
+		session=getSqlSessionFactory().openSession(true);
+		List<planDto> pagelist=null;
+		
+		pagelist=session.selectList(namespace+"getPaging",map);
+		System.out.println("getPage");
+		session.close();
+			
+		return pagelist;
+	}
+
 }
+	
+	
+

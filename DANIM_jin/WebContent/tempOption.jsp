@@ -20,7 +20,7 @@
 		planDto dto = (planDto)request.getAttribute("dto");	
 		//out.println(dto.getPdata());
 		//String filename = "temp.txt";
-		out.println(dto.getPdata() + "###");
+		System.out.println(dto.getPdata() + "###");
 		
 		String encoding = "<"+"%"+"@"+ " page language="+"\"java\""+ " contentType="+"\"text/html; charset=UTF-8\""+" pageEncoding="+"\"UTF-8\" "+"%"+">";
 		String encoding1 = "<" + "%" +" request.setCharacterEncoding(" +"\"UTF-8\""+ "); " + "%" + ">";
@@ -50,19 +50,19 @@
 			writer.write(dto.getPdata());
 			//writer.print(dto.getPdata());
 			
-			dto.setPdata(filePath);
-			
-			out.println(filePath+"*****");
-			out.println("sucess!!");
+			dto.setPdata(dto.getPno()+".jsp");
+						
+			System.out.println(filePath+"*****");
+			System.out.println("sucess!!");
 			
 		}catch(IOException e){
-			out.println("failed");
+			System.out.println("failed");
 		}finally{
 			writer.close();
 		} 
 		 
 		request.setAttribute("dto", dto); 
-		pageContext.forward("textController?command=savePath"); 
+		pageContext.forward("danim.do?command=savePath"); 
 	%>	
 	
 

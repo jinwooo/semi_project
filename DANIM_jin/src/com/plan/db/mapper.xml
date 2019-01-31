@@ -47,12 +47,20 @@
 		INSERT INTO PLAN VALUES(PLANSEQUENCE.NEXTVAL,#{ptitle},#{psdate},#{pldate},#{pdata},#{pimage},#{id})
 	</insert>
 	
+	<select id="selectPno" parameterType="planDto" resultType="String">
+		SELECT PNO 
+		FROM PLAN 
+		WHERE PTITLE = #{ptitle} AND ID = #{id} AND PIMAGE = #{pimage}
+	</select>
+	
 	<!-- 게시글 수 count -->
 	
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM PLAN
 	</select>
+	
+	
 	
 	<!-- 페이징처리를 위한 select -->
 	

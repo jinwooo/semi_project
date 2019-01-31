@@ -151,6 +151,19 @@ public class planDao extends SqlMapConfig {
 		
 		return res;
 	}
+	
+	public String selectPno(planDto dto) {
+		SqlSession session = null;
+		String res = "";
+		
+		session = getSqlSessionFactory().openSession(true);		
+		res = session.selectOne(namespace+"selectPno",dto);
+		session.close();
+		
+		return res;
+	}
+	
+	
 
 }
 	

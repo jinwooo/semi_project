@@ -497,7 +497,6 @@ body {
 			   $(this).parent().append("<div class='contentholder'></div>")
 			   $(this).parent().find("img").remove()
 			   $(this).parent().find(".contentDel").remove()
-			
 		});
 		
 		

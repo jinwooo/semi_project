@@ -240,101 +240,108 @@ public class DanimServlet extends HttpServlet {
 			}
 			
 		}else if(command.equals("saveText")) {
-	         /* 저장버튼을 누르면 처음 들어오는애 */
-	         String pno = request.getParameter("pno");
-	         String text = request.getParameter("text");
-	         String id = request.getParameter("id");
-	         
-	         /*pno = "1";*/
-	            
-	         Pdto.setPno(pno);
-	         Pdto.setPtitle(request.getParameter("ptitle"));
-	         Pdto.setPsdate(request.getParameter("psdate"));
-	         Pdto.setPldate(request.getParameter("pldate"));
-	         Pdto.setPdata("none-data");
-	         Pdto.setPimage("none-date");
-	         Pdto.setId(id);
-	         
-	         
-	         System.out.println(Pdto.getPno()+":"+Pdto.getPtitle()+":"+Pdto.getPsdate()+":"+Pdto.getPldate()+":"+Pdto.getPdata()+":"+Pdto.getId());
-	   
-	         int tempDto = 0;
-	         
-	         System.out.println(pno.getClass().getName());
-	         
-	         
-	         /*이미지 옮기는 작업*/
-	         
-	         moveFile mvfile = new moveFile();
-	         System.out.println(request.getParameter("pimage"));
-	         // 내꺼에 맞게 경로바꾸기
-	         mvfile.moveFile(request.getParameter("pimage"),"C:\\Users\\user2\\Downloads\\"+request.getParameter("pimage")+".png", "C:\\Users\\user2\\git\\semi_project\\DANIM_jin\\WebContent\\sav");
-	         
-	         Pdto.setPimage(request.getParameter("pimage")+".png");
-	         
-	         /* 저장이 안되어 있을 경우 db저장시키기 */
-	         if(pno == null || pno.equals(null) || pno.equals("")) {
-	            /* 아무것도 안나옴  - 저장합시다*/
-	            System.out.println("아무것도 없을때 사용하는 if문으로 들어옴");
-	            
-	            //Pdto.setPno(Integer.toString(Pdao.setPno()));
-	            
-	            int res = Pdao.insertPlan(Pdto);
-	            
-	            System.out.println("::insert가 됨 값은 : " +res);
-	            
-	            if(res > 0) {
-	               System.out.println("성공적으로 저장");
-	               Pdto.setPdata(text);
-	            }else {
-	               System.out.println("안됨");
-	            }
-	         }else {
-	            System.out.println("else로 들어옴");
-	            tempDto = Pdao.checkPno(id, pno);
-	            System.out.println("tempDto는 : "+tempDto);
-	            if(tempDto != 1) {
-	               /* 아무것도 안나옴  - 저장합시다*/
-	               System.out.println("아무것도 없을때 사용하는 if문으로 들어옴2");
-	               
-	               //Pdto.setPno(Integer.toString(Pdao.setPno()));
-		            
-		            int res = Pdao.insertPlan(Pdto);
-	               
-	               System.out.println("::insert가 됨 값은 : " +res);
-	               
-	               if(res > 0) {
-	                  System.out.println("성공적으로 저장");
-	                  Pdto.setPdata(text);
-	               }else {
-	                  System.out.println("안됨");
-	               }
-	            }else {
-	               Pdto.setPno(pno);
-	               Pdto.setPdata(text);
-	            }
-	         }      
-	         
-	         request.setAttribute("dto", Pdto);
-	         System.out.println("여기까진 옴");
-	         dispatch(request, response, "tempOption.jsp");
-	         
-	      }else if(command.equals("savePath")) {
-			Pdto = (planDto)request.getAttribute("dto");
-			System.out.println(Pdto.getPno());
-			
-			int res = Pdao.saveText(Pdto);
-			Pdto = Pdao.selectOne(Pdto.getPno());
-			
-			if(res >0) {
-				System.out.println("success!" + Pdto.getPno());
-				request.setAttribute("pno", Pdto.getPno());
-				//id가 아니라 pno를 보내야함 
-				dispatch(request, response, "planner.jsp");
-			}else {
-				System.out.println("false");
-			}			
-		}else if(command.equals("getText")) {
+            /* 저장버튼을 누르면 처음 들어오는애 */
+            String pno = request.getParameter("pno");
+            String text = request.getParameter("text");
+            String id = request.getParameter("id");
+            
+            /*pno = "1";*/
+               
+            Pdto.setPno(pno);
+            Pdto.setPtitle(request.getParameter("ptitle"));
+            Pdto.setPsdate(request.getParameter("psdate"));
+            Pdto.setPldate(request.getParameter("pldate"));
+            Pdto.setPdata("none-data");
+            Pdto.setPimage("none-date");
+            Pdto.setId(id);
+            
+            System.out.println(Pdto.getPno()+":"+Pdto.getPtitle()+":"+Pdto.getPsdate()+":"+Pdto.getPldate()+":"+Pdto.getPdata()+":"+Pdto.getId());
+      
+            int tempDto = 0;
+            
+            System.out.println(pno.getClass().getName());
+            
+            
+            /*이미지 옮기는 작업*/
+            
+            moveFile mvfile = new moveFile();
+            System.out.println(request.getParameter("pimage"));
+            // 내꺼에 맞게 경로바꾸기
+            mvfile.moveFile(request.getParameter("pimage"),"C:\\Users\\user2\\Downloads\\"+request.getParameter("pimage")+".png", "C:\\Users\\user2\\git\\semi_project\\DANIM_jin\\WebContent\\sav");
+            
+            Pdto.setPimage(request.getParameter("pimage")+".png");
+            
+            /* 저장이 안되어 있을 경우 db저장시키기 */
+            if(pno == null || pno.equals(null) || pno.equals("")) {
+               /* 아무것도 안나옴  - 저장합시다*/
+               System.out.println("아무것도 없을때 사용하는 if문으로 들어옴!!!!!!!!!!");
+               
+               //Pdto.setPno(Integer.toString(Pdao.setPno()));
+               
+               int res = Pdao.insertPlan(Pdto);
+               
+               String selectpno = Pdao.selectPno(Pdto);                  
+               Pdto.setPno(selectpno);               
+               System.out.println("selectpno:"+selectpno);
+               
+               System.out.println("::insert가 됨 값은 : " +res);
+               
+               if(res > 0) {
+                  System.out.println("성공적으로 저장");
+                  Pdto.setPdata(text);
+               }else {
+                  System.out.println("안됨");
+               }
+            }else {
+               System.out.println("else로 들어옴");
+               tempDto = Pdao.checkPno(id, pno);
+               System.out.println("tempDto는 : "+tempDto);
+               if(tempDto != 1) {
+                  /* 아무것도 안나옴  - 저장합시다*/
+                  System.out.println("아무것도 없을때 사용하는 if문으로 들어옴2");
+                  
+                  //Pdto.setPno(Integer.toString(Pdao.setPno()));
+                  
+                  int res = Pdao.insertPlan(Pdto);
+                  
+                  String selectpno = Pdao.selectPno(Pdto);                  
+                  Pdto.setPno(selectpno);
+                  System.out.println("selectpno:"+selectpno);
+                  
+                  System.out.println("::insert가 됨 값은 : " +res);
+                  
+                  if(res > 0) {
+                     System.out.println("성공적으로 저장");
+                     Pdto.setPdata(text);
+                  }else {
+                     System.out.println("안됨");
+                  }
+               }else {
+                  Pdto.setPno(pno);
+                  Pdto.setPdata(text);
+               }
+            }      
+            
+            request.setAttribute("dto", Pdto);
+            System.out.println("여기까진 옴");
+            dispatch(request, response, "tempOption.jsp");
+            
+         }else if(command.equals("savePath")) {
+         Pdto = (planDto)request.getAttribute("dto");
+         
+         int res = Pdao.saveText(Pdto);
+         
+         Pdto = Pdao.selectOne(Pdto.getPno());
+         
+         if(res >0) {
+            System.out.println("success!" + Pdto.getPno());
+            request.setAttribute("pno", Pdto.getPno());
+            //id가 아니라 pno를 보내야함 
+            dispatch(request, response, "planner.jsp");
+         }else {
+            System.out.println("false");
+         }         
+      }else if(command.equals("getText")) {
 			String pno = (String)request.getParameter("pno");			
 			System.out.println(pno);
 			Pdto = Pdao.selectOne(pno);
@@ -692,61 +699,7 @@ public class DanimServlet extends HttpServlet {
 		            
 		             dispatch(request, response, "diary.jsp");
 		          }
-		}else if(command.equals("manageDiary")) {
-			int curpage=Integer.parseInt(request.getParameter("page"))==1?1:Integer.parseInt(request.getParameter("page"));
-			
-			List<planDto> pagelist=new ArrayList<planDto>();
-			System.out.println("클릭한 페이지 :" + curpage);
-			
-			Paging paging=new Paging();
-			
-			paging.setCurPageNum(curpage);
-			paging.makeBlock(curpage);
-			paging.makeLastDPageNum();
-			// 위에 걸로 다시 계산 
-			int blockLastNum=paging.getBlockStartNum();
-			int blockStartNum=paging.getBlockLastNum();
-			int lastPageNum=paging.getLastPageNum();
-			
-			request.setAttribute("curPageNum", curpage);
-			request.setAttribute("blockStartNum", blockStartNum);
-			request.setAttribute("blockLastNum", blockLastNum);
-			request.setAttribute("lastPageNum", lastPageNum);
-			request.setAttribute("paging", paging);	
-			
-			pagelist=Pdao.getPaging(paging);
-			
-			request.setAttribute("pagelist", pagelist);
-			dispatch(request,response,"manageDiary.jsp");
-		}else if(command.equals("manageBoard")) {
-			//int total=dao.countAll();
-			int curpage=Integer.parseInt(request.getParameter("page"))==1?1:Integer.parseInt(request.getParameter("page"));
-			List<BoardDto> pagelist=new ArrayList<BoardDto>();
-			
-			System.out.println("클릭한 페이지 : " +curpage);
-			
-			Paging paging=new Paging();
-			
-			paging.setCurPageNum(curpage);
-			paging.makeBlock(curpage);
-			paging.makeLastPageNum();
-			// 위에 걸로 다시 계산 
-			int blockLastNum=paging.getBlockStartNum();
-			int blockStartNum=paging.getBlockLastNum();
-			int lastPageNum=paging.getLastPageNum();
-			
-			request.setAttribute("curPageNum", curpage);
-			request.setAttribute("blockStartNum", blockStartNum);
-			request.setAttribute("blockLastNum", blockLastNum);
-			request.setAttribute("lastPageNum", lastPageNum);
-			request.setAttribute("paging", paging);	
-			
-			pagelist=dao.getPaging(paging);
-			
-			request.setAttribute("pagelist", pagelist);
-			dispatch(request,response,"manageBoard.jsp");
-			
-		}		
+		}
 	         
 		
 	}

@@ -240,7 +240,7 @@ input[type=button]{
       <li class="sidebar-brand">
        <span style="font-weight: bold">MENU</span>
       </li>
-      <li><a href="manageUser.jsp">회원 관리</a></li>
+      <li><a href="danim.do?command=adminMain">회원 관리</a></li>
       <li><a href="danim.do?command=review&page=1">글 관리</a></li>
 	  <li><a href="danim.do?command=diary&page=1">다이어리 관리</a></li>
     </ul>
@@ -305,7 +305,7 @@ input[type=button]{
                </c:forEach>
    
      
-            <tr style="border-right:hidden; border-left:hidden; border-bottom:hidden;"><td colspan="10"><input type="submit" id="back" value="수정" class="btn-primary" ></td></tr>
+        <tr style="border-right:hidden; border-left:hidden; border-bottom:hidden;"><td colspan="10"><input type="submit" id="back" value="수정" class="btn-primary" ></td></tr>
             </form>
          </c:otherwise>
       </c:choose>

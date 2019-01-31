@@ -165,7 +165,45 @@ input[type=button]{
     line-height: 3em;
   }
 
+#write,#back{
+    
 
+   width:60px;
+   height:30px;
+   font-size:40px;
+   font-style: normal;
+   font-weight: bold;
+}
+.btn-primary{
+   background-color:rgb(200,160,220);
+   border:none;
+    color : white;
+   text-align : center;
+   font-size:30px;
+   border-radius : 4px;
+}
+   
+
+.btn-primary,#write,#back{
+
+   float: right;
+   background-color:rgb(200,160,220);
+   border:none;
+    color : white;
+   text-align : center;
+   font-size:15px;
+   border-radius : 4px;
+   left: 50px;
+}
+.btn-primary,#write:hover,
+.btn-primary,#write:active{
+   background-color : rgb(229, 204, 255);
+}
+
+.btn-primary,#back:hover,
+.btn-primary,#back:active{
+   background-color : rgb(229, 204, 255);
+}
 
 </style>
 
@@ -212,9 +250,9 @@ input[type=button]{
       <li class="sidebar-brand">
        <span style="font-weight: bold">MENU</span>
       </li>
-      <li><a href="manageUser.jsp">회원 관리</a></li>
-      <li><a href="danim.do?command=manageBoard&page=1">글 관리</a></li>
-	  <li><a href="danim.do?command=manageDiary&page=1">다이어리 관리</a></li>	
+      <li><a href="danim.do?command=adminMain">회원 관리</a></li>
+      <li><a href="danim.do?command=review&page=1">글 관리</a></li>
+	  <li><a href="danim.do?command=diary&page=1">다이어리 관리</a></li>	
     </ul>
   </div>
 </div>
@@ -226,12 +264,14 @@ input[type=button]{
 	<input type="hidden" name="command" value="" >
 	<table border="1" style="text-align: center;">
 		<col width="50"/>
+		<col width="50"/>
 		<col width="200px"/>
 		<col width="200px"/>
 		<col width="300px"/>
 		<col width="100px"/>
 		<col width="50px"/>
 		<tr>
+		<th><input type="checkbox" name="all" onclick="allchk(this.checked)" /></th>
 			<th>번  호</th>
 			<th>글제목</th>
 			<th>id</th>
@@ -248,6 +288,7 @@ input[type=button]{
 			<c:otherwise>
 				<c:forEach items="${pagelist }" var="dto">
 					<tr>
+					<td><input type="checkbox" name="chk" value="${dto.boardno }"/>
 						<td>${dto.boardno }</td>
 						<td><a href="danim.do?command=boarddetail&boardno=${dto.boardno  }" id="detail">${dto.title }</a></td>
 						<td>${dto.id }</td>
@@ -256,6 +297,7 @@ input[type=button]{
 						<td>${dto.viewcount }</td>
 					</tr>
 				</c:forEach>
+				 <tr style="border-right:hidden; border-left:hidden; border-bottom:hidden;"><td colspan="10"><input type="submit" id="back" value="삭제" class="btn-primary" ></td></tr>
 			</c:otherwise>
 		</c:choose>
 		
@@ -289,14 +331,6 @@ input[type=button]{
 <br/>
 </div>
 
-<div align="center">
-	<div style="display: inline-block;  margin-right: 30px;" >
-		<input type="button"  id="write" value="글쓰기" class="btn-primary"  onclick="confirmChk();"  >
-	</div>
-	<div style="display: inline-block" >	
-		<input type="button" id="back" value="뒤로가기" class="btn-primary" onclick="location.href='danim.do?command=main'" >
-	</div>
-</div>
 
 
 </body>

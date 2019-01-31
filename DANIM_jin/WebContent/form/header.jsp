@@ -58,12 +58,13 @@ if(id==null||id.equals("")){                            // id가 Null 이거나 
 
 	header{
 		min-width: 1000px;
-		/* position : fixed; */
+		position : fixed;
 		left :0;
 		top:0;
 		width:100%;
 		height: 100px;
 		z-index: 4;
+		background: white;
 		
 	}
 	#title{

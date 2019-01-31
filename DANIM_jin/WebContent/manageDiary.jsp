@@ -99,6 +99,46 @@ input[type=button]{
     font-size: 1.3em;
     line-height: 3em;
   }
+  
+  #write,#back{
+    
+
+   width:60px;
+   height:30px;
+   font-size:40px;
+   font-style: normal;
+   font-weight: bold;
+}
+.btn-primary{
+   background-color:rgb(200,160,220);
+   border:none;
+    color : white;
+   text-align : center;
+   font-size:30px;
+   border-radius : 4px;
+}
+   
+
+.btn-primary,#write,#back{
+
+   float: right;
+   background-color:rgb(200,160,220);
+   border:none;
+    color : white;
+   text-align : center;
+   font-size:15px;
+   border-radius : 4px;
+   left: 50px;
+}
+.btn-primary,#write:hover,
+.btn-primary,#write:active{
+   background-color : rgb(229, 204, 255);
+}
+
+.btn-primary,#back:hover,
+.btn-primary,#back:active{
+   background-color : rgb(229, 204, 255);
+}
 
 
 </style>
@@ -120,9 +160,9 @@ input[type=button]{
       <li class="sidebar-brand">
        <span style="font-weight: bold">MENU</span>
       </li>
-      <li><a href="manageUser.jsp">회원 관리</a></li>
-      <li><a href="danim.do?command=manageBoard&page=1">글 관리</a></li>
-	  <li><a href="danim.do?command=manageDiary&page=1">다이어리 관리</a></li>	
+      <li><a href="danim.do?command=adminMain">회원 관리</a></li>
+      <li><a href="danim.do?command=review&page=1">글 관리</a></li>
+	  <li><a href="danim.do?command=diary&page=1">다이어리 관리</a></li>	
     </ul>
   </div>
 </div>
@@ -133,10 +173,12 @@ input[type=button]{
 	<h1 id="share">다른 여행자들의 #DANIM</h1> <br/><br/>
 	<input type="hidden" name="command" value="" >
 	<table border="1">
+		<col width="50"/>
 		<col width="50px"/>
 		<col width="300px"/>
 		<col width="200px"/>
 		<tr>
+			<th><input type="checkbox" name="all" onclick="allchk(this.checked)" /></th>
 			<th>No</th>
 			<th>#diary</th>
 			<th>다이어리 설명</th>
@@ -150,11 +192,13 @@ input[type=button]{
 			<c:otherwise>
 				<c:forEach items="${pagelist }" var="Pdto">
 					<tr>
+						<td><input type="checkbox" name="chk" value="${Pdto.pno }"/>
 						<td>${Pdto.pno }</td>					
 						<td><img src="sav/${Pdto.pimage }.png" width="200px" height="200px"></td>
 						<td>${Pdto.id } &nbsp;&nbsp; ${Pdto.ptitle }</td>
 					</tr>	
 				</c:forEach>
+				 <tr style="border-right:hidden; border-left:hidden; border-bottom:hidden;"><td colspan="10"><input type="submit" id="back" value="삭제" class="btn-primary" ></td></tr>
 			</c:otherwise>
 		</c:choose>
 	</table>

@@ -48,6 +48,7 @@ input[type=button]{
 	font-family: 'BMHANNAAir'; 
 }
 
+
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js">
 </script>
@@ -82,7 +83,7 @@ input[type=button]{
 				<c:forEach items="${pagelist }" var="Pdto">
 					<tr>
 						<td>${Pdto.pno }</td>					
-						<td><img src="sav/${Pdto.pimage }.png" width="200px" height="200px"></td>
+						<td><a href="danim.do?command=diarydetail&pno=${Pdto.pno }"><img src="sav/${Pdto.pimage }.png" width="200px" height="200px"></a></td>
 						<td>${Pdto.id } &nbsp;&nbsp; ${Pdto.ptitle }</td>
 					</tr>	
 				</c:forEach>

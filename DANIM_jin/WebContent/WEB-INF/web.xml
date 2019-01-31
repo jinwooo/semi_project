@@ -12,7 +12,6 @@
     <servlet-name>danim</servlet-name>
     <url-pattern>/danim.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>map</servlet-name>
     <servlet-class>com.map.controller.mapController</servlet-class>

@@ -79,7 +79,14 @@
   		<foreach item="item" index="index" collection="seqs" separator="," open="("  close=")">
   	   		#{item}
 		</foreach>  	
-  </delete>
+   </delete>
+   
+   <!-- 파일이름가져오기 -->
+  <select id="filename" parameterType="int" resultType="String">
+  SELECT #{filename}
+  FROM BOARD
+  </select>
+  
 </mapper>
 
 

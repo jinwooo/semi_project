@@ -4,6 +4,7 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="java.io.File"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="com.board.dto.BoardDto" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 
@@ -27,6 +28,7 @@ if(request.getContentLength() > 10*1024*1024 ){
 		java.text.SimpleDateFormat formatter2 = new java.text.SimpleDateFormat ("yyyy_MM_dd_HHmmss", java.util.Locale.KOREA);
 		int cnt = 1;
 		String upfile = (multi.getFilesystemName("Filedata"));
+		
 		if (!upfile.equals("")) {
 			String dateString = formatter2.format(new java.util.Date());
 			String moveFileName = dateString + upfile.substring(upfile.lastIndexOf(".") );

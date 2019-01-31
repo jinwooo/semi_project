@@ -699,7 +699,13 @@ public class DanimServlet extends HttpServlet {
 		            
 		             dispatch(request, response, "diary.jsp");
 		          }
-		}
+		}else if(command.equals("diarydetail")) {
+			
+			String pno=request.getParameter("pno");
+			request.setAttribute("pno",pno);
+			
+			dispatch(request,response,"diaryDetail.jsp");
+		}	
 	         
 		
 	}

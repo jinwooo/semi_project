@@ -152,7 +152,7 @@ input[type=button]{
 </div>
 
 <form action="danim.do" method="post">
-	<h1 id="share">다른 여행자들의 #DANIM</h1>
+	<h1 id="share">&nbsp; &nbsp; 자유게시판</h1>
 	<input type="hidden" name="command" value="" >
 	<table border="1">
 		<col width="50"/>

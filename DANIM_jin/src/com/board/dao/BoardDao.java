@@ -147,6 +147,7 @@ public class BoardDao extends SqlMapConfig {
 		
 		return res;
 	}
+	// 
 	public int insert(BoardDto dto) {
 		
 		SqlSession session=null;
@@ -159,6 +160,11 @@ public class BoardDao extends SqlMapConfig {
 		return res;
 	}
 	
+	//public String selfile(int boardno) {
+	//	
+	//}
+	
+	//dto.setFileName(filename);
 }
 
 

@@ -607,7 +607,7 @@ img{
 %>
 
 <div id="review">
-	<div class="hr-sect">&nbsp; &nbsp; Sit amet</div>
+	<div class="hr-sect">&nbsp; &nbsp; Dairy</div>
 	<p align="right">
 		<input type="button" value="더보기" class="btn-primary" onclick="location.href='danim.do?command=diary&page=1'"/>
 	</p>

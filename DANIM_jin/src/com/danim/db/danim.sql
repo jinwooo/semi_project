@@ -21,5 +21,7 @@ CREATE TABLE "USERBOARD" (
 INSERT INTO "USERBOARD"
 VALUES('rlawlsdn','김진우','rlawlsdn','주소','01066727677','propose_7677@naver.com','admin','N',0,'N','origin','');
 
+UPDATE USERBOARD SET GRADE='admin' WHERE ID='admin';
+
 SELECT * FROM "USERBOARD";
 COMMIT;

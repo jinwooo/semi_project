@@ -276,9 +276,9 @@ public class DanimServlet extends HttpServlet {
 	            /* 아무것도 안나옴  - 저장합시다*/
 	            System.out.println("아무것도 없을때 사용하는 if문으로 들어옴");
 	            
-	            Pdto.setPno(Integer.toString(Pdao.setPno()));
+	            //Pdto.setPno(Integer.toString(Pdao.setPno()));
 	            
-	            int res = Pdao.insert(Pdto);
+	            int res = Pdao.insertPlan(Pdto);
 	            
 	            System.out.println("::insert가 됨 값은 : " +res);
 	            
@@ -670,7 +670,61 @@ public class DanimServlet extends HttpServlet {
 			
 			request.setAttribute("pagelist", pagelist);
 			dispatch(request,response,"diary.jsp");
-		}	
+		}else if(command.equals("manageDiary")) {
+			int curpage=Integer.parseInt(request.getParameter("page"))==1?1:Integer.parseInt(request.getParameter("page"));
+			
+			List<planDto> pagelist=new ArrayList<planDto>();
+			System.out.println("클릭한 페이지 :" + curpage);
+			
+			Paging paging=new Paging();
+			
+			paging.setCurPageNum(curpage);
+			paging.makeBlock(curpage);
+			paging.makeLastDPageNum();
+			// 위에 걸로 다시 계산 
+			int blockLastNum=paging.getBlockStartNum();
+			int blockStartNum=paging.getBlockLastNum();
+			int lastPageNum=paging.getLastPageNum();
+			
+			request.setAttribute("curPageNum", curpage);
+			request.setAttribute("blockStartNum", blockStartNum);
+			request.setAttribute("blockLastNum", blockLastNum);
+			request.setAttribute("lastPageNum", lastPageNum);
+			request.setAttribute("paging", paging);	
+			
+			pagelist=Pdao.getPaging(paging);
+			
+			request.setAttribute("pagelist", pagelist);
+			dispatch(request,response,"manageDiary.jsp");
+		}else if(command.equals("manageBoard")) {
+			//int total=dao.countAll();
+			int curpage=Integer.parseInt(request.getParameter("page"))==1?1:Integer.parseInt(request.getParameter("page"));
+			List<BoardDto> pagelist=new ArrayList<BoardDto>();
+			
+			System.out.println("클릭한 페이지 : " +curpage);
+			
+			Paging paging=new Paging();
+			
+			paging.setCurPageNum(curpage);
+			paging.makeBlock(curpage);
+			paging.makeLastPageNum();
+			// 위에 걸로 다시 계산 
+			int blockLastNum=paging.getBlockStartNum();
+			int blockStartNum=paging.getBlockLastNum();
+			int lastPageNum=paging.getLastPageNum();
+			
+			request.setAttribute("curPageNum", curpage);
+			request.setAttribute("blockStartNum", blockStartNum);
+			request.setAttribute("blockLastNum", blockLastNum);
+			request.setAttribute("lastPageNum", lastPageNum);
+			request.setAttribute("paging", paging);	
+			
+			pagelist=dao.getPaging(paging);
+			
+			request.setAttribute("pagelist", pagelist);
+			dispatch(request,response,"manageBoard.jsp");
+			
+		}		
 	         
 		
 	}

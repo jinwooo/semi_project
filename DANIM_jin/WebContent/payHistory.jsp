@@ -79,9 +79,9 @@
        <span style="font-weight: bold">MENU</span>
       </li>
       <li><a href="myPage.jsp">개인정보 변경</a></li>
-      <li><a href="#">내 플래너</a></li>
+      <li><a href="map.do?command=myDiary&id=<%=id%>">내 플래너</a></li>
       <li><a href="danim.do?command=myHistory&id=<%=id%>">내가 올린 글</a></li>
-      <li><a href="#">결제 내역</a></li>
+      <li><a href="danim.do?command=payHistory&id=<%=id%>">결제 내역</a></li>
 
     </ul>
   </div>
@@ -101,7 +101,6 @@
 		<tr>
 		
 			<th>결제 번호</th>
-			<th>구매 수량</th>
 			<th>결제 날짜</th>
 			<th>결제 금액</th>
 			
@@ -109,15 +108,13 @@
 		<c:choose>
 			<c:when test="${empty list }">
 			<tr>
-				<td colspan="6">---작성된 글이 없습니다----</td>
+				<td colspan="6">---결제 내역이 없습니다----</td>
 			</tr>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-						<td><input type="checkbox" name="chk" value="${dto.paynum }"/>
 						<td>${dto.paynum }</td>
-						<td>${dto.buycount }</td>
 						<td>${dto.buydate }</td>
 						<td>${dto.paymoney }</td>
 					</tr>

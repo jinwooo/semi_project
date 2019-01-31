@@ -101,7 +101,7 @@ function logchk(){
 
 <%
 		String as = request.getParameter("id");
-		System.out.println("as:"+as);
+
 %> 
 		$.ajax({
 			url:"danim.do?command=confirmchk&id=<%=as%>",	
@@ -290,23 +290,19 @@ hr{
 		width:300px;
 	}
 	#log{
-	width: 300px;
+	
+	
+	  all: unset;
+      width: 300px;
 	height: 49px;
-	
-	font-size: 18px;
-	font-weight: 700;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    border: 1px solid #ccc;
-	margin-bottom: 5px;
-	
-	color: #fff;
-	border-color: #b22520;
-	box-shadow: inset 0 1px 0 rgba(242,164,162,.6), 0 1px 2px rgba(0,0,0,.05);
-	background-color: #e85b54;
-	background-image: linear-gradient(to bottom,#e85b54 0,#b22520 100%);
+      background-color: rgb(200, 160, 220);
+      border-radius: 7px;
+      color: white;
+      font-size: 10pt;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 5px;
+      font-size: 17px;
 	
 	}
 	.inputInform{
@@ -327,7 +323,7 @@ hr{
 	.modal-content{
 		left: 90px;
 		width: 390px;
-		height: 370px;
+		height: 410px;
 	}
 	.modal {
         text-align: center;
@@ -378,7 +374,6 @@ img{
      // for FB.getLoginStatus().
      if (response.status === 'connected') {
        // Logged into your app and Facebook.
-              
        testAPI();
      } else {
        // The person is not logged into your app or we are unable to tell.
@@ -440,17 +435,14 @@ img{
     	 setTimeout(function(){
    	      FB.logout(); 
    	    }, 10000);
-    	 
+    
        console.log('Successful login for: ' + response.name);
-       document.getElementById('status').innerHTML =
-         '너의 이름: ' + response.name + '/ 너의 아이디: '+response.id + '!';
-       location.href="danim.do?command=snsLogin&id="+response.id+"&name="+response.name
+      
+       location.href="danim.do?command=snsLogin&id="+response.id+"&name="+response.name;
+       FB.logout();
      });
    }
    
-   function fbLogout(){
-	   FB.logout();
-   }
 
 
 </script>
@@ -462,32 +454,19 @@ img{
     Kakao.init('067cd728aca1925331e19dd03a049443');
     function loginWithKakao() {
       // 로그인 창을 띄웁니다.
-      Kakao.Auth.login({
+     Kakao.Auth.loginForm({
         success: function(authObj) {
-          alert(JSON.stringify(authObj));
+          //alert(JSON.stringify(authObj));
 
           Kakao.API.request({
    
          url: '/v1/user/me',
          success: function(res) {
    
-               alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
-               alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-   
-               console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
-               console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
-               //console.log(res.profile_image);
-               console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
-               // res.properties.nickname으로도 접근 가능 )
-               //console.log(res.created);
-               //console.log(res.status);
-               console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
-   				
-   			$("#status").html('카톡 이름 : '+res.properties.nickname+' / 아이디 : '+res.id);
-              //document.write(res.properties.nickname+"님 환영합니다.");
-
+              
+				kout();
               location.href="danim.do?command=snsLogin&id="+res.id+"&name="+res.properties.nickname
-   
+              
              }
            })
 
@@ -497,22 +476,15 @@ img{
         }
       });
     };
+    
+ 
   //]]>
-    function Logout() {
-
-        Kakao.Auth.logout();
-
-        
+    function kout(){
+    	
+    	Kakao.Auth.logout(function(data){
+                alert(data)
+            });
     }
-	function loginformOut() {
-		$("#loginform").hide();
-		$("#main").css("opacity","1");
-	}
-	function loginform() {
-		$("#loginform").show();
-		//$("#main").hide();
-		$("#main").css("opacity","0.5");
-	}
 </script>
 <body>
 <div data-text-content="true" id="title">
@@ -554,13 +526,13 @@ img{
 										</div>
 										<span id="loginError" style="color:red">아이디 또는 비밀번호가 틀렸습니다.</span>
 										<div id="loginGroup">
-                    					<input id="log" type="button" value="로그인" onclick="logchk();"/>
+                    					<input id="log" type="button" value="#DANIM으로 로그인" onclick="logchk();"/>
                     					
                     					<a id="custom-login-btn" href="javascript:loginWithKakao()"><br/><img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/></a><br/>
 									<div class="fb-login-button" scope="public_profile,email" data-width="300" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin="checkLoginState();"></div>
 								</div></br>
-										<div align="right" > 
-                    						<a href="findInfo.jsp">아이디/비밀번호찾기</a><span>      </span><a href="join.jsp"  >회원가입</a>
+										<div align="center" > 
+                    						<a href="findInfo.jsp" style="color:rgb(200, 160, 220)">아이디/비밀번호찾기</a><span>  <span>    &nbsp;|&nbsp;    </span>    </span><a href="join.jsp" style="color:rgb(200, 160, 220)" >회원가입</a>
                     					</div> 
 									</form>
 								</div> 

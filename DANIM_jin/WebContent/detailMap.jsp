@@ -199,6 +199,7 @@
 		        var findplace = $(this).find('.planplace').text();
 		        $('#keyword').val(findplace);
 		        searchPlaces();
+		        $('#placesList .item').css("background-color","#FFFFFF");
 			});
 			
 			$("body").on('click', '#placesList .item', function() {				
@@ -232,11 +233,11 @@
 						'</div>')					  	
 					.find(".remove-block").click(function() {
 				        var valueCheck = false;
-				        $(this).parent().parent().find('.selectedplace').each(function() {
-				            if($(this).text() != null && $(this).text() != '') {
+				        $(this).parent().find('input').each(function() {
+				            if($(this).attr("name") != "type" && $(this).val() != '') {
 				                valueCheck = true;
 				            }
-				        });	
+				        });
 				
 				        if(valueCheck) {
 				            var delCheck = confirm('입력하신 내용이 있습니다.\n삭제하시겠습니까?');
@@ -821,7 +822,8 @@
 				    }				    
 				    
 				    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-				    ps.keywordSearch( keyword, placesSearchCB); 
+				    ps.keywordSearch( keyword, placesSearchCB);
+				    $('#placesList .item').css("background-color","#FFFFFF");
 				}
 			
 				// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다

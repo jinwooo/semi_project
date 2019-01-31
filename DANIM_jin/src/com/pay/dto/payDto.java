@@ -5,6 +5,7 @@ public class payDto {
 	private String paynum;
 	private String id;
 	private int paymoney;
+	private String buydate;
 	
 	public payDto() {
 		super();
@@ -17,6 +18,14 @@ public class payDto {
 		this.paymoney = paymoney;
 	}
 
+	public String getBuydate() {
+		return buydate;
+	}
+
+	public void setBuydate(String buydate) {
+		this.buydate = buydate;
+	}
+	
 	public String getPaynum() {
 		return paynum;
 	}  

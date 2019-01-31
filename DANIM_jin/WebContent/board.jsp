@@ -19,6 +19,34 @@
  <script src="js/bootstrap.min.js"></script>
 
 <title>Insert title here</title>
+<script type="text/javascript">
+function confirmChk(){ 	
+
+	<%
+			String as = request.getParameter("id");
+
+	%> 
+			$.ajax({
+				url:"danim.do?command=confirmchk&id=<%=as%>",	
+						// data : data를 주겠다
+						  // data를 받겠다
+				success:function(msg){
+					if(msg=="Y"){
+							location.href='write.jsp';
+					}else if(msg=="N"){
+						alert("이메일 인증을 해주세요.")
+					}
+
+				},
+				error:function(){
+					alert("ajax실패");
+				}
+			}); 
+			
+			}
+
+
+</script>
 <style type="text/css">
 
 table{
@@ -192,7 +220,7 @@ input[type=button]{
 
 <div align="center">
 	<div style="display: inline-block;  margin-right: 30px;" >
-		<input type="button"  id="write" value="글쓰기" class="btn-primary"  onclick="location.href='danim.do?command=insert'"  >
+		<input type="button"  id="write" value="글쓰기" class="btn-primary"  onclick="confirmChk();"  >
 	</div>
 	<div style="display: inline-block" >	
 		<input type="button" id="back" value="뒤로가기" class="btn-primary" onclick="location.href='danim.do?command=main'" >

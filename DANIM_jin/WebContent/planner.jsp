@@ -86,6 +86,11 @@
 		cursor: move;
 	}
 	
+	#sidemenu .accordion > div input[type=submit]{
+		margin: 0;
+		margin-top: 10px;
+	}
+	
    /* editor */
    #editor {
       top: 50px;
@@ -138,9 +143,14 @@
       display: none;
    }
    
-   	#editor .wrapper .canvas .display .inputtext{
+   	#editor .wrapper .canvas .display .inputText{
 		background: none;
-		border: 0;	
+		border: 0;
+		outline: none;
+	}
+	
+	#editor .wrapper .canvas .display .inputText:focus{
+		background: white;
 	}
    
    #editor .wrapper .canvas .display.selected{
@@ -187,21 +197,7 @@
       opacity: 0.3;
    }
    
-   .contentDel{
-      all: unset;
-      display: none;
-      width: 50px;
-      height: 50px;
-      top: -55px;
-      position: relative;
-      left: 5px;
-      border-radius: 50px;
-      background-color: rgb(200, 160, 220);
-      color: white;
-      font-size: 10pt;
-      text-align: center;
-      cursor: pointer;
-   }
+   
    
    
    /* button */
@@ -218,6 +214,58 @@
       cursor: pointer;
    }
    
+   .contentDel{
+      all: unset;
+      display: none;
+      width: 50px;
+      height: 50px;
+      top: -55px;
+      position: relative;
+      left: 5px;
+      border-radius: 50px;
+      background-color: rgb(200, 160, 220);
+      color: white;
+      font-size: 10pt;
+      text-align: center;
+      cursor: pointer;
+   }
+   
+	.contentOtherDel{
+		all: unset;
+		display: none;
+	    width: 20px;
+	    height: 20px;
+	    border-radius: 15px;
+	    background-color: rgb(200, 160, 220);
+	    color: white;
+	    font-size: 11pt;
+	    font-weight: bold;
+	    text-align: center;
+	    cursor: pointer;
+	    position: absolute;
+	    top: -10px;
+	    right: -10px;
+	    line-height: 0.5;
+	}
+	
+	.textMove{
+	    top: 0px;
+	    left: -40px;
+	    padding: 5px;
+	    width: 30px;
+	    height: 30px;
+	    color: rgb(200, 160, 220);
+		border: 1px solid rgb(200, 160, 220);
+	    border-radius: 30px;
+	    background: white;
+	    position: absolute;
+	    font-size: 10pt;
+	    line-height: 2.3;
+	    text-align: center;
+	    cursor: move;
+	    opacity: 0.8;
+	    display: none;
+	}
    
 </style>
 
@@ -306,8 +354,10 @@
 				drop: function(ev, ui) {
 					
 					if($(ui.draggable).clone().is(".draggableOther.text")){
-						$(this).prepend($(ui.draggable).clone().attr({"class":"draggableincanvas"}).css({"position" : "absolute"}))
-						$(".draggableincanvas").html("<textarea class='inputtext'>글상자</textarea>");
+						$(this).prepend($(ui.draggable).clone().attr({"class":"draggableincanvas"}).css({"position" : "absolute"}).html("<textarea class='inputText'>글상자</textarea>").append("<button class='contentOtherDel'>x</button><span class='textMove'>이동</span>"))
+						
+					} else if($(ui.draggable).clone().is(".draggableOther.sticker")){
+						$(this).prepend($(ui.draggable).clone().attr({"class":"draggableincanvas"}).css({"position" : "absolute"}).append("<button class='contentOtherDel'>x</button>")).find("img").attr("class","inputSticker")
 					}
 				}
 			})
@@ -315,18 +365,27 @@
 		
 		$(document).on("mouseenter", ".draggableincanvas", function() {
 			$(this).hover(function() {
-				$(this).css("border","2px solid blue")
+				$(this).children().children(".inputText").parent().css({"border":"1.5px dashed rgb(200, 160, 220)","background":"white"})
+				$(this).find(".contentOtherDel").css("display","inline-block")
+				$(this).find(".textMove").css("display","inline-block")
+			   
 			}, function () {
-				$(this).css("border","0")
-			}
-			),
+				$(this).children().children(".inputText").parent().css({"border":"","background":""})
+				$(this).find(".contentOtherDel").css("display","none")
+				$(this).find(".textMove").css("display","none")
+				  
+			});
+
 			$(this).draggable({
 				appendTo: "body",
 				refreshPositions: true,
 				scroll: false,
-			})
+			});
+			
+			$(this).children().eq(0).resizable();
+
 		})
-      
+		
 		$(".draggableOther").draggable({
 			appendTo: "body",
 			helper: "clone",
@@ -405,26 +464,40 @@
 			      }
 			   });
 			 
-		$("#picupload").click(function() {
+		$("#picUpload").submit(function() {
 			
 			
 		});
 	
 	})
       
-      $(document).on("mouseenter", ".view > .droppable", function() {
-         $(this).hover(function() {
-         $(this).find(".contentDel").css("display","inline-block")
-      }, function () {
-         $(this).find(".contentDel").css("display","none")
-      })
+		$(document).on("mouseenter", ".view > .droppable", function() {
+			
+			if($(this).children().is("img")){
+			   $(this).hover(function() {
+				   $(this).find(".contentDel").css("display","inline-block")
+				   $(this).children().css({"border":"2px dashed rgb(200, 160, 220)"}).attr({"width":496,"height":171})
+				}, function () {
+			 	  $(this).find(".contentDel").css("display","none")
+			 	  $(this).children().css({"border":""}).attr({"width":500,"height":175})
+			 	})
+			}
+		 	  
+		});
       
-      $(document).on("click", ".contentDel", function() {
-         $(this).parent().append("<div class='contentholder'></div>")
-         $(this).parent().find(".draggable").remove()
-         $(this).parent().find(".contentDel").remove()
-      })
-      })
+		$(document).on("click", ".contentDel", function() {
+			   $(this).parent().append("<div class='contentholder'></div>")
+			   $(this).parent().find("img").remove()
+			   $(this).parent().find(".contentDel").remove()
+			})
+		});
+		
+
+		
+		$(document).on("click", ".contentOtherDel", function() {
+			   $(this).parent().remove()
+		});
+		
       
       
      <%
@@ -496,8 +569,6 @@
         	
         }); 
       
-   });
-   
    function setPno(){
 	   return <%=dao.setPno() %>
    }
@@ -543,7 +614,8 @@
        $(".canvas").css("border","0");
        
 		for(var i = 0; i < <%=dpsq %>; i++){
-				$(document).find(".inputtext").eq(i).css({"top":(753*i)+(53*(i+1)),"left":70,"position":"absolute"});
+			$(document).find(".display").eq(i).find(".inputText").parent().css({"top":(753*i)+(53*(i+1)),"left":70,"position":"absolute"});
+			$(document).find(".display").eq(i).find(".inputSticker").parent().css({"top":(753*i)+(53*(i+1)),"left":70,"position":"absolute"});
 		}
        
        html2canvas(document.querySelector(".canvas")).then(canvas => {
@@ -567,10 +639,11 @@
              doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
              heightLeft -= pageHeight;
           }
-          doc.save('sample-file.pdf'); 
+          doc.save('<%=user+"의 여행"%>'); 
           $(".display").removeAttr("style");
-          $(".inputtext").removeAttr("style");
-           $(".canvas").removeAttr("style");
+          $(".inputText").parent().removeAttr("style");
+          $(".inputSticker").parent().removeAttr("style");
+          $(".canvas").removeAttr("style");
        })
 }
 
@@ -630,8 +703,11 @@
 				</div>
 				<h3>사진</h3>
 				<div>
-					<input type="file" name="file" id="myFile" accept=".jpg, .jpeg, .png" style="width:220px;">
-					<button id="picupload" class="btn">업로드</button>
+					<form id="picUpload" action="danim.do?" method="post"  enctype="multipart/form-data">
+						<input type="file" name="file" id="myFile" accept=".jpg, .jpeg, .png" style="width:220px;">
+						<input type="submit" class="btn" value="업로드">
+					</form>
+					
 				</div>
 				<h3>글상자</h3>
 				<div>
@@ -641,7 +717,9 @@
 				</div>
 				<h3>스티커</h3>
 				<div>
-					
+					<div class="draggableOther sticker">
+						<img src="image/like.png" width="100px" height="100px">
+					</div>
 				</div>
 			</div>
       </div>

@@ -38,5 +38,12 @@
 	<delete id="deletePlan" parameterType="String">
   		DELETE FROM PLAN WHERE PNO = #{pno }
  	</delete>
+ 	
+ 	<delete id="muldel" parameterType="hashmap">
+  	DELETE FROM PLAN WHERE PNO IN
+  		<foreach item="item" index="index" collection="seqs" separator="," open="("  close=")">
+  	   		#{item}
+		</foreach>  	
+   </delete>
 
 </mapper>

@@ -3,6 +3,7 @@ package com.map.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,8 +154,19 @@ public class mapController extends HttpServlet {
 			
 			jsResponse(response,"planner.jsp","일정저장 완료");
 			
-		} 
-		
+		}else if(command.equals("muldel")) {
+			String[] array = request.getParameterValues("chk");
+			System.out.println(Arrays.toString(array));
+			
+			int res = plandao.multiDelete(array);
+			if(res >0) {
+				String referer = request.getHeader("referer");
+				jsResponse(response, referer, "삭제 성공");
+			}else {
+				System.out.println("false");
+			}
+			
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

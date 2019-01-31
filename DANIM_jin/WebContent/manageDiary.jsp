@@ -169,9 +169,9 @@ input[type=button]{
   <!-- /사이드바 -->
   <br/><br/>
 <div align="center">
-<form action="danim.do" method="post">
+<form action="map.do" method="post">
 	<h1 id="share">다른 여행자들의 #DANIM</h1> <br/><br/>
-	<input type="hidden" name="command" value="" >
+	<input type="hidden" name="command" value="muldel" >
 	<table border="1">
 		<col width="50"/>
 		<col width="50px"/>

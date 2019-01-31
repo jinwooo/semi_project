@@ -713,7 +713,24 @@ body {
 					
 				</div>
 				<h3>리뷰</h3>
-				<div></div>
+				<div>
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/ReviewEmpty.png">
+					</div>
+					빈 리뷰 속지
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/ReviewLine.png">
+					</div>
+					줄노트 리뷰
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/ReviewGrid.png">
+					</div>
+					Grid 리뷰
+					<div class="draggable">
+						<img style="background: white;" width="200px" height="100px" src="image/ReviewDotGrid.png">
+					</div>
+					Dot Grid 리뷰
+				</div>
 				<h3>표지</h3>
 				<div></div>
 				<h3>사진</h3>

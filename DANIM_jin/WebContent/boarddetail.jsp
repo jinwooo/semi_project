@@ -186,13 +186,36 @@
 	<div id="detailbody">
 		<!-- board content -->
 		<div class="boardContent">
-			<div>
-				<h3><%=dto.getTitle() %></h3>
-			</div>
-			<div class="content" style="border: 1px solid red; width:1000px; height: 700px;" >
-				<%=dto.getContent() %>
-				<img src="sav/<%=dto.getFilename() %>" width="200px" height="200px" >
-			</div>
+			<table border="1">
+
+
+		<col width="200px"/>
+		<col width="300px"/>
+		<col width="100px"/>
+		<col width="50px"/>
+		<tr>
+			<th>제  목</th>
+			<td><%=dto.getTitle() %></td>
+		</tr>
+		<tr>
+			<th>아이디</th>
+			<td><%=dto.getId() %></td>
+		</tr>
+		<tr>
+			<th>작성일</th>
+			<td><%=dto.getRegdate() %></td>
+		</tr>
+		<tr>
+			<th>조회수</th>
+			<td><%=dto.getViewcount() %></td>
+		</tr>
+		<tr>
+			<th>내   용</th>
+			<td><textarea rows="10" cols="60" readonly="readonly"><%=dto.getContent() %></textarea></td>
+		</tr>	
+
+
+	</table>
 			
 			<div class="userlike">
 					<button id="likebtn">

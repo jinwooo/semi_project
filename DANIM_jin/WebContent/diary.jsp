@@ -24,7 +24,7 @@ table{
 	margin: auto;
 }
 
-#share{
+#title{
 	font-weight : bold;
 	font-size: 32px;
 	color: #8B8989;
@@ -40,6 +40,14 @@ img { display: block; }
 .pager{
 	font-size:20px;
 	font-weight: bold;
+}
+#share{
+	margin: auto;
+    width: 1000px;
+}
+
+#share td{
+	padding: 5px 25px;
 }
 
 
@@ -62,7 +70,32 @@ input[type=button]{
 </div>
 
 <form action="danim.do" method="post">
-	<h1 id="share">다른 여행자들의 #DANIM</h1>
+	<h1 id="title">다른 여행자들의 Diary</h1>
+		<div id="share">
+			<table>
+			<col width="200px">
+			<col width="200px">
+			<col width="200px">
+			<col width="200px">
+			<tr>
+				<td align="center"></td>
+			
+			
+			</tr>
+			
+			
+			</table>
+		
+		</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<input type="hidden" name="command" value="" >
 	<table border="1">
 		<col width="50px"/>

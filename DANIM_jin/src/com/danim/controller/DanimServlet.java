@@ -152,14 +152,20 @@ public class DanimServlet extends HttpServlet {
          DanimDto dto = Ddao.login(id);
          String pass = dto.getPw();
          PrintWriter out = response.getWriter();
-         if(pw.equals(pass)) {
-            // 로그인 성공
-            System.out.println("로그인 성공");
-            out.print("ok");
+         if(dto.getYn()=="Y") {
             
+         
+            if(pw.equals(pass)) {
+               // 로그인 성공
+               System.out.println("로그인 성공");
+               out.print("ok");
+               
+            }else {
+               System.out.println("로그인 실패");
+               out.print("no");
+            }
          }else {
-            System.out.println("로그인 실패");
-            out.print("no");
+            out.print("remove");
          }
       }else if(command.equals("snsLogin")){
          String id= request.getParameter("id");
@@ -455,7 +461,7 @@ public class DanimServlet extends HttpServlet {
          dispatch(request,response,"write.jsp");
       }else if(command.equals("insertres")) {
          
-     	 int boardno=Integer.parseInt(request.getParameter("boardno")); 
+         int boardno=Integer.parseInt(request.getParameter("boardno")); 
          String id=request.getParameter("id");
          System.out.println("id : " + id);
          String title=request.getParameter("title");
@@ -463,7 +469,7 @@ public class DanimServlet extends HttpServlet {
          String content=request.getParameter("content");
          
          BoardDto likenumdto = dao.selectOne(boardno);
-	     int likenum = likenumdto.getLikenum();
+        int likenum = likenumdto.getLikenum();
          
          
          BoardDto dto=new BoardDto();
@@ -713,44 +719,44 @@ public class DanimServlet extends HttpServlet {
          request.setAttribute("pno",pno);
          
          dispatch(request,response,"diaryDetail.jsp");
-      }else if(command.equals("updateboard"))	{
-			
-			int boardno=Integer.parseInt(request.getParameter("boardno"));
-			String id=request.getParameter("id");
-			System.out.println("id :" +id);
-			
-			BoardDto dto=dao.selectOne(boardno);
-			request.setAttribute("dto", dto);
-			System.out.println("dto.getId() : "+dto.getId());
-			
-			if(dto.getId().equals(id)) {
-				dispatch(request,response,"updateboard.jsp");
-			}else {
-				dispatch(request,response,"boarddetail.jsp");
-			}
-			
-		}else if(command.equals("updateboardres")) {
-			
-			int boardno=Integer.parseInt(request.getParameter("boardno"));
-			String title=request.getParameter("title");
-			String content=request.getParameter("content");
-			String id=request.getParameter("id");
+      }else if(command.equals("updateboard"))   {
+         
+         int boardno=Integer.parseInt(request.getParameter("boardno"));
+         String id=request.getParameter("id");
+         System.out.println("id :" +id);
+         
+         BoardDto dto=dao.selectOne(boardno);
+         request.setAttribute("dto", dto);
+         System.out.println("dto.getId() : "+dto.getId());
+         
+         if(dto.getId().equals(id)) {
+            dispatch(request,response,"updateboard.jsp");
+         }else {
+            dispatch(request,response,"boarddetail.jsp");
+         }
+         
+      }else if(command.equals("updateboardres")) {
+         
+         int boardno=Integer.parseInt(request.getParameter("boardno"));
+         String title=request.getParameter("title");
+         String content=request.getParameter("content");
+         String id=request.getParameter("id");
 
-			BoardDto dto=new BoardDto();
-			
-			dto.setBoardno(boardno);
-			dto.setTitle(title);
-			dto.setContent(content);
-			
-			int res=dao.update(dto);
-			
-			if(res>0) {
-				jsResponse(response,"danim.do?command=review&page=1","수정 성공");
-			}else {
-				jsResponse(response,"danim.do?command=boarddetail","수정 실패");
-			}
-			
-		}
+         BoardDto dto=new BoardDto();
+         
+         dto.setBoardno(boardno);
+         dto.setTitle(title);
+         dto.setContent(content);
+         
+         int res=dao.update(dto);
+         
+         if(res>0) {
+            jsResponse(response,"danim.do?command=review&page=1","수정 성공");
+         }else {
+            jsResponse(response,"danim.do?command=boarddetail","수정 실패");
+         }
+         
+      }
             
       
    }
@@ -771,20 +777,3 @@ public class DanimServlet extends HttpServlet {
    
    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

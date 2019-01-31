@@ -81,6 +81,8 @@ function logchk(){
          
          }else if(msg=="no"){
             $("#loginError").show();
+         }else if(msg=="remove"){
+            $("#removeInfo").show();
          }
 
       },
@@ -95,6 +97,7 @@ function logchk(){
    
    $(function(){
       $("#loginError").hide();
+      $("#removeInfo").hide();
    });
    
     function confirmChk(){    
@@ -558,6 +561,7 @@ th {
                                  <input id="formPw"class="logInput" type="password" placeholder="비밀번호를 입력해주세요" value="" name="pw"/>
                               </div>
                               <span id="loginError" style="color:red">아이디 또는 비밀번호가 틀렸습니다.</span>
+                              <span id="removeInfo" style="color:red">이미 탈퇴한 회원입니다.</span>
                               <div id="loginGroup">
                                    <input id="log" type="button" value="#DANIM으로 로그인" onclick="logchk();"/>
                                    

@@ -141,6 +141,7 @@
 	.bootstrap-timepicker-widget table td input {width: 30px;}
 	.selectedplace {font-size: 15px;}
 	
+	.btn {all: unset; width: 65px; height: 30px; margin-left: 5px; background-color: rgb(200, 160, 220); border-radius: 7px; color: white; font-size: 10pt; text-align: center; cursor: pointer;}
 	
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -253,10 +254,16 @@
 			
 			$("body").on( "click", "#savedate", function() {
 				var mytitle = $('#mytitle').val();
+				var notselect = $('.block').find($('.selectedplace')).text();
 				if (mytitle == null || !mytitle.replace(/^\s+|\s+$/g, '')) {
 			        alert('여행 제목을 입력해주세요!');
 			        return false;
+				}				
+				if (notselect == null || !notselect.replace(/^\s+|\s+$/g, '')) {
+			        alert('상세 일정을 추가해주세요!');
+			        return false;
 				}
+				
 				$(".daypanel").each(function() {
 					var daycnt = $(this).find('.daycnt').text().substr(4);
 					var sldate = $(this).find('.sldate').text();
@@ -301,10 +308,16 @@
 			
 			$("body").on( "click", "#nextpage", function() {
 				var mytitle = $('#mytitle').val();
+				var notselect = $('.block').find($('.selectedplace')).text();
 				if (mytitle == null || !mytitle.replace(/^\s+|\s+$/g, '')) {
 			        alert('여행 제목을 입력해주세요!');
 			        return false;
+				}				
+				if (notselect == null || !notselect.replace(/^\s+|\s+$/g, '')) {
+			        alert('상세 일정을 추가해주세요!');
+			        return false;
 				}
+				
 				$(".daypanel").each(function() {
 					var daycnt = $(this).find('.daycnt').text().substr(4);
 					var sldate = $(this).find('.sldate').text();
@@ -490,6 +503,7 @@
 					style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 				<div id="clustermap" class="overlay"></div>
 				<div class="customButton">
+					<input type="button" value="메인으로" class="btn" onclick="location.href = 'main.jsp'">
 					<input class="btn btn-primary btn-sm" type="button" id="savedate" value="저장">
 					<input class="btn btn-primary btn-sm" type="button" id="nextpage" value="다음으로">
 				</div>

@@ -16,7 +16,7 @@ public class sendMail {
 	public void sendEmail(String to, String content) {
 
 		String from = "propose_7677@naver.com";
-		String subject = "안녕하세요 #DAMIM입니다.";
+		String subject = "안녕하세요 #DANIM입니다.";
 
 		// 입력값 받음
 		 

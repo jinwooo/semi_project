@@ -639,24 +639,27 @@ th {
          <col width="200px">
          <col width="200px">
          <col width="200px">
-         <tr>
-            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-            <td align="center"><img src="sav/travel2.jpg" width="200px" height="200px" ></td>
-         </tr>
-         <tr style="font-size: 14pt; font-weight: bold;">
-            <td>테스트이미지</td>
-            <td>테스트이미지</td>
-            <td>테스트이미지</td>
-            <td>테스트이미지</td>
-         </tr>
-         <tr>
-            <td>#갬성 #여행 #당일치기</td>
-            <td>#갬성 #여행 #당일치기</td>
-            <td>#갬성 #여행 #당일치기</td>
-            <td>#갬성 #여행 #당일치기</td>
-         </tr>
+          <c:choose>
+            <c:when test="${empty plist }">
+               <tr align="center">
+                  <td colspan="4">- - - 작성된 글이 없습니다 - - -</td>
+               </tr>
+            </c:when>
+            <c:otherwise>
+               <c:forEach items="${plist }" var="dto">
+                  <tr align="center">
+                     <td align="center"><img src="sav/${dto.pimage }" width="200px" height="200px" ></td>
+		          </tr>
+		          <tr style="font-size: 14pt; font-weight: bold;">
+            		 <td>${dto.ptitle }</td>
+            	  </tr>
+            	  <tr>
+  			          <td>#갬성 #여행 #DANIM</td>
+  			      </tr>
+               </c:forEach>
+            </c:otherwise>
+         </c:choose>
+         
       </table>
    </div>
    

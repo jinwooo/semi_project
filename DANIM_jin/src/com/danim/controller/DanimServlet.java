@@ -67,6 +67,7 @@ public class DanimServlet extends HttpServlet {
       random random = new random();
       planDto Pdto = new planDto();
       planDao Pdao = new planDao(); 
+      com.map.dao.planDao plandao = new com.map.dao.planDao();
       payDto payDto = new payDto();
       payDao payDao = new payDao();
       
@@ -80,7 +81,9 @@ public class DanimServlet extends HttpServlet {
       
       if(command.equals("main")) {
          List<BoardDto> list=dao.selectMain();
+         List<com.map.dto.planDto> plist=plandao.mainList();
          request.setAttribute("list", list);
+         request.setAttribute("plist", plist);
          dispatch(request,response,"main.jsp");
       }else if(command.equals("list")) {
          List<BoardDto> list=dao.selectAll();

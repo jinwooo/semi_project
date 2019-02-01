@@ -91,4 +91,15 @@ public class planDao extends SqlMapConfig_plan{
 		return res;
 	}
 	
+	public List<planDto> mainList() {
+		SqlSession session = null;
+		List<planDto> res = null;
+		
+		session = getSqlSessionFactory().openSession(true);		
+		res = session.selectList(namespace+"mainList");
+		session.close();
+		
+		return res;
+	}
+	
 }

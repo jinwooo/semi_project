@@ -45,5 +45,10 @@
   	   		#{item}
 		</foreach>  	
    </delete>
+   
+   <select id="mainList" resultType="planDto">
+		SELECT PNO,PTITLE,PSDATE,PLDATE,PDATA,PIMAGE,ID
+		FROM (SELECT PNO,PTITLE,PSDATE,PLDATE,PDATA,PIMAGE,ID FROM PLAN ORDER BY PNO DESC ) WHERE <![CDATA[ROWNUM<5]]>
+	</select>
 
 </mapper>

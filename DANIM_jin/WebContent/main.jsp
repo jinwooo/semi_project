@@ -601,10 +601,10 @@ th {
 <br/>
 <div data-obj-type="element" id="demo">
    <p>
-      "감성 여행 플래너 & 다이어리에 대한 설명...
-      diam maecenas ultricies mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing vitae 
-      proin sagittis nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices 
-       어쩌고 저쩌고 소개어쩔"
+      " 감성 여행 플래너 & 다이어리 "<br/><br/>
+       안전 지대를 벗어나 모험을 해봐<br/>
+       그에 대한 보상은 분명 가치있을거야<br/>
+       -라푼젤-
    </p>
 </div>
 <div data-obj-type="image" id="mainimg">
@@ -686,7 +686,7 @@ th {
             <th>♥</th>
          </tr>
          <tr align="center">
-            <td>1</td>
+            <td>0</td>
             <td align="left">어머님,,감당가능하실,,? 이건,,임의로 넣은 row입니다↘,,,</td>
             <td>쓰앵님</td>
             <td>2019-01-28 15:34:57</td>

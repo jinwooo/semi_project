@@ -172,7 +172,7 @@ input[type=button]{
 <form action="map.do" method="post">
 	<h1 id="share">다른 여행자들의 #DANIM</h1> <br/><br/>
 	<input type="hidden" name="command" value="muldel" >
-	<table border="1">
+	<table border="1" style="text-align: center;">
 		<col width="50"/>
 		<col width="50px"/>
 		<col width="300px"/>

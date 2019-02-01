@@ -318,7 +318,7 @@
 	
 
 	<!-- footer -->
-	<div style="text-align: center; margin: 50px 0 50px 0; padding: 20px; border-top: 1px solid lightgray;">
+	<div>
 		<jsp:include page="./form/footer.jsp"></jsp:include>
 	</div>
 	

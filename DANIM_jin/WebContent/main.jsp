@@ -663,19 +663,17 @@ th {
             </c:when>
             <c:otherwise>
                
-                  <tr align="center">
-                  <c:forEach items="${plist }" var="dto" begin="0" end="4">   
-                     <td align="center"><img src="sav/${dto.pimage }" width="200px" height="200px" ></td>
-                  </c:forEach>    
-		          </tr>
-		      <tr style="font-size: 14pt; font-weight: bold;">
-            		
-		        <c:forEach items="${plist }" var="dto" begin="0" end="4"><td>${dto.ptitle }</td></c:forEach> 
-            	  </tr>
-            	  <tr>
-  			      <c:forEach items="${plist }" var="dto" begin="0" end="4"><td>#갬성 #여행 #DANIM</td></c:forEach>     
-  			          
-  			      </tr> 
+			<tr align="center">
+				<c:forEach items="${plist }" var="dto" begin="0" end="4">   
+					<td align="center"><img src="sav/${dto.pimage }" width="200px" height="150px" ></td>
+				</c:forEach>    
+			</tr>
+			<tr style="font-size: 14pt; font-weight: bold;">
+				<c:forEach items="${plist }" var="dto" begin="0" end="4"><td>${dto.ptitle }</td></c:forEach> 
+			</tr>
+			<tr>
+				<c:forEach items="${plist }" var="dto" begin="0" end="4"><td>#갬성 #여행 #DANIM</td></c:forEach>     
+			</tr> 
   			   
                
             </c:otherwise>

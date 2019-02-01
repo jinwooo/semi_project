@@ -57,6 +57,33 @@ table{
 	font-weight : bold;
 	font-size: 32px;
 	color: #8B8989;
+	text-align: center;
+	margin: 50px auto;
+	width: 700px;
+   	border: 2px solid lightgray;
+   	border-radius: 25px;
+	padding: 25px;
+}
+
+#boardContainer{
+	margin: 50px auto;
+	width: 1000px;
+	border: 2px solid lightgray;
+   	border-radius: 25px;
+	padding: 25px;
+}
+
+#boardtop{
+    text-align: center;
+    font-weight: bold;
+}
+
+#boardContainer td{
+	padding: 20px;
+}
+
+#boardContainer tr{
+	border-bottom: 2px dashed lightgray;
 }
 
 .selected{
@@ -114,6 +141,10 @@ input[type=button]{
 	font-family: 'BMHANNAAir'; 
 }
 
+#boardbtn{
+	margin-top: 25px; 
+}
+
 </style>
 
 <script type="text/javascript" src="js/jquery-3.3.1.min.js">
@@ -151,47 +182,50 @@ input[type=button]{
 	<jsp:include page="./form/header.jsp"></jsp:include>
 </div>
 
-<form action="danim.do" method="post">
-	<h1 id="share">&nbsp; &nbsp; 자유게시판</h1>
-	<input type="hidden" name="command" value="" >
-	<table border="1">
-		<col width="50"/>
-		<col width="200px"/>
-		<col width="200px"/>
-		<col width="300px"/>
-		<col width="100px"/>
-		<col width="50px"/>
-		<tr>
-			<th>번  호</th>
-			<th>글제목</th>
-			<th>id</th>
-			<th>파일이름</th>
-			<th>작성일</th>
-			<th>조회수</th>
-		</tr>
-		<c:choose>
-			<c:when test="${empty pagelist }">
-			<tr>
-				<td colspan="6">---작성된 글이 없습니다----</td>
-			</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${pagelist }" var="dto">
+	<form action="danim.do" method="post">
+		<h1 id="share"><i>Community</i></h1>
+		<input type="hidden" name="command" value="" >
+		<div id="boardContainer">
+			<table>
+		         <col width="100px">
+		         <col width="425px">
+		         <col width="125px">
+		         <col width="200px">
+				<tr id="boardtop">
+		            <td>No.</td>
+		            <td>제목</td>
+		            <td>글쓴이</td>
+		            <td>작성일</td>
+				</tr>
+				<c:choose>
+					<c:when test="${empty pagelist }">
 					<tr>
-						<td>${dto.boardno }</td>
-						<td><a href="danim.do?command=boarddetail&boardno=${dto.boardno  }" id="detail">${dto.title }</a></td>
-						<td>${dto.id }</td>
-						<td>${dto.filename }</td>
-						<td>${dto.regdate }</td>
-						<td>${dto.viewcount }</td>
+						<td colspan="6">---작성된 글이 없습니다----</td>
 					</tr>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		
-		<tr></tr>	
-	</table>
-</form>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${pagelist }" var="dto">
+							<tr>
+								<td align="center">${dto.boardno }</td>
+								<td id="boardtitle"><a href="danim.do?command=boarddetail&boardno=${dto.boardno  }" id="detail">${dto.title }</a></td>
+								<td align="center">${dto.id }</td>
+								<td align="center">${dto.regdate }</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
+			</table>
+		<div align="center" id="boardbtn">
+			<div style="display: inline-block;  margin-right: 30px;" >
+				<input type="button"  id="write" value="글쓰기" class="btn-primary"  onclick="confirmChk();"  >
+			</div>
+			<div style="display: inline-block" >	
+				<input type="button" id="back" value="뒤로가기" class="btn-primary" onclick="location.href='danim.do?command=main'" >
+			</div>
+		</div>
+	</div>
+	</form>
 
 <div class="pager" align="center">
 	
@@ -218,14 +252,7 @@ input[type=button]{
 </div>
 <br/>
 
-<div align="center">
-	<div style="display: inline-block;  margin-right: 30px;" >
-		<input type="button"  id="write" value="글쓰기" class="btn-primary"  onclick="confirmChk();"  >
-	</div>
-	<div style="display: inline-block" >	
-		<input type="button" id="back" value="뒤로가기" class="btn-primary" onclick="location.href='danim.do?command=main'" >
-	</div>
-</div>
+
 
 
 </body>

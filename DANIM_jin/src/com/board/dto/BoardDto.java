@@ -8,7 +8,7 @@ public class BoardDto {
 	private String id;
 	private String title;
 	private int likenum;
-	private Date regdate;
+	private String regdate;
 	private int viewcount;
 	private String filename;
 	private String content;
@@ -17,7 +17,7 @@ public class BoardDto {
 		
 	}
 	// select
-	public BoardDto(int boardno, String id, String title, int likenum, Date regdate, int viewcount, String filename,
+	public BoardDto(int boardno, String id, String title, int likenum, String regdate, int viewcount, String filename,
 			String content) {
 		super();
 		this.boardno = boardno;
@@ -61,10 +61,10 @@ public class BoardDto {
 	public void setLikenum(int likenum) {
 		this.likenum = likenum;
 	}
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 	public int getViewcount() {

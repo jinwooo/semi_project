@@ -110,30 +110,56 @@
 		all: unset;
 		cursor: pointer;
 	}
-	.btn-primary,#update{
+	.btn-primary, #update{
 		background-color:rgb(200,160,220);
 		border:none;
  		color : white;
 		text-align : center;
-		font-size:12px;
+		font-size: 10px;
 		border-radius : 4px;
 	}
 	
-   	.btn-primary,#update:hover,
-	.btn-primary,#update:active{
+   	.btn-primary,#update:hover,	.btn-primary,#update:active{
 		background-color : rgb(229, 204, 255);
 	}
-	#update{
 	
-		postion: absolute;
-		width:120px;
-		height:50px;
-		font-size:23px;
+	#update{
+		width: 75px;
+		height: 40px; 
+		font-size: 10pt;
 		font-style: normal;
 		font-weight: bold;
 		margin-top:20px;
 	}
-   
+	
+	#detailbody .boardContent{
+		border: 2px solid lightgray;
+		border-radius: 25px;
+		padding: 25px;
+	}
+	#detailbody .boardContent .boardtitle{
+		border-bottom: 1px solid gray;
+	}
+	
+	#boardtitle {
+		padding: 15px;
+		font-size: 18pt;
+		font-weight: bold;
+		text-align: center;
+		
+	}
+	
+	#writer, #date{
+		font-size: 10pt;
+		color: gray;
+		padding: 5px;
+	}
+	
+	
+	#content{
+		padding: 50px;
+		min-height: 500px;
+	}
 	
 </style>
 
@@ -186,43 +212,39 @@
 	<div id="detailbody">
 		<!-- board content -->
 		<div class="boardContent">
-			<table border="1">
-
-
-		<col width="200px"/>
-		<col width="300px"/>
-		<col width="100px"/>
-		<col width="50px"/>
-		<tr>
-			<th>제  목</th>
-			<td><%=dto.getTitle() %></td>
-		</tr>
-		<tr>
-			<th>아이디</th>
-			<td><%=dto.getId() %></td>
-		</tr>
-		<tr>
-			<th>작성일</th>
-			<td><%=dto.getRegdate() %></td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td><%=dto.getViewcount() %></td>
-		</tr>
-		<tr>
-			<th>내   용</th>
-			<td><textarea rows="10" cols="60" readonly="readonly"><%=dto.getContent() %></textarea></td>
-		</tr>	
-
-
-	</table>
-			
-			<div class="userlike">
-					<button id="likebtn">
-						<img src="<%=isLiked>0?"image/like.png":"image/unlike.png" %>" width="25px" height="25px">
-						<span><%=dto.getLikenum() %></span>
-					</button>
-			</div>
+			<table>
+				<col width="400px"/>
+				<col width="125px"/>
+				<col width="175px"/>
+				<tr class="boardtitle">
+					<td colspan="3" id="boardtitle" align="center">[&nbsp;&nbsp;<%=dto.getTitle() %>&nbsp;&nbsp;]</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td id="writer">[글쓴이]&nbsp;<%=dto.getId() %></td>
+					<td id="date" align="right">[Date]&nbsp;<%=dto.getRegdate() %></td>
+				</tr>
+				<tr>
+					<td colspan="3"><div id="content"><%=dto.getContent() %></div></td>
+				</tr>	
+		
+		
+			</table>
+<%
+			if(dto.getId().equals(id)){
+%>
+			<div align="center">
+				<input type="button" id="update" class="btn-primary" value="수정하기" onclick="location.href='danim.do?command=updateboard&boardno=<%=boardno%>&id=<%=id%>'"/>
+			</div>	
+<%
+			}
+%>	
+		</div>
+		<div class="userlike">
+				<button id="likebtn">
+					<img src="<%=isLiked>0?"image/like.png":"image/unlike.png" %>" width="25px" height="25px">
+					<span><%=dto.getLikenum() %></span>
+				</button>
 		</div>
 	
 		<!-- board comment -->
@@ -292,12 +314,6 @@
 				</table>
 			</div>
 		</div>
-	
-
-	<div align="center">
-		<input type="button" id="update" class="btn-primary" value="수정하기" onclick="location.href='danim.do?command=updateboard&boardno=<%=boardno%>&id=<%=id%>'"/>
-	</div>	
-		
 	</div>
 	
 

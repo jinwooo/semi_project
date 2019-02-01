@@ -384,6 +384,7 @@ img{
    font-size:23px;
    font-stlye :  normal;
    font-weight : bold;
+   margin-top: 25px; 
 }
 
 
@@ -393,9 +394,23 @@ th {
 
 #community {
    margin: 50px auto;
-   width: 800px;
+   width: 1000px;
+   	border: 2px solid lightgray;
+   	border-radius: 25px;
+	padding: 25px;
 }
 
+#community > table{ 
+	margin: auto;
+}
+
+#community tr{
+	border-bottom: 2px dashed lightgray;
+}
+
+#community th, #community td{
+	padding: 20px;
+}
 
 
 </style>
@@ -680,26 +695,17 @@ th {
    <div class="hr-sect">Community</div>
    
    <div id="community">
-      <table border="1">
-         <col width="50px">
-         <col width="400px">
+      <table>
          <col width="100px">
+         <col width="425px">
+         <col width="125px">
          <col width="200px">
-         <col width="50px">
    
          <tr>
             <th>No.</th>
             <th>제목</th>
             <th>글쓴이</th>
             <th>작성일</th>
-            <th>♥</th>
-         </tr>
-         <tr align="center">
-            <td>0</td>
-            <td align="left">어머님,,감당가능하실,,? 이건,,임의로 넣은 row입니다↘,,,</td>
-            <td>쓰앵님</td>
-            <td>2019-01-28 15:34:57</td>
-            <td>234</td>
          </tr>
    
          <c:choose>
@@ -715,18 +721,18 @@ th {
                      <td style="text-align: left;">${dto.title }</td>
                      <td>${dto.id }</td>
                      <td>${dto.regdate }</td>
-                     <td>${dto.likenum }</td>
                   </tr>
                </c:forEach>
             </c:otherwise>
          </c:choose>
-   
+
       </table>
+		<div align="center">
+			<input type="button" value="게시판 입장" class="btn-primary" id="board" onclick="location.href='danim.do?command=review&page=1'"/>
+		</div>
    </div>
    
-   <div  align="center">
-      <input type="button" value="게시판 입장" class="btn-primary" id="board" onclick="location.href='danim.do?command=review&page=1'"/>
-   </div>
+
 </div>
 
 <br/><br/><br/><br/><br/><br/>

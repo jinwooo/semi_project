@@ -760,8 +760,11 @@ body {
 					<%
 	
 					boolean load = false;
-					load = Boolean.parseBoolean(request.getParameter("load"));
-					String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\semi_project\\semi_project\\DANIM_jin\\WebContent\\img\\"+user;
+					String isLoad = request.getParameter("load");
+					if(isLoad != null){
+						load = true;
+					}
+					String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\DANIM_jin\\WebContent\\img\\"+user;
 					File dirFile=new File(savePath);
 					File []fileList=dirFile.listFiles();
 					

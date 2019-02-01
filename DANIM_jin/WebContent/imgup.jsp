@@ -13,10 +13,11 @@
 <%@ page import="java.sql.*" %>
 
 <%
-	String id = request.getParameter("id");
+	
+	String id = (String)session.getAttribute("sessionId");;
 	System.out.println(id);
 	//String savePath = request.getServletContext().getRealPath("img\\"+id);
-	String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\semi_project\\semi_project\\DANIM_jin\\WebContent\\img\\"+id;
+	String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\DANIM_jin\\WebContentimg\\"+id;
 	System.out.println("저장될 경로 : "+savePath);
 	/*  폴더 생성하기 */
 	//생성할 파일경로 지정
@@ -54,7 +55,7 @@
 %>
 
 <script type="text/javascript">
-	location.href = "planner.jsp?load=true";
+	location.href = "planner.jsp?load=yaaa";
 </script>
 
 

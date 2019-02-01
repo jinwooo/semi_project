@@ -639,6 +639,7 @@ th {
          <col width="200px">
          <col width="200px">
          <col width="200px">
+         
           <c:choose>
             <c:when test="${empty plist }">
                <tr align="center">
@@ -646,17 +647,22 @@ th {
                </tr>
             </c:when>
             <c:otherwise>
-               <c:forEach items="${plist }" var="dto">
+               
                   <tr align="center">
+                  <c:forEach items="${plist }" var="dto" begin="0" end="4">   
                      <td align="center"><img src="sav/${dto.pimage }" width="200px" height="200px" ></td>
+                  </c:forEach>    
 		          </tr>
-		          <tr style="font-size: 14pt; font-weight: bold;">
-            		 <td>${dto.ptitle }</td>
+		      <tr style="font-size: 14pt; font-weight: bold;">
+            		
+		        <c:forEach items="${plist }" var="dto" begin="0" end="4"><td>${dto.ptitle }</td></c:forEach> 
             	  </tr>
             	  <tr>
-  			          <td>#갬성 #여행 #DANIM</td>
-  			      </tr>
-               </c:forEach>
+  			      <c:forEach items="${plist }" var="dto" begin="0" end="4"><td>#갬성 #여행 #DANIM</td></c:forEach>     
+  			          
+  			      </tr> 
+  			   
+               
             </c:otherwise>
          </c:choose>
          

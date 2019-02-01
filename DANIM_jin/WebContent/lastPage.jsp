@@ -114,8 +114,8 @@ String user = (String)session.getAttribute("sessionId"); //dto로 받아와야�
         description: '#여행 #일정 #계획 #감성 #플래너',
         imageUrl: 'https://www.uniqmagazine.com/media/CACHE/images/thumbs/2018/09/17/IGModule_870x617_WeddingPlanning/c71817a7d14aa06858b6c51b790784ca.jpg',
         link: {
-          mobileWebUrl: 'http://localhost:8787/DANIM_jin/',	//모바일 카카오톡에서 사용하는 웹링크
-          webUrl: 'http://localhost:8787/DANIM_jin/'	//PC카카오톡에서 사용하는 웹링크
+          mobileWebUrl: 'http://192.168.10.33:8787/DANIM_jin/',	//모바일 카카오톡에서 사용하는 웹링크
+          webUrl: 'http://192.168.10.33:8787/DANIM_jin/'	//PC카카오톡에서 사용하는 웹링크
         }
       },
       /* social: {
@@ -127,15 +127,15 @@ String user = (String)session.getAttribute("sessionId"); //dto로 받아와야�
         {
           title: '웹으로 보기',
           link: {
-            mobileWebUrl: 'http://localhost:8787/DANIM_jin/',
-            webUrl: 'http://localhost:8787/DANIM_jin/'
+            mobileWebUrl: 'http://192.168.10.33:8787/DANIM_jin/',
+            webUrl: 'http://192.168.10.33:8787/DANIM_jin/'
           }
         },
         {
           title: '앱으로 보기',
           link: {
-            mobileWebUrl: 'http://localhost:8787/DANIM_jin/',
-            webUrl: 'http://localhost:8787/DANIM_jin/'
+            mobileWebUrl: 'http://192.168.10.33:8787/DANIM_jin/',
+            webUrl: 'http://192.168.10.33:8787/DANIM_jin/'
           }
         }
       ]

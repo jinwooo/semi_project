@@ -680,7 +680,7 @@ body {
 				</div>
 
 				<div class="menu"> 
-					<input type="button" value="메인으로" class="btn" onclick="location.href = 'main.jsp'"> <input
+					<input type="button" value="메인으로" class="btn" onclick="location.href='danim.do?command=main'"> <input
 						type="button" value="임시저장" id="planSave" class="btn"> <input
 						type="button" value="PDF 저장" id="pdfdown" class="btn">
 				</div>

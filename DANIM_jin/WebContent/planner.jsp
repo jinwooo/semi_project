@@ -563,7 +563,8 @@ body {
  				pimage : fileName
  			}
  		});	     
-		
+		location.href='main.jsp';
+		alert(저장완료);
       }); 
       
 /* 저장된 파일을 불러오는 함수 */
@@ -766,7 +767,7 @@ body {
 					if(isLoad != null){
 						load = true;
 					}
-					String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\DANIM_jin\\WebContent\\img\\"+user;
+					String savePath = "C:\\Users\\user2\\git\\semi_project\\DANIM_jin\\WebContent\\img\\"+user;
 					File dirFile=new File(savePath);
 					File []fileList=dirFile.listFiles();
 					

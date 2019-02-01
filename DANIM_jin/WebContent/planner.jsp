@@ -761,7 +761,7 @@ body {
 	
 					boolean load = false;
 					load = Boolean.parseBoolean(request.getParameter("load"));
-					String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\semi_project\\semi_project\\DANIM_jin\\WebContent\\img\\null";
+					String savePath = "C:\\Users\\gigabyte\\git\\semi_project\\semi_project\\semi_project\\DANIM_jin\\WebContent\\img\\"+user;
 					File dirFile=new File(savePath);
 					File []fileList=dirFile.listFiles();
 					
@@ -778,7 +778,7 @@ body {
 							System.out.println("FileName="+tempFileName);
 							%>
 							<div class="draggableOther sticker">
-								<img src="img/null/<%=tempFileName %>" width="100px" height="100px">
+								<img src="img/<%=user %>/<%=tempFileName %>" width="100px" height="100px">
 							</div>
 							<%
 							}

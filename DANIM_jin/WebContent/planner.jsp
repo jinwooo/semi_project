@@ -284,6 +284,8 @@ body {
 	opacity: 0.8;
 	display: none;
 }
+
+
 </style>
 
 <%
@@ -781,7 +783,7 @@ body {
 							System.out.println("FileName="+tempFileName);
 							%>
 							<div class="draggableOther sticker">
-								<img src="img/<%=user %>/<%=tempFileName %>" width="100px" height="100px">
+								<img src="img/<%=user %>/<%=tempFileName %>" width="200px" height="100px" >
 							</div>
 							<%
 							}

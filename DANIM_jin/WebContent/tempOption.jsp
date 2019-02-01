@@ -35,7 +35,7 @@
 			//filePath = request.getSession().getServletContext().getRealPath("form");
 			//filePath = (this).getClass().getResource("").getPath();
 			//out.println(filePath);
-			filePath = "C:\\Users\\user2\\git\\semi_project\\DANIM_jin\\WebContent\\sav"; 
+			filePath = "C:\\Users\\gigabyte\\git\\semi_project\\DANIM_jin\\WebContent\\sav"; 
 			//filePath = "./form/";
 			filePath = filePath +"\\"+dto.getPno()+".jsp";
 			//out.print(filePath);
